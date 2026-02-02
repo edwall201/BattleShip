@@ -22,8 +22,8 @@ public class Coordinate {
       throw new IllegalArgumentException("Coordinate column must be 0-9, but is " + cloumnnum);
     }
     this.row = rowLetter - 'A';
-    this.column = cloumnnum - '0';
-  }
+    this.column = cloumnnum - '0'; 
+ }
 
   public int getRow() {
     return row;
