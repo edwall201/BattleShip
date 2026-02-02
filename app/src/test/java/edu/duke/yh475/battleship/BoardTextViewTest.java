@@ -56,4 +56,22 @@ public class BoardTextViewTest {
         "E  | |  E\n";
     emptyBoardHelper(3, 5, header, body);
   }
+
+
+  @Test
+  public void test_display_empty_3by5_with_ship() {
+    BattleShipBoard<Character> b = new BattleShipBoard<>(3, 5);
+    BoardTextView view = new BoardTextView(b);
+    BasicShip sh = new BasicShip(new Coordinate(1, 0));
+    b.tryAddShip(sh);
+    String body =
+      "  0|1|2\n" +
+      "A  | |  A\n" +
+      "B s| |  B\n" +
+      "C  | |  C\n" +
+      "D  | |  D\n" +
+      "E  | |  E\n" +
+      "  0|1|2\n";
+   assertEquals(view.displayMyOwnBoard(), body);
+  }
 }

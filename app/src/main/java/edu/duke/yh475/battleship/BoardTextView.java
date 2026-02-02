@@ -14,14 +14,15 @@ public class BoardTextView {
 
   /**
    * Constructs a BoardView, given the board it will display
+   * 
    * @param toDisplay is the board to display
    * @throws IllegalArgumentException if the board is larger than 10*26
    */
   public BoardTextView(Board<Character> toDisplay) {
     this.toDisplay = toDisplay;
     if (toDisplay.getWidth() > 10 || toDisplay.getHeight() > 26) {
-      throw new IllegalArgumentException(  "Board must be no larger than 10x26, but is "
-                      + toDisplay.getWidth() + "x" + toDisplay.getHeight());
+      throw new IllegalArgumentException("Board must be no larger than 10x26, but is "
+          + toDisplay.getWidth() + "x" + toDisplay.getHeight());
     }
   }
 
@@ -29,7 +30,7 @@ public class BoardTextView {
     StringBuilder ans = new StringBuilder();
     String header = makeHeader();
     ans.append(header);
-    for(int i = 0; i < toDisplay.getHeight(); i++){
+    for (int i = 0; i < toDisplay.getHeight(); i++) {
       ans.append(makeRow(i));
     }
     ans.append(header);
@@ -38,8 +39,9 @@ public class BoardTextView {
 
   /**
    * This is the header line , 0 | 1 | 2 | 3\n
+   * 
    * @return the String that is the header for the given board
-    */
+   */
   String makeHeader() {
     StringBuilder ans = new StringBuilder("  ");
     String sep = "";
@@ -54,18 +56,25 @@ public class BoardTextView {
 
   /**
    * This is the row line.
+   * 
    * @return the String that is the row for the given board
    */
 
-  String makeRow(int rowNum){
+  String makeRow(int rowNum) {
     StringBuilder ans = new StringBuilder();
-    char letter = (char)('A' + rowNum);
+    char letter = (char) ('A' + rowNum);
     ans.append(letter);
     ans.append(" ");
     String sep = "";
-    for(int i = 0; i < toDisplay.getWidth(); i ++){
+    for (int col = 0; col < toDisplay.getWidth(); col++) {
       ans.append(sep);
-      ans.append(" ");
+      Coordinate coord = new Coordinate(rowNum, col);
+      Character cha = toDisplay.whatIsAt(coord);
+      if (cha == null) {
+        ans.append(" ");
+      } else {
+        ans.append(cha);
+      }
       sep = "|";
     }
     ans.append(" ");
@@ -73,7 +82,7 @@ public class BoardTextView {
     ans.append("\n");
     return ans.toString();
   }
-  
+
   public Board<Character> getToDisplay() {
     return toDisplay;
   }
