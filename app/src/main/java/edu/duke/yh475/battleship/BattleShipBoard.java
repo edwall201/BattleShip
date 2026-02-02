@@ -3,7 +3,7 @@ package edu.duke.yh475.battleship;
 public class BattleShipBoard implements Board {
   private final int width;
   private final int height;
-
+  
   /**
     * Constructs a BattleshipBoard with the specificed width and heights
     * @param w is the width of the newly constructed board
