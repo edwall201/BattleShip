@@ -62,7 +62,7 @@ public class BoardTextViewTest {
   public void test_display_empty_3by5_with_ship() {
     BattleShipBoard<Character> b = new BattleShipBoard<>(3, 5);
     BoardTextView view = new BoardTextView(b);
-    BasicShip sh = new BasicShip(new Coordinate(1, 0));
+    RectangleShip<Character> sh = new RectangleShip<Character>(new Coordinate(1, 0), 's', 'X');
     b.tryAddShip(sh);
     String body =
       "  0|1|2\n" +
