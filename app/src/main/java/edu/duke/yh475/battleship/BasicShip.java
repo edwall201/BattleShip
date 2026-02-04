@@ -27,6 +27,17 @@ public abstract class BasicShip<T> implements Ship<T> {
     
    }
 
+  /**
+   * Check if the coordinate in this ship or not
+   * @param c The coordinate
+   * @thorws IllegalArgumentException if the coordinate is not part of this ship
+   */
+  protected void checkCoordinateInThisShip(Coordinate c){
+    if(!myPieces.containsKey(c)){
+        throw new IllegalArgumentException("Coordinate" + c + "not in this ship");
+    }
+ }
+
   @Override
   public boolean occupiesCoordinates(Coordinate c) {
     return myPieces.containsKey(c);
@@ -34,21 +45,27 @@ public abstract class BasicShip<T> implements Ship<T> {
 
   @Override
   public boolean isSunk() {
-    return false;
+    for(Boolean b : myPieces.values()){
+      if(! b) return false;
+    }
+    return true;
    }
 
   @Override
   public void recordHitAt(Coordinate where) {
+    checkCoordinateInThisShip(where);
+    myPieces.put(where, true);
    }
 
   @Override
   public boolean wasHitAt(Coordinate where) {
-    return false;
+    checkCoordinateInThisShip(where);
+    return myPieces.get(where);
   }
 
   @Override
   public T  getDisplayInfoAt(Coordinate where) {
-    return myDisplayInfo.getInfo(where, false);
+    return myDisplayInfo.getInfo(where, wasHitAt(where));
   }
   
 }
