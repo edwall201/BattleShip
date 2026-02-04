@@ -1,14 +1,27 @@
 package edu.duke.yh475.battleship;
 
+/**
+ * This class represents a loction with 2D board
+ * Coordinates consist of a row and a col
+ */
 public class Coordinate {
   private final int row;
   private final int column;
-
+  /**
+   * Construct a coordinate
+   * @param r the row index
+   * @param c the col index
+   */
   public Coordinate(int r, int c) {
     this.row = r;
     this.column = c;
   }
 
+  /**
+   *Construct a coordinate by parsing a string
+   * @param input A string with length2, first char is A-Z, and the second is 0-9
+   * @throw IllegalArgumentException if the string is  not format correct
+   */
   public Coordinate(String input) {
     if (input.length() != 2) {
       throw new IllegalArgumentException("Coordinate must be 2 characters");
@@ -33,6 +46,11 @@ public class Coordinate {
     return column;
   }
 
+  /**
+   * Compares this corrdinate with another object
+   * @param o the object to compare
+   * @return true if they are the same row and col
+   */
   @Override
   public boolean equals(Object o) {
     if (o != null && o.getClass().equals(getClass())) {
