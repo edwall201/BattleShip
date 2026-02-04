@@ -15,13 +15,6 @@ public abstract class BasicShip<T> implements Ship<T> {
     
    }
 
-  public BasicShip(Iterable<Coordinate> where){
-    myPieces = new HashMap<Coordinate, Boolean>();
-    for(Coordinate c: where){
-      myPieces.put(c, false);
-    }
-  }
-
   @Override
   public boolean occupiesCoordinates(Coordinate c) {
     return myPieces.containsKey(c);

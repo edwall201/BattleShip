@@ -11,10 +11,10 @@ public class BasicShipTest {
   public void test_iterable() {
     Coordinate c1 = new Coordinate(1, 2);
     RectangleShip<Character> ship = new RectangleShip<Character>(c1, 1, 3, 's', '*');
-    
+
     assertTrue(ship.occupiesCoordinates(new Coordinate(1, 2)));
     assertTrue(ship.occupiesCoordinates(new Coordinate(2, 2)));
-    assertTrue(ship.occupiesCoordinates(new Coordinate(3, 2)));   
+    assertTrue(ship.occupiesCoordinates(new Coordinate(3, 2)));
 
   }
 
