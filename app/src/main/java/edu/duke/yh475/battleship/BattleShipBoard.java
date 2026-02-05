@@ -24,7 +24,7 @@ public class BattleShipBoard<T> implements Board<T> {
     this.height = h;
     this.myShips = new ArrayList<Ship<T>>();
   }
-
+  
   @Override
   public int getHeight() {
     return height;

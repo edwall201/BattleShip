@@ -3,6 +3,8 @@ package edu.duke.yh475.battleship;
 import java.util.HashSet;
 
 public class RectangleShip<T> extends BasicShip<T> {
+
+  private final String name;
   /**
    * Constructs a RectangleShip
    * @param upperLeft The coordinate of the top-left corner of the ship
@@ -10,8 +12,9 @@ public class RectangleShip<T> extends BasicShip<T> {
    * @param height The number of rows the ship occupies
    * @param myDisplayInfo The logic used to determine how the ship is displayed
    */
-  public RectangleShip(Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> myDisplayInfo) {
+  public RectangleShip(String name,Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> myDisplayInfo) {
     super(makeCoords(upperLeft, width, height), myDisplayInfo);
+    this.name = name;
   }
 
   /**
@@ -23,8 +26,9 @@ public class RectangleShip<T> extends BasicShip<T> {
    * @param onHit The display info when a part of the ship is hit
    */
   
-  public RectangleShip(Coordinate upperLeft, int width, int height, T data, T onHit) {
-    this(upperLeft, width, height, new SimpleShipDisplayInfo<T>(data, onHit));
+  public RectangleShip(String name, Coordinate upperLeft, int width, int height, T data, T onHit) {
+    this(name, upperLeft, width, height, new SimpleShipDisplayInfo<T>(data, onHit));
+    
   }
 
   /**
@@ -33,7 +37,7 @@ public class RectangleShip<T> extends BasicShip<T> {
    * @param onHit The display info when the ship is hit
    */
   public RectangleShip(Coordinate upperLeft, T data, T onHit) {
-    this(upperLeft, 1, 1, data, onHit);
+    this("testship", upperLeft, 1, 1, data, onHit);
   }
   
   /**
@@ -51,6 +55,11 @@ public class RectangleShip<T> extends BasicShip<T> {
     }
     
     return coords;
+  }
+
+  @Override
+  public String getName(){
+    return name;
   }
 
 }
