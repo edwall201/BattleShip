@@ -21,13 +21,20 @@ public class RectangleShipTest {
   @Test
   public void test_ship_occupy(){
     Coordinate coord = new Coordinate(1, 2);
-    RectangleShip<Character> ship = new RectangleShip<>(coord, 2, 3, 's', '*');
+    RectangleShip<Character> ship = new RectangleShip<Character>("submarins",coord, 2, 3, 's', '*');
     assertTrue(ship.occupiesCoordinates(new Coordinate(1,2)));
     assertTrue(ship.occupiesCoordinates(new Coordinate(2,3)));
     assertTrue(ship.occupiesCoordinates(new Coordinate(3,3)));
 
     assertFalse(ship.occupiesCoordinates(new Coordinate(4,3)));
     
+  }
+
+  @Test
+  public void test_ship_getname(){
+    Coordinate coord = new Coordinate(1, 2);
+    RectangleShip<Character> ship = new RectangleShip<Character>("submarins",coord, 2, 3, 's', '*');
+    assertEquals("submarins", ship.getName()); 
   }
 
 
