@@ -9,6 +9,9 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.io.Reader;
 
+/**
+ *The main application class for the battle ship game
+ */
 public class App {
   final Board<Character> theBoard;
   final BoardTextView view;

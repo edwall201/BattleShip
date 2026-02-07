@@ -3,6 +3,7 @@ package edu.duke.yh475.battleship;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
@@ -49,6 +50,24 @@ public class BasicShipTest {
     assertThrows(IllegalArgumentException.class, () -> {
       ship.wasHitAt(new Coordinate(2, 2));
     });
+  }
+
+  @Test
+  public void test_getCoordinates(){
+    Coordinate base = new Coordinate(1,2);
+    RectangleShip<Character> ship = new RectangleShip<Character>("TestShip", base, 1, 3, 's', '*');
+    Iterable<Coordinate> coords = ship.getCoordinates();
+
+    HashSet<Coordinate> actualCoords = new HashSet<>();
+    for(Coordinate c: coords){
+      actualCoords.add(c);
+    }
+    
+    assertTrue(actualCoords.contains(new Coordinate(1, 2)));
+    assertTrue(actualCoords.contains(new Coordinate(2, 2)));
+    assertTrue(actualCoords.contains(new Coordinate(3, 2)));
+    assertFalse(actualCoords.contains(new Coordinate(0, 0)));
+      
   }
 
 }
