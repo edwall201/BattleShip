@@ -36,13 +36,13 @@ public class V1ShipFactoryTest {
   }
 
   @Test
-  public void test_makeDestroy() {
+  public void test_makeDestroyer() {
     V1ShipFactory factory = new V1ShipFactory();
     Placement v1 = new Placement(new Coordinate(1,2), 'v');
-    Ship<Character> sub = factory.makeDestroy(v1);
+    Ship<Character> sub = factory.makeDestroyer(v1);
     checkShip(sub, "Destroy", 'd', new Coordinate(1,2), new Coordinate(2, 2));
 
-    Ship<Character> sub2 = factory.makeDestroy(new Placement(new Coordinate(1, 2), 'H'));
+    Ship<Character> sub2 = factory.makeDestroyer(new Placement(new Coordinate(1, 2), 'H'));
     checkShip(sub2, "Destroy", 'd', new Coordinate(1,2), new Coordinate(1,3));
   }
 

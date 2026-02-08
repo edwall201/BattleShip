@@ -34,5 +34,5 @@ public interface AbstractShipFactory<T> {
    * @param where specifies the location and orientation of the ship to make
    * @return the ship created for the destroy
    */
-  public Ship<T> makeDestroy(Placement where);
+  public Ship<T> makeDestroyer(Placement where);
 }

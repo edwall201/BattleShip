@@ -30,7 +30,7 @@ public class V1ShipFactory implements AbstractShipFactory<Character> {
   }
 
   @Override
-  public Ship<Character> makeDestroy(Placement where) {
+  public Ship<Character> makeDestroyer(Placement where) {
     return createShip(where, 1, 3, 'd', "Destroy");
   }
 
