@@ -25,10 +25,8 @@ public class RectangleShip<T> extends BasicShip<T> {
    * @param data The display info when a part of the ship is not hit
    * @param onHit The display info when a part of the ship is hit
    */
-  
   public RectangleShip(String name, Coordinate upperLeft, int width, int height, T data, T onHit) {
     this(name, upperLeft, width, height, new SimpleShipDisplayInfo<T>(data, onHit));
-    
   }
 
   /**
@@ -53,7 +51,6 @@ public class RectangleShip<T> extends BasicShip<T> {
         coords.add(new Coordinate(upperleft.getRow() + row, upperleft.getColumn() + col));
       }
     }
-    
     return coords;
   }
 
@@ -61,5 +58,4 @@ public class RectangleShip<T> extends BasicShip<T> {
   public String getName(){
     return name;
   }
-
 }

@@ -26,6 +26,12 @@ public class BoardTextView {
     }
   }
 
+  /**
+   * Generates a string representation of the board from the perspective of the owner
+   * The display includes a col number each row
+   * @return a formatted string representing the complete of the board
+   */
+
   public String displayMyOwnBoard() {
     StringBuilder ans = new StringBuilder();
     String header = makeHeader();
@@ -39,7 +45,6 @@ public class BoardTextView {
 
   /**
    * This is the header line , 0 | 1 | 2 | 3\n
-   * 
    * @return the String that is the header for the given board
    */
   String makeHeader() {
@@ -56,10 +61,8 @@ public class BoardTextView {
 
   /**
    * This is the row line.
-   * 
    * @return the String that is the row for the given board
    */
-
   String makeRow(int rowNum) {
     StringBuilder ans = new StringBuilder();
     char letter = (char) ('A' + rowNum);

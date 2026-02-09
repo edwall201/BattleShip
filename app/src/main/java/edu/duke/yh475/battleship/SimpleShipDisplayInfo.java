@@ -7,7 +7,6 @@ package edu.duke.yh475.battleship;
 public class SimpleShipDisplayInfo<T> implements ShipDisplayInfo<T> {
   private T myData;
   private T onHit;
-
   
   /**
    * Constructs the SimpleShipDisplayInfo

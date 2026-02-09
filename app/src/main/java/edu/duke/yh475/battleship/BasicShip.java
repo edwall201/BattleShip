@@ -7,7 +7,6 @@ import java.util.HashMap;
  * It manages the ships coordinate and hit status by hashmap
  * @param <T> the type of display information
  */
-
 public abstract class BasicShip<T> implements Ship<T> {
   private HashMap<Coordinate, Boolean> myPieces;
   protected ShipDisplayInfo<T> myDisplayInfo;
@@ -64,7 +63,7 @@ public abstract class BasicShip<T> implements Ship<T> {
   }
 
   @Override
-  public T  getDisplayInfoAt(Coordinate where) {
+  public T getDisplayInfoAt(Coordinate where) {
     return myDisplayInfo.getInfo(where, wasHitAt(where));
   }
 

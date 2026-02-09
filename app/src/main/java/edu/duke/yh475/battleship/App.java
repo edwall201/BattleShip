@@ -19,6 +19,12 @@ public class App {
   final PrintStream out;
   final AbstractShipFactory<Character> shipFactory;
 
+  /**
+   * Construct and App instance
+   * @param theBoard is the board to manage
+   * @param inputSource is where player commands are read from
+   * @param out is where message and the board view ara printed
+   */
   public App(Board<Character> theBoard, Reader inputSource, PrintStream out){
     this.theBoard = theBoard;
     this.view = new BoardTextView(theBoard);
@@ -26,13 +32,22 @@ public class App {
     this.out = out;
     this.shipFactory = new V1ShipFactory();
   }
-
+  /**
+   * Prompts the player for a aship placement and reads their response.
+   * @param prompt is teh message to display to player
+   * @param return a placement parsed from input
+   * @throws IOException if there is an error reading 
+   */
   public Placement readPlacement(String prompt) throws IOException{
     out.println(prompt);
     String s = inputReader.readLine();
     return new Placement(s);
   }
 
+  /**
+   * A single ship placement and display the board
+   * @throws IOException if input reading fails
+   */
   public void doOnePlacement() throws IOException{
     Placement p = readPlacement("where would you like to put your ship? ");
     Ship<Character> s = shipFactory.makeDestroyer(p);
@@ -40,6 +55,9 @@ public class App {
     out.print(view.displayMyOwnBoard());
   }
 
+  /**
+   * The main of the Battleship applcation
+   */
   public static void main(String [] arts) throws IOException{
     BattleShipBoard<Character> b = new BattleShipBoard<>(10, 20);
     App app = new App(b, new InputStreamReader(System.in), System.out);

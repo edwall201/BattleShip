@@ -1,7 +1,11 @@
 package edu.duke.yh475.battleship;
-
 import java.util.ArrayList;
 
+/**
+ * BattleShip represents the grid where ships are placed and tracked
+ * It manages the ships and placement rules 
+ * @param<T> the type of data stored on the board
+ */
 public class BattleShipBoard<T> implements Board<T> {
   private final int width;
   private final int height;
@@ -9,8 +13,8 @@ public class BattleShipBoard<T> implements Board<T> {
   private final PlacementRuleChecker<T> placementRuleChecker;
   
   /**
-    * Constructs a BattleshipBoard with the specificed width and heights
-    * @param w is the width of the newly constructed board
+   * Constructs a BattleshipBoard with the specificed width and heights
+   * @param w is the width of the newly constructed board
    * @param h is the heigh of the newly constructed board
    * @throws IllegalArgumentException if the width or height are less than or equal to zero
    */

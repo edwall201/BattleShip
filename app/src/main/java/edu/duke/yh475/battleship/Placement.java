@@ -1,14 +1,25 @@
 package edu.duke.yh475.battleship;
 
+/**
+ * A placement representation the combination of a starting coordinate and orientation
+ */
 public class Placement {
 
   private final Coordinate where;
   private final char orientation;
 
+  /**
+   * Gets the coordinates of the placement
+   * @return the coordinate
+   */
   public Coordinate getWhere() {
     return where;
   }
 
+  /**
+   * Get the orientation of the placement
+   * @return the orientation
+   */
   public char getOrientation() {
     return orientation;
   }
@@ -26,12 +37,10 @@ public class Placement {
   /**
    * Constructs a placement from a string description
    * This constructor leverages the coordinate constructor
-   * 
    * @param input is a 3 character string, first 2 are coordinate the third is the  orientation
    * @throws IllegalArgumentException if the input lenth is not 3
    * @throws IllegalArgumentException if the orientation is not V or H
    */
-
   public Placement(String input) {
     if (input.length() != 3) {
       throw new IllegalArgumentException("Placement description must be 3 characters but is " + input);
