@@ -41,8 +41,6 @@ public class BattleShipBoardTest {
     RectangleShip<Character> s1 = new RectangleShip<Character>(c1, 's', 'X');
     assertEquals(null, b.tryAddShip(s1));
     Coordinate c2 = new Coordinate(1, 0);
-    RectangleShip<Character> s2 = new RectangleShip<Character>(c2, 's', 'X');
-    assertEquals(null, b.tryAddShip(s2));
     expected[1][0] = 's';
 
     checkWhatIsAtBoard(b, expected);
@@ -53,17 +51,17 @@ public class BattleShipBoardTest {
     BattleShipBoard<Character> b = new BattleShipBoard<>(3, 5);
     V1ShipFactory factory = new V1ShipFactory();
     Ship<Character> s1 = factory.makeSubmarine(new Placement("A8H"));
-    assertEquals("This placement is invalid", b.tryAddShip(s1));
+    assertEquals("That placement is invalid: the ship goes off the right of the board.", b.tryAddShip(s1));
   }
 
  @Test
  public void test_whatIsAt_invalid_collosion() {
-    BattleShipBoard<Character> b = new BattleShipBoard<>(3, 5);
+    BattleShipBoard<Character> b = new BattleShipBoard<>(10, 10);
     V1ShipFactory factory = new V1ShipFactory();
     Ship<Character> s1 = factory.makeSubmarine(new Placement("A2H"));
     b.tryAddShip(s1);
     Ship<Character> s2 = factory.makeSubmarine(new Placement("A2H"));
-    assertEquals("This placement is invalid", b.tryAddShip(s2));
+    assertEquals("That placement is invalid: the ship overlaps another ship.", b.tryAddShip(s2));
 
  }
 }

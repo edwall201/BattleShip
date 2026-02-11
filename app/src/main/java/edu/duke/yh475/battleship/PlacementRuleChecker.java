@@ -17,21 +17,22 @@ public abstract class PlacementRuleChecker<T>{
   /**
    * Subclass must implement this to define their specific rule.
    */
-  protected abstract boolean checkMyRule(Ship<T> theShip, Board<T> theBoard);
+  protected abstract String checkMyRule(Ship<T> theShip, Board<T> theBoard);
 
   /**
    * Checks the placement against this rule and all sub rules in the chain
    * @pararm theShip is the ship being placed
    * @param theBoard is the board on which the ship is placed
-   * @return true if the placement satisfies all the rule in the chain or return false
+   * @return null if the placement satisfies all the rule in the chain or return an error message
    */
-  public boolean checkPlacement(Ship<T> theShip, Board<T> theBoard){
-    if(!checkMyRule(theShip, theBoard)){
-        return false;
+  public String checkPlacement(Ship<T> theShip, Board<T> theBoard){
+    String msg = checkMyRule(theShip, theBoard);
+    if(msg != null){
+        return msg;
       }
       if(next != null){
         return next.checkPlacement(theShip, theBoard);
       }
-      return true;
+      return null;
   }
 }

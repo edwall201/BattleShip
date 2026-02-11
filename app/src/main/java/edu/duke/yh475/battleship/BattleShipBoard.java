@@ -32,7 +32,7 @@ public class BattleShipBoard<T> implements Board<T> {
   }
 
   public BattleShipBoard(int w, int h){
-    this(w, h, new InBoundsRuleChecker<T>(new InBoundsRuleChecker<>(null)));
+    this(w, h, new InBoundsRuleChecker<T>(new NoCollisionRuleChecker<>(null)));
   }
   
   @Override
@@ -52,8 +52,9 @@ public class BattleShipBoard<T> implements Board<T> {
    */
   @Override
   public String tryAddShip(Ship<T> toAdd) {
-    if(! placementRuleChecker.checkPlacement(toAdd, this)){
-      return "This placement is invalid";
+    String msg = placementRuleChecker.checkPlacement(toAdd, this);
+    if(msg != null){
+      return msg;
     }
     myShips.add(toAdd);
     return null;
