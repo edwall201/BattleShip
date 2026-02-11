@@ -38,19 +38,17 @@ public class App {
     V1ShipFactory factory = new V1ShipFactory();
     TextPlayer p1 = new TextPlayer("A", b1, input, System.out, factory);
     TextPlayer p2 = new TextPlayer("B", b2, input, System.out, factory);
-
     App app = new App(p1, p2);
     app.doPlacementPhase();
-
   }
 
   /**
-   * Executes the entire placement phases for both players
-   * @throws IOExpection if there is an error reading from the input source
+   * Starts the placement phase for both players.
+   * Each player will place their set of 10 ships according to the rules.
+   * @throws IOException if there is an error reading input.
    */
   public void doPlacementPhase() throws IOException {
-    player1.doPlacementPhase();
-    player2.doPlacementPhase();
+      player1.doPlacementPhase();
+      player2.doPlacementPhase();
   }
-
 }

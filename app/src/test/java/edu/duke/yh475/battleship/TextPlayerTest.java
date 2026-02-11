@@ -37,9 +37,11 @@ public class TextPlayerTest {
   public void test_do_one_placement() throws IOException {
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     TextPlayer player = createTextPlayer(10, 20, "A0V\n", bytes);
-    player.doOnePlacement();
+    V1ShipFactory shipFactory = new V1ShipFactory();
+    player.doOnePlacement("Destroyer", shipFactory::makeDestroyer);
     String response = bytes.toString();
     assertTrue(response.contains("Player A where do you want to place a Destroyer?"));
+    assertTrue(response.contains("D"));
   }
 
 }
