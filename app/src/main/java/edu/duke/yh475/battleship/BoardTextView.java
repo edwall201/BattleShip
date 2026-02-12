@@ -1,5 +1,7 @@
 package edu.duke.yh475.battleship;
 
+import java.util.function.Function;
+
 /**
  * This class handles textual display of a board
  * It supports 2 wayts to display the board
@@ -33,13 +35,12 @@ public class BoardTextView {
    * 
    * @return a formatted string representing the complete of the board
    */
-
-  public String displayMyOwnBoard() {
+  protected String displayAnyBoard(Function<Coordinate, Character> getSquareFn) {
     StringBuilder ans = new StringBuilder();
     String header = makeHeader();
     ans.append(header);
     for (int i = 0; i < toDisplay.getHeight(); i++) {
-      ans.append(makeRow(i));
+      ans.append(makeRow(i, getSquareFn));
     }
     ans.append(header);
     return ans.toString();
@@ -67,7 +68,7 @@ public class BoardTextView {
    * 
    * @return the String that is the row for the given board
    */
-  String makeRow(int rowNum) {
+  String makeRow(int rowNum, Function<Coordinate, Character> getSquareFn) {
     StringBuilder ans = new StringBuilder();
     char letter = (char) ('A' + rowNum);
     ans.append(letter);
@@ -76,7 +77,7 @@ public class BoardTextView {
     for (int col = 0; col < toDisplay.getWidth(); col++) {
       ans.append(sep);
       Coordinate coord = new Coordinate(rowNum, col);
-      Character cha = toDisplay.whatIsAtForSelf(coord);
+      Character cha = getSquareFn.apply(coord);
       if (cha == null) {
         ans.append(" ");
       } else {
@@ -92,6 +93,20 @@ public class BoardTextView {
 
   public Board<Character> getToDisplay() {
     return toDisplay;
+  }
+
+  /**
+   * Generates a string representation of the board from the owner
+   */
+  public String displayMyOwnBoard() {
+    return displayAnyBoard((c) -> toDisplay.whatIsAtForSelf(c));
+  }
+
+  /**
+   * Generates a string representation of the board from the enemy
+   */
+  public String displayEnemyBoard() {
+    return displayAnyBoard((c) -> toDisplay.whatIsAtForEnemy(c));
   }
 
 }

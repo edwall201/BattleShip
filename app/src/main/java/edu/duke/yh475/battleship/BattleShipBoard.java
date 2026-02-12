@@ -39,10 +39,6 @@ public class BattleShipBoard<T> implements Board<T> {
   public BattleShipBoard(int w, int h){
     this(w, h, new InBoundsRuleChecker<T>(new NoCollisionRuleChecker<>(null)), (T)(Character)'X');
   }
-
-  public BattleShipBoard(int w, int h, PlacementRuleChecker<T> placementRuleChecker) {
-    this(w, h, placementRuleChecker, (T)(Character)'X');
-  }
   
   @Override
   public int getHeight() {
