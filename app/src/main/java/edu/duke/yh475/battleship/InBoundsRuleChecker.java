@@ -16,6 +16,9 @@ public class InBoundsRuleChecker<T> extends PlacementRuleChecker<T>{
 
   /**
    * Checks if the given ship is entirely within the boards width and heigh
+   * @param theShip is the ship being checked
+   * @param theBoard is the board on which the ship is being placed
+   * @return null if the ship is within the board or an error message if any part of the ship is out of bounds
    */
   @Override
   protected String checkMyRule(Ship<T> theShip, Board<T> theBoard){

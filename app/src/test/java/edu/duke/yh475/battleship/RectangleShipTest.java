@@ -25,9 +25,7 @@ public class RectangleShipTest {
     assertTrue(ship.occupiesCoordinates(new Coordinate(1,2)));
     assertTrue(ship.occupiesCoordinates(new Coordinate(2,3)));
     assertTrue(ship.occupiesCoordinates(new Coordinate(3,3)));
-
     assertFalse(ship.occupiesCoordinates(new Coordinate(4,3)));
-    
   }
 
   @Test
@@ -36,6 +34,5 @@ public class RectangleShipTest {
     RectangleShip<Character> ship = new RectangleShip<Character>("submarins",coord, 2, 3, 's', '*');
     assertEquals("submarins", ship.getName()); 
   }
-
 
 }

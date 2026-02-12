@@ -38,9 +38,9 @@ public class BasicShipTest {
   void test_getDisplay() {
     Coordinate c1 = new Coordinate(1, 2);
     RectangleShip<Character> ship = new RectangleShip<Character>("submarine",c1, 1, 2, 's', '*');
-    assertEquals('s', ship.getDisplayInfoAt(c1));
+    assertEquals('s', ship.getDisplayInfoAt(c1, true));
     ship.recordHitAt(c1);
-    assertEquals('*', ship.getDisplayInfoAt(c1));
+    assertEquals('*', ship.getDisplayInfoAt(c1, true));
   }
 
   @Test

@@ -27,8 +27,10 @@ public class BoardTextView {
   }
 
   /**
-   * Generates a string representation of the board from the perspective of the owner
+   * Generates a string representation of the board from the perspective of the
+   * owner
    * The display includes a col number each row
+   * 
    * @return a formatted string representing the complete of the board
    */
 
@@ -45,6 +47,7 @@ public class BoardTextView {
 
   /**
    * This is the header line , 0 | 1 | 2 | 3\n
+   * 
    * @return the String that is the header for the given board
    */
   String makeHeader() {
@@ -61,6 +64,7 @@ public class BoardTextView {
 
   /**
    * This is the row line.
+   * 
    * @return the String that is the row for the given board
    */
   String makeRow(int rowNum) {
@@ -72,7 +76,7 @@ public class BoardTextView {
     for (int col = 0; col < toDisplay.getWidth(); col++) {
       ans.append(sep);
       Coordinate coord = new Coordinate(rowNum, col);
-      Character cha = toDisplay.whatIsAt(coord);
+      Character cha = toDisplay.whatIsAtForSelf(coord);
       if (cha == null) {
         ans.append(" ");
       } else {

@@ -12,8 +12,8 @@ public class RectangleShip<T> extends BasicShip<T> {
    * @param height The number of rows the ship occupies
    * @param myDisplayInfo The logic used to determine how the ship is displayed
    */
-  public RectangleShip(String name,Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> myDisplayInfo) {
-    super(makeCoords(upperLeft, width, height), myDisplayInfo);
+  public RectangleShip(String name,Coordinate upperLeft, int width, int height, ShipDisplayInfo<T> myDisplayInfo, ShipDisplayInfo<T> enemyDisplayInfo) {
+    super(makeCoords(upperLeft, width, height), myDisplayInfo, enemyDisplayInfo);
     this.name = name;
   }
 
@@ -26,7 +26,7 @@ public class RectangleShip<T> extends BasicShip<T> {
    * @param onHit The display info when a part of the ship is hit
    */
   public RectangleShip(String name, Coordinate upperLeft, int width, int height, T data, T onHit) {
-    this(name, upperLeft, width, height, new SimpleShipDisplayInfo<T>(data, onHit));
+    this(name, upperLeft, width, height, new SimpleShipDisplayInfo<T>(data, onHit), new SimpleShipDisplayInfo<T>(null, data));
   }
 
   /**

@@ -10,19 +10,22 @@ import java.util.HashMap;
 public abstract class BasicShip<T> implements Ship<T> {
   private HashMap<Coordinate, Boolean> myPieces;
   protected ShipDisplayInfo<T> myDisplayInfo;
+  protected ShipDisplayInfo<T> enemyDisplayInfo;
 
   /**
    * Constructs a basicShip with the specificed coordinates and displayinformation
    * Initial all coordinate to not hit
    * @param where an interable of coordinate
    * @param myDisplayInfo the display information handler for this ship
+   * @param enemyDisplayInfo the display information handler for the enemy ship
    */
-  public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> myDisplayInfo){
+  public BasicShip(Iterable<Coordinate> where, ShipDisplayInfo<T> myDisplayInfo, ShipDisplayInfo<T> enemyDisplayInfo){
     this.myPieces = new HashMap<Coordinate, Boolean>();
     for(Coordinate c: where){
       this.myPieces.put(c, false);
     }
     this.myDisplayInfo = myDisplayInfo;
+    this.enemyDisplayInfo = enemyDisplayInfo;
     
    }
 
@@ -63,8 +66,11 @@ public abstract class BasicShip<T> implements Ship<T> {
   }
 
   @Override
-  public T getDisplayInfoAt(Coordinate where) {
-    return myDisplayInfo.getInfo(where, wasHitAt(where));
+  public T getDisplayInfoAt(Coordinate where, boolean myShip) {
+    if(myShip){
+      return myDisplayInfo.getInfo(where, wasHitAt(where));
+    }
+    return enemyDisplayInfo.getInfo(where, wasHitAt(where));
   }
 
   @Override

@@ -36,7 +36,7 @@ public class InBoundsRuleCheckerTest {
   @Test
   public void test_in_bound() { 
    InBoundsRuleChecker<Character> checker = new InBoundsRuleChecker<>(null);
-    Board<Character> board = new BattleShipBoard<>(10, 20, checker);
+   Board<Character> board = new BattleShipBoard<>(10, 20, checker, 'X');
     V1ShipFactory factory = new V1ShipFactory();
     Ship<Character> s1 = factory.makeSubmarine(new Placement("A0V"));
 
