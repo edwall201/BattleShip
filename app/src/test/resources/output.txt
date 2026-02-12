@@ -28,10 +28,12 @@ Player A: you are going to place the following ships (which are all rectangular)
 3 "Battleships" that are 1x4
 2 "Carriers" that are 1x6
 
-Player A where do you want to place a Destroyer?
+Player A where do you want to place a Submarine?
+That placement is invalid: it does not have the correct format.
+Player A where do you want to place a Submarine?
   0|1|2|3|4|5|6|7|8|9
-A s| | | | | | | | |  A
-B s| | | | | | | | |  B
+A s|s| | | | | | | |  A
+B  | | | | | | | | |  B
 C  | | | | | | | | |  C
 D  | | | | | | | | |  D
 E  | | | | | | | | |  E
@@ -51,7 +53,7 @@ R  | | | | | | | | |  R
 S  | | | | | | | | |  S
 T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9
-Player A where do you want to place a Destroyer?
+Player A where do you want to place a Submarine?
   0|1|2|3|4|5|6|7|8|9
 A s|s| | | | | | | |  A
 B s|s| | | | | | | |  B
@@ -76,9 +78,9 @@ T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9
 Player A where do you want to place a Destroyer?
   0|1|2|3|4|5|6|7|8|9
-A s|s|d| | | | | | |  A
-B s|s|d| | | | | | |  B
-C  | |d| | | | | | |  C
+A s|s| | | | | | | |  A
+B s|s| | | | | | | |  B
+C d|d|d| | | | | | |  C
 D  | | | | | | | | |  D
 E  | | | | | | | | |  E
 F  | | | | | | | | |  F
@@ -98,11 +100,13 @@ S  | | | | | | | | |  S
 T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9
 Player A where do you want to place a Destroyer?
+That placement is invalid: it does not have the correct format.
+Player A where do you want to place a Destroyer?
   0|1|2|3|4|5|6|7|8|9
-A s|s|d|d| | | | | |  A
-B s|s|d|d| | | | | |  B
-C  | |d|d| | | | | |  C
-D  | | | | | | | | |  D
+A s|s| | | | | | | |  A
+B s|s| | | | | | | |  B
+C d|d|d| | | | | | |  C
+D d|d|d| | | | | | |  D
 E  | | | | | | | | |  E
 F  | | | | | | | | |  F
 G  | | | | | | | | |  G
@@ -122,11 +126,11 @@ T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9
 Player A where do you want to place a Destroyer?
   0|1|2|3|4|5|6|7|8|9
-A s|s|d|d|d| | | | |  A
-B s|s|d|d|d| | | | |  B
-C  | |d|d|d| | | | |  C
-D  | | | | | | | | |  D
-E  | | | | | | | | |  E
+A s|s| | | | | | | |  A
+B s|s| | | | | | | |  B
+C d|d|d| | | | | | |  C
+D d|d|d| | | | | | |  D
+E d|d|d| | | | | | |  E
 F  | | | | | | | | |  F
 G  | | | | | | | | |  G
 H  | | | | | | | | |  H
@@ -143,14 +147,14 @@ R  | | | | | | | | |  R
 S  | | | | | | | | |  S
 T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9
-Player A where do you want to place a Destroyer?
+Player A where do you want to place a Battleship?
   0|1|2|3|4|5|6|7|8|9
-A s|s|d|d|d|b| | | |  A
-B s|s|d|d|d|b| | | |  B
-C  | |d|d|d|b| | | |  C
-D  | | | | |b| | | |  D
-E  | | | | | | | | |  E
-F  | | | | | | | | |  F
+A s|s| | | | | | | |  A
+B s|s| | | | | | | |  B
+C d|d|d| | | | | | |  C
+D d|d|d| | | | | | |  D
+E d|d|d| | | | | | |  E
+F b|b|b|b| | | | | |  F
 G  | | | | | | | | |  G
 H  | | | | | | | | |  H
 I  | | | | | | | | |  I
@@ -166,15 +170,17 @@ R  | | | | | | | | |  R
 S  | | | | | | | | |  S
 T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9
-Player A where do you want to place a Destroyer?
+Player A where do you want to place a Battleship?
+That placement is invalid: the ship overlaps another ship.
+Player A where do you want to place a Battleship?
   0|1|2|3|4|5|6|7|8|9
-A s|s|d|d|d|b|b| | |  A
-B s|s|d|d|d|b|b| | |  B
-C  | |d|d|d|b|b| | |  C
-D  | | | | |b|b| | |  D
-E  | | | | | | | | |  E
-F  | | | | | | | | |  F
-G  | | | | | | | | |  G
+A s|s| | | | | | | |  A
+B s|s| | | | | | | |  B
+C d|d|d| | | | | | |  C
+D d|d|d| | | | | | |  D
+E d|d|d| | | | | | |  E
+F b|b|b|b| | | | | |  F
+G b|b|b|b| | | | | |  G
 H  | | | | | | | | |  H
 I  | | | | | | | | |  I
 J  | | | | | | | | |  J
@@ -189,16 +195,16 @@ R  | | | | | | | | |  R
 S  | | | | | | | | |  S
 T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9
-Player A where do you want to place a Destroyer?
+Player A where do you want to place a Battleship?
   0|1|2|3|4|5|6|7|8|9
-A s|s|d|d|d|b|b|b| |  A
-B s|s|d|d|d|b|b|b| |  B
-C  | |d|d|d|b|b|b| |  C
-D  | | | | |b|b|b| |  D
-E  | | | | | | | | |  E
-F  | | | | | | | | |  F
-G  | | | | | | | | |  G
-H  | | | | | | | | |  H
+A s|s| | | | | | | |  A
+B s|s| | | | | | | |  B
+C d|d|d| | | | | | |  C
+D d|d|d| | | | | | |  D
+E d|d|d| | | | | | |  E
+F b|b|b|b| | | | | |  F
+G b|b|b|b| | | | | |  G
+H b|b|b|b| | | | | |  H
 I  | | | | | | | | |  I
 J  | | | | | | | | |  J
 K  | | | | | | | | |  K
@@ -212,47 +218,57 @@ R  | | | | | | | | |  R
 S  | | | | | | | | |  S
 T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9
-Player A where do you want to place a Destroyer?
+Player A where do you want to place a Carrier?
+That placement is invalid: the ship goes off the bottom of the board.
+Player A where do you want to place a Carrier?
+That placement is invalid: it does not have the correct format.
+Player A where do you want to place a Carrier?
+That placement is invalid: the ship goes off the right of the board.
+Player A where do you want to place a Carrier?
+That placement is invalid: the ship goes off the right of the board.
+Player A where do you want to place a Carrier?
+That placement is invalid: the ship goes off the right of the board.
+Player A where do you want to place a Carrier?
   0|1|2|3|4|5|6|7|8|9
-A s|s|d|d|d|b|b|b|c|  A
-B s|s|d|d|d|b|b|b|c|  B
-C  | |d|d|d|b|b|b|c|  C
-D  | | | | |b|b|b|c|  D
-E  | | | | | | | |c|  E
-F  | | | | | | | |c|  F
-G  | | | | | | | | |  G
-H  | | | | | | | | |  H
+A s|s| | | | | | | |  A
+B s|s| | | | | | | |  B
+C d|d|d| | | | | | |  C
+D d|d|d| | | | | | |  D
+E d|d|d| | | | | | |  E
+F b|b|b|b| | | | | |  F
+G b|b|b|b| | | | | |  G
+H b|b|b|b| | | | | |  H
 I  | | | | | | | | |  I
 J  | | | | | | | | |  J
-K  | | | | | | | | |  K
-L  | | | | | | | | |  L
-M  | | | | | | | | |  M
-N  | | | | | | | | |  N
-O  | | | | | | | | |  O
-P  | | | | | | | | |  P
+K  | | | | | |c| | |  K
+L  | | | | | |c| | |  L
+M  | | | | | |c| | |  M
+N  | | | | | |c| | |  N
+O  | | | | | |c| | |  O
+P  | | | | | |c| | |  P
 Q  | | | | | | | | |  Q
 R  | | | | | | | | |  R
 S  | | | | | | | | |  S
 T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9
-Player A where do you want to place a Destroyer?
+Player A where do you want to place a Carrier?
   0|1|2|3|4|5|6|7|8|9
-A s|s|d|d|d|b|b|b|c|c A
-B s|s|d|d|d|b|b|b|c|c B
-C  | |d|d|d|b|b|b|c|c C
-D  | | | | |b|b|b|c|c D
-E  | | | | | | | |c|c E
-F  | | | | | | | |c|c F
-G  | | | | | | | | |  G
-H  | | | | | | | | |  H
+A s|s| | | | | | | |  A
+B s|s| | | | | | | |  B
+C d|d|d| | | | | | |  C
+D d|d|d| | | | | | |  D
+E d|d|d| | | | | | |  E
+F b|b|b|b| | | | | |  F
+G b|b|b|b| | | | | |  G
+H b|b|b|b| | | | | |  H
 I  | | | | | | | | |  I
 J  | | | | | | | | |  J
-K  | | | | | | | | |  K
-L  | | | | | | | | |  L
-M  | | | | | | | | |  M
-N  | | | | | | | | |  N
-O  | | | | | | | | |  O
-P  | | | | | | | | |  P
+K  | | | | |c|c| | |  K
+L  | | | | |c|c| | |  L
+M  | | | | |c|c| | |  M
+N  | | | | |c|c| | |  N
+O  | | | | |c|c| | |  O
+P  | | | | |c|c| | |  P
 Q  | | | | | | | | |  Q
 R  | | | | | | | | |  R
 S  | | | | | | | | |  S
@@ -288,9 +304,9 @@ Player B: you are going to place the following ships (which are all rectangular)
 3 "Battleships" that are 1x4
 2 "Carriers" that are 1x6
 
-Player B where do you want to place a Destroyer?
+Player B where do you want to place a Submarine?
   0|1|2|3|4|5|6|7|8|9
-A  | | | | | | | | |  A
+A s|s| | | | | | | |  A
 B  | | | | | | | | |  B
 C  | | | | | | | | |  C
 D  | | | | | | | | |  D
@@ -300,8 +316,8 @@ G  | | | | | | | | |  G
 H  | | | | | | | | |  H
 I  | | | | | | | | |  I
 J  | | | | | | | | |  J
-K s| | | | | | | | |  K
-L s| | | | | | | | |  L
+K  | | | | | | | | |  K
+L  | | | | | | | | |  L
 M  | | | | | | | | |  M
 N  | | | | | | | | |  N
 O  | | | | | | | | |  O
@@ -311,210 +327,4 @@ R  | | | | | | | | |  R
 S  | | | | | | | | |  S
 T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9
-Player B where do you want to place a Destroyer?
-  0|1|2|3|4|5|6|7|8|9
-A  | | | | | | | | |  A
-B  | | | | | | | | |  B
-C  | | | | | | | | |  C
-D  | | | | | | | | |  D
-E  | | | | | | | | |  E
-F  | | | | | | | | |  F
-G  | | | | | | | | |  G
-H  | | | | | | | | |  H
-I  | | | | | | | | |  I
-J  | | | | | | | | |  J
-K s|s| | | | | | | |  K
-L s|s| | | | | | | |  L
-M  | | | | | | | | |  M
-N  | | | | | | | | |  N
-O  | | | | | | | | |  O
-P  | | | | | | | | |  P
-Q  | | | | | | | | |  Q
-R  | | | | | | | | |  R
-S  | | | | | | | | |  S
-T  | | | | | | | | |  T
-  0|1|2|3|4|5|6|7|8|9
-Player B where do you want to place a Destroyer?
-  0|1|2|3|4|5|6|7|8|9
-A  | | | | | | | | |  A
-B  | | | | | | | | |  B
-C  | | | | | | | | |  C
-D  | | | | | | | | |  D
-E  | | | | | | | | |  E
-F  | | | | | | | | |  F
-G  | | | | | | | | |  G
-H  | | | | | | | | |  H
-I  | | | | | | | | |  I
-J  | | | | | | | | |  J
-K s|s|d| | | | | | |  K
-L s|s|d| | | | | | |  L
-M  | |d| | | | | | |  M
-N  | | | | | | | | |  N
-O  | | | | | | | | |  O
-P  | | | | | | | | |  P
-Q  | | | | | | | | |  Q
-R  | | | | | | | | |  R
-S  | | | | | | | | |  S
-T  | | | | | | | | |  T
-  0|1|2|3|4|5|6|7|8|9
-Player B where do you want to place a Destroyer?
-  0|1|2|3|4|5|6|7|8|9
-A  | | | | | | | | |  A
-B  | | | | | | | | |  B
-C  | | | | | | | | |  C
-D  | | | | | | | | |  D
-E  | | | | | | | | |  E
-F  | | | | | | | | |  F
-G  | | | | | | | | |  G
-H  | | | | | | | | |  H
-I  | | | | | | | | |  I
-J  | | | | | | | | |  J
-K s|s|d|d| | | | | |  K
-L s|s|d|d| | | | | |  L
-M  | |d|d| | | | | |  M
-N  | | | | | | | | |  N
-O  | | | | | | | | |  O
-P  | | | | | | | | |  P
-Q  | | | | | | | | |  Q
-R  | | | | | | | | |  R
-S  | | | | | | | | |  S
-T  | | | | | | | | |  T
-  0|1|2|3|4|5|6|7|8|9
-Player B where do you want to place a Destroyer?
-  0|1|2|3|4|5|6|7|8|9
-A  | | | | | | | | |  A
-B  | | | | | | | | |  B
-C  | | | | | | | | |  C
-D  | | | | | | | | |  D
-E  | | | | | | | | |  E
-F  | | | | | | | | |  F
-G  | | | | | | | | |  G
-H  | | | | | | | | |  H
-I  | | | | | | | | |  I
-J  | | | | | | | | |  J
-K s|s|d|d|d| | | | |  K
-L s|s|d|d|d| | | | |  L
-M  | |d|d|d| | | | |  M
-N  | | | | | | | | |  N
-O  | | | | | | | | |  O
-P  | | | | | | | | |  P
-Q  | | | | | | | | |  Q
-R  | | | | | | | | |  R
-S  | | | | | | | | |  S
-T  | | | | | | | | |  T
-  0|1|2|3|4|5|6|7|8|9
-Player B where do you want to place a Destroyer?
-  0|1|2|3|4|5|6|7|8|9
-A  | | | | | | | | |  A
-B  | | | | | | | | |  B
-C  | | | | | | | | |  C
-D  | | | | | | | | |  D
-E  | | | | | | | | |  E
-F  | | | | | | | | |  F
-G  | | | | | | | | |  G
-H  | | | | | | | | |  H
-I  | | | | | | | | |  I
-J  | | | | | | | | |  J
-K s|s|d|d|d|b| | | |  K
-L s|s|d|d|d|b| | | |  L
-M  | |d|d|d|b| | | |  M
-N  | | | | |b| | | |  N
-O  | | | | | | | | |  O
-P  | | | | | | | | |  P
-Q  | | | | | | | | |  Q
-R  | | | | | | | | |  R
-S  | | | | | | | | |  S
-T  | | | | | | | | |  T
-  0|1|2|3|4|5|6|7|8|9
-Player B where do you want to place a Destroyer?
-  0|1|2|3|4|5|6|7|8|9
-A  | | | | | | | | |  A
-B  | | | | | | | | |  B
-C  | | | | | | | | |  C
-D  | | | | | | | | |  D
-E  | | | | | | | | |  E
-F  | | | | | | | | |  F
-G  | | | | | | | | |  G
-H  | | | | | | | | |  H
-I  | | | | | | | | |  I
-J  | | | | | | | | |  J
-K s|s|d|d|d|b|b| | |  K
-L s|s|d|d|d|b|b| | |  L
-M  | |d|d|d|b|b| | |  M
-N  | | | | |b|b| | |  N
-O  | | | | | | | | |  O
-P  | | | | | | | | |  P
-Q  | | | | | | | | |  Q
-R  | | | | | | | | |  R
-S  | | | | | | | | |  S
-T  | | | | | | | | |  T
-  0|1|2|3|4|5|6|7|8|9
-Player B where do you want to place a Destroyer?
-  0|1|2|3|4|5|6|7|8|9
-A  | | | | | | | | |  A
-B  | | | | | | | | |  B
-C  | | | | | | | | |  C
-D  | | | | | | | | |  D
-E  | | | | | | | | |  E
-F  | | | | | | | | |  F
-G  | | | | | | | | |  G
-H  | | | | | | | | |  H
-I  | | | | | | | | |  I
-J  | | | | | | | | |  J
-K s|s|d|d|d|b|b|b| |  K
-L s|s|d|d|d|b|b|b| |  L
-M  | |d|d|d|b|b|b| |  M
-N  | | | | |b|b|b| |  N
-O  | | | | | | | | |  O
-P  | | | | | | | | |  P
-Q  | | | | | | | | |  Q
-R  | | | | | | | | |  R
-S  | | | | | | | | |  S
-T  | | | | | | | | |  T
-  0|1|2|3|4|5|6|7|8|9
-Player B where do you want to place a Destroyer?
-  0|1|2|3|4|5|6|7|8|9
-A  | | | | | | | | |  A
-B  | | | | | | | | |  B
-C  | | | | | | | | |  C
-D  | | | | | | | | |  D
-E  | | | | | | | | |  E
-F  | | | | | | | | |  F
-G  | | | | | | | | |  G
-H  | | | | | | | | |  H
-I  | | | | | | | | |  I
-J  | | | | | | | | |  J
-K s|s|d|d|d|b|b|b|c|  K
-L s|s|d|d|d|b|b|b|c|  L
-M  | |d|d|d|b|b|b|c|  M
-N  | | | | |b|b|b|c|  N
-O  | | | | | | | |c|  O
-P  | | | | | | | |c|  P
-Q  | | | | | | | | |  Q
-R  | | | | | | | | |  R
-S  | | | | | | | | |  S
-T  | | | | | | | | |  T
-  0|1|2|3|4|5|6|7|8|9
-Player B where do you want to place a Destroyer?
-  0|1|2|3|4|5|6|7|8|9
-A  | | | | | | | | |  A
-B  | | | | | | | | |  B
-C  | | | | | | | | |  C
-D  | | | | | | | | |  D
-E  | | | | | | | | |  E
-F  | | | | | | | | |  F
-G  | | | | | | | | |  G
-H  | | | | | | | | |  H
-I  | | | | | | | | |  I
-J  | | | | | | | | |  J
-K s|s|d|d|d|b|b|b|c|c K
-L s|s|d|d|d|b|b|b|c|c L
-M  | |d|d|d|b|b|b|c|c M
-N  | | | | |b|b|b|c|c N
-O  | | | | | | | |c|c O
-P  | | | | | | | |c|c P
-Q  | | | | | | | | |  Q
-R  | | | | | | | | |  R
-S  | | | | | | | | |  S
-T  | | | | | | | | |  T
-  0|1|2|3|4|5|6|7|8|9
+Player B where do you want to place a Submarine?

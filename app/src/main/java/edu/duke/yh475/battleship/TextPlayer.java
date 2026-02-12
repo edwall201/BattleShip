@@ -1,9 +1,9 @@
 package edu.duke.yh475.battleship;
 
 import java.io.BufferedReader;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,7 +20,7 @@ public class TextPlayer {
   final BufferedReader inputReader;
   final PrintStream out;
   final AbstractShipFactory<Character> shipFactory;
-  final String TextPlayer;
+  final String name;
   final ArrayList<String> shipsToPlace;
   final HashMap<String, Function<Placement, Ship<Character>>> shipCreationFns;
 
@@ -34,7 +34,7 @@ public class TextPlayer {
    */
   public TextPlayer(String name, Board<Character> theBoard, BufferedReader inputSource, PrintStream out,
     AbstractShipFactory<Character> shipFactory) {
-    this.TextPlayer = name;
+    this.name = name;
     this.theBoard = theBoard;
     this.view = new BoardTextView(theBoard);
     this.inputReader = inputSource;
@@ -51,11 +51,14 @@ public class TextPlayer {
    * Prompts the player for a aship placement and reads their response.
    * @param prompt is teh message to display to player
    * @param return a placement parsed from input
-   * @throws IOException if there is an error reading
+   * @throws EOFException if there is an error reading
    */
   public Placement readPlacement(String prompt) throws IOException {
     out.println(prompt);
     String s = inputReader.readLine();
+    if(s == null){
+      throw new EOFException("Player "+ name + " failed to enter a placement");
+    }
     return new Placement(s);
   }
 
@@ -66,11 +69,21 @@ public class TextPlayer {
    * @throws IOException if input reading fails
    */
   public void doOnePlacement(String shipName, Function<Placement, Ship<Character>> createFn) throws IOException {
-    String prompt = "Player " + TextPlayer + " where do you want to place a Destroyer?";
-    Placement p = readPlacement(prompt);
-    Ship<Character> s = createFn.apply(p);
-    theBoard.tryAddShip(s);
-    out.print(view.displayMyOwnBoard());
+    while(true){
+      try{
+        String prompt = "Player " + name + " where do you want to place a " + shipName + "?";
+        Placement p = readPlacement(prompt);
+        Ship<Character> s = createFn.apply(p);
+        String msg = theBoard.tryAddShip(s);
+        if(msg == null){
+          out.print(view.displayMyOwnBoard());
+          return;
+        }
+        out.println(msg);
+      }catch (IllegalArgumentException e){
+        out.println("That placement is invalid: it does not have the correct format.");
+      }
+    }
   }
 
   /**
@@ -79,7 +92,7 @@ public class TextPlayer {
    */
   public void doPlacementPhase() throws IOException {
     out.println(view.displayMyOwnBoard());
-    String instruct = "Player " + TextPlayer
+    String instruct = "Player " + name
         + ": you are going to place the following ships (which are all rectangular). For each ship, type the coordinate of the upper left side of the ship, followed by either H (for horizontal) or V (for vertical).  For example M4H would place a ship horizontally starting at M4 and going to the right.  You have\n"
         + "\n" + "2 \"Submarines\" ships that are 1x2\n" + "3 \"Destroyers\" that are 1x3\n"
         + "3 \"Battleships\" that are 1x4\n" + "2 \"Carriers\" that are 1x6\n";
@@ -89,7 +102,6 @@ public class TextPlayer {
       Function<Placement, Ship<Character>> createFn = shipCreationFns.get(shipName);
       doOnePlacement(shipName, createFn);
     }
-   
   }
 
   /**
