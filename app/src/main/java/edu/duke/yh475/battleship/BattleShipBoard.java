@@ -92,6 +92,7 @@ public class BattleShipBoard<T> implements Board<T> {
    * @param where is the coordinate to check
    * @return the display information of type T for enemy view
    */
+  @Override
   public T whatIsAtForEnemy(Coordinate where){
     return whatIsAt(where, false);
   }

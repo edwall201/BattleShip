@@ -59,6 +59,7 @@ public class BoardTextView {
       ans.append(i);
       sep = "|";
     }
+    ans.append("  ");
     ans.append("\n");
     return ans.toString();
   }
@@ -107,6 +108,26 @@ public class BoardTextView {
    */
   public String displayEnemyBoard() {
     return displayAnyBoard((c) -> toDisplay.whatIsAtForEnemy(c));
+  }
+
+  public String displayMyBoardWithEnemyNextToIt(BoardTextView enemyView, String myHeader, String enemyHeader){
+    StringBuilder ans = new StringBuilder();
+    int w = toDisplay.getWidth();
+    ans.append("     ").append(myHeader);
+    int space = (2 * w  + 22) - 5 - myHeader.length();
+    for(int i = 0; i < space; i++){
+      ans.append(" ");
+    }
+    ans.append(enemyHeader).append("\n");
+
+    String[] leftlines = displayMyOwnBoard().split("\n");
+    String[] rightlines = enemyView.displayEnemyBoard().split("\n");
+    for(int i = 0; i < leftlines.length; i++){
+      ans.append(leftlines[i]);
+      ans.append("                ");
+      ans.append(rightlines[i]).append("\n");
+    }
+    return ans.toString();
   }
 
 }
