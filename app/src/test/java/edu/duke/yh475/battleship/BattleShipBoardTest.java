@@ -85,4 +85,17 @@ public class BattleShipBoardTest {
     assertEquals('X', b.whatIsAtForEnemy(new Coordinate(2, 2)));
   }
 
+  @Test
+  public void test_isLost(){
+    BattleShipBoard<Character> b = new BattleShipBoard<>(10, 20);
+    V1ShipFactory factory = new V1ShipFactory();
+    Ship<Character> s1 = factory.makeSubmarine(new Placement("A0H"));
+    b.tryAddShip(s1);
+    assertFalse(b.isLost());
+    b.fireAt(new Coordinate(0, 0));
+    assertFalse(b.isLost());
+    b.fireAt(new Coordinate(0, 1));
+    assertTrue(b.isLost());
+    
+    }
 }
