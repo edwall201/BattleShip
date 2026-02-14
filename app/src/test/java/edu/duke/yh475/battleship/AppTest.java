@@ -22,12 +22,22 @@ class AppTest {
   
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
-  void test_main() throws IOException{
+  void test_A_wins() throws IOException {
+    runTest("testA_wins_input.txt", "testA_wins_output.txt");
+  }
+
+  @Test
+  @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
+  void test_B_wins() throws IOException {
+    runTest("testB_wins_input.txt", "testB_wins_output.txt");
+  }
+
+  private void runTest(String inputName, String outputName) throws IOException{
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     PrintStream out = new PrintStream(bytes, true);
 
-    InputStream input = getClass().getClassLoader().getResourceAsStream("input.txt");
-    InputStream expectedStream = getClass().getClassLoader().getResourceAsStream("output.txt");
+    InputStream input = getClass().getClassLoader().getResourceAsStream(inputName);
+    InputStream expectedStream = getClass().getClassLoader().getResourceAsStream(outputName);
     assertNotNull(input);
 
     InputStream oldIn = System.in;
