@@ -75,6 +75,13 @@ public class BattleShipBoard<T> implements Board<T> {
     return whatIsAt(where, true);
   }
 
+  /**
+   * Check the board at a specific coordinate to see what is present
+   * @param where is the coordinate to check
+   * @param isSelf is ture if the view is for self, false if the view is for enemy
+   * @return the display info of typt T
+   */
+
   protected T whatIsAt(Coordinate where, boolean isSelf){
     for (Ship<T> s: myShips) {
       if (s.occupiesCoordinates(where)){
@@ -114,5 +121,12 @@ public class BattleShipBoard<T> implements Board<T> {
     return null;
   }
 
-
+  public boolean isLost(){
+    for(Ship<T> s: myShips){
+      if(!s.isSunk()){
+        return false;
+      }
+    }
+    return true;
+  }
 }
