@@ -124,6 +124,12 @@ public class TextPlayer {
     shipsToPlace.addAll(Collections.nCopies(2, "Carrier"));
   }
 
+  /**
+   * Prompts the player for a coordinate and reads their response.
+   * @param prompt is the message to display to player
+   * @return a coordinate parsed from input
+   * @throws IOException if there is an error input
+   */
   protected Coordinate readCoordinate(String prompt) throws IOException{
     while(true){
       try{
@@ -139,6 +145,14 @@ public class TextPlayer {
     }
   }
   
+  /**
+   * Manages a single turn of attacking the enemy board
+   * @param enemyBoard is the board of the enemy player
+   * @param enemyView is the view of the enemy board
+   * @param myHeader is the header to display above the player's own board
+   * @param enemyHeader is the header to display above the enemy board
+   * @throws IOException if there is an error during input output
+   */
   public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String myHeader, String enemyHeader) throws IOException{
     out.println(view.displayMyBoardWithEnemyNextToIt(enemyView, myHeader, enemyHeader));
     Coordinate coord = readCoordinate("Player " + name + "'s turn: input a coordinate to fire at");
