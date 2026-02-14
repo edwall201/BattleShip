@@ -40,6 +40,7 @@ public class App {
       TextPlayer p2 = new TextPlayer("B", b2, input, System.out, factory);
       App app = new App(p1, p2);
       app.doPlacementPhase();
+      app.doAttackingPhase();
     }
     catch (EOFException e){
     }
@@ -55,5 +56,21 @@ public class App {
   public void doPlacementPhase() throws IOException {
     player1.doPlacementPhase();
     player2.doPlacementPhase();
+  }
+
+  public void doAttackingPhase() throws IOException{
+    while(true){
+      player1.playOneTurn(player2.theBoard, player2.view, "Your Ocean", "Player "+ player2.name+"'s ocean");
+      if(player2.theBoard.isLost()){
+        System.out.println("Player " + player1.name + " win!");
+        break;
+      }
+      player2.playOneTurn(player1.theBoard, player1.view, "Your Ocean", "Player "+ player1.name+"'s ocean");
+      if(player1.theBoard.isLost()){
+        System.out.println("Player " + player2.name + " win!");
+        break;
+      }
+    }
+
   }
 }

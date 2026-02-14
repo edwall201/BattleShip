@@ -125,6 +125,7 @@ public class BattleShipBoard<T> implements Board<T> {
    * check if all the ships on the board are sunk
    * @return true if all ships are sunk, or false
    */
+  @Override
   public boolean isLost(){
     for(Ship<T> s: myShips){
       if(!s.isSunk()){

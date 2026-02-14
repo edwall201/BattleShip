@@ -139,9 +139,9 @@ public class TextPlayer {
     }
   }
   
-  protected void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String myHeader, String enemyHeader) throws IOException{
+  public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String myHeader, String enemyHeader) throws IOException{
     out.println(view.displayMyBoardWithEnemyNextToIt(enemyView, myHeader, enemyHeader));
-    Coordinate coord = readCoordinate("Player " + name + "'s turn: input a coordinate to fire at\n");
+    Coordinate coord = readCoordinate("Player " + name + "'s turn: input a coordinate to fire at");
     Ship<Character> hitRecord = enemyBoard.fireAt(coord);
     if (hitRecord != null){
       out.println("You hit a "+ hitRecord.getName() + "!");
