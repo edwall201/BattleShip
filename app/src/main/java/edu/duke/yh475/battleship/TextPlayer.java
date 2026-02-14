@@ -81,7 +81,7 @@ public class TextPlayer {
         }
         out.println(msg);
       }catch (IllegalArgumentException e){
-        out.println("That placement is invalid: it does not have the correct format.");
+       out.println("That placement is invalid: it does not have the correct format.");
       }
     }
   }
@@ -123,4 +123,33 @@ public class TextPlayer {
     shipsToPlace.addAll(Collections.nCopies(3, "Battleship"));
     shipsToPlace.addAll(Collections.nCopies(2, "Carrier"));
   }
-}
+
+  protected Coordinate readCoordinate(String prompt) throws IOException{
+    while(true){
+      try{
+        out.println(prompt);
+        String input = inputReader.readLine();
+        if(input == null){
+          throw new EOFException("Input ended unexpectedly");
+        }
+        return new Coordinate(input);
+      }catch(IllegalArgumentException e){
+        out.println(e.getMessage() + " Please try again.");
+      }
+    }
+  }
+  
+  protected void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String myHeader, String enemyHeader) throws IOException{
+    out.println(view.displayMyBoardWithEnemyNextToIt(enemyView, myHeader, enemyHeader));
+    Coordinate coord = readCoordinate("Player " + name + "'s turn: input a coordinate to fire at\n");
+    Ship<Character> hitRecord = enemyBoard.fireAt(coord);
+    if (hitRecord != null){
+      out.println("You hit a "+ hitRecord.getName() + "!");
+    }else{
+     out.println("You missed!\n");
+    }
+    
+  }
+
+  
+} 

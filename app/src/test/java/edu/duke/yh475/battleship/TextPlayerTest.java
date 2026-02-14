@@ -88,5 +88,63 @@ public class TextPlayerTest {
       assertTrue(output.contains("where do you want to place a Carrier?"));
   }
 
+  @Test
+  public void test_playoneturn_invalid() throws IOException{
+    Board<Character> b1 = new BattleShipBoard<>(10, 20);
+    Board<Character> b2 = new BattleShipBoard<>(10, 20);
+    AbstractShipFactory<Character> f = new V1ShipFactory();
+    Ship<Character> ship = f.makeSubmarine(new Placement("A0H"));
+    b2.tryAddShip(ship);
+
+    BufferedReader input = new BufferedReader(new StringReader("ZZ\nB0\n"));
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    PrintStream out = new PrintStream(bytes);
+
+    TextPlayer p1 = new TextPlayer("A", b1, input, out, f);
+    BoardTextView enemyView = new BoardTextView(b2);
+    p1.playOneTurn(b2, enemyView, "My Ocean", "Enemy Ocean");
+
+    String output = bytes.toString();
+    assertTrue(output.contains("Please try again."));
+    assertTrue(output.contains("You missed!"));
+
+  }
+
+  @Test
+  public void test_playoneturn_EOF() throws IOException{
+    Board<Character> b1 = new BattleShipBoard<>(10, 20);
+    Board<Character> b2 = new BattleShipBoard<>(10, 20);
+    AbstractShipFactory<Character> f = new V1ShipFactory();
+ 
+    BufferedReader input = new BufferedReader(new StringReader(""));
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    PrintStream out = new PrintStream(bytes);
+
+    TextPlayer p1 = new TextPlayer("A", b1, input, out, f);
+    BoardTextView enemyView = new BoardTextView(b2);
+    EOFException thrown = assertThrows(EOFException.class, () -> {p1.playOneTurn(b2, enemyView, "My Ocean", "Enemy Ocean");});
+    assertEquals("Input ended unexpectedly", thrown.getMessage());
+  }
+
+  @Test
+  public void test_playoneturn_valid() throws IOException{
+    Board<Character> b1 = new BattleShipBoard<>(10, 20);
+    Board<Character> b2 = new BattleShipBoard<>(10, 20);
+    AbstractShipFactory<Character> f = new V1ShipFactory();
+    Ship<Character> ship = f.makeSubmarine(new Placement("A0H"));
+    b2.tryAddShip(ship);
+
+    BufferedReader input = new BufferedReader(new StringReader("A0\n"));
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    PrintStream out = new PrintStream(bytes);
+
+    TextPlayer p1 = new TextPlayer("A", b1, input, out, f);
+    BoardTextView enemyView = new BoardTextView(b2);
+    p1.playOneTurn(b2, enemyView, "My Ocean", "Enemy Ocean");
+
+    String output = bytes.toString();
+    assertTrue(output.contains("You hit a Submarine!"));
+  }
+
 }
 
