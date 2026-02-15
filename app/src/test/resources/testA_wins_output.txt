@@ -755,7 +755,7 @@ T  | | | | | | | | |  T                T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 
 Player A's turn: input a coordinate to fire at
-You hit a Destroy!
+You hit a Destroyer!
      Your Ocean                           Player A's ocean
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 A *|*|*|d|d|b|b|b|c|c A                A  | | | | | | | | |  A
@@ -808,7 +808,7 @@ T  | | | | | | | | |  T                T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 
 Player A's turn: input a coordinate to fire at
-You hit a Destroy!
+You hit a Destroyer!
      Your Ocean                           Player A's ocean
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 A *|*|*|d|d|b|b|b|c|c A                A  | | | | | | | | |  A
@@ -861,7 +861,7 @@ T  | | | | | | | | |  T                T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 
 Player A's turn: input a coordinate to fire at
-You hit a Destroy!
+You hit a Destroyer!
      Your Ocean                           Player A's ocean
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 A *|*|*|d|d|b|b|b|c|c A                A  | | | | | | | | |  A
@@ -914,7 +914,7 @@ T  | | | | | | | | |  T                T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 
 Player A's turn: input a coordinate to fire at
-You hit a Destroy!
+You hit a Destroyer!
      Your Ocean                           Player A's ocean
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 A *|*|*|*|d|b|b|b|c|c A                A  | | | | | | | | |  A
@@ -967,7 +967,7 @@ T  | | | | | | | | |  T                T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 
 Player A's turn: input a coordinate to fire at
-You hit a Destroy!
+You hit a Destroyer!
      Your Ocean                           Player A's ocean
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 A *|*|*|*|d|b|b|b|c|c A                A  | | | | | | | | |  A
@@ -1020,7 +1020,7 @@ T  | | | | | | | | |  T                T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 
 Player A's turn: input a coordinate to fire at
-You hit a Destroy!
+You hit a Destroyer!
      Your Ocean                           Player A's ocean
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 A *|*|*|*|d|b|b|b|c|c A                A  | | | | | | | | |  A
@@ -1073,7 +1073,7 @@ T  | | | | | | | | |  T                T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 
 Player A's turn: input a coordinate to fire at
-You hit a Destroy!
+You hit a Destroyer!
      Your Ocean                           Player A's ocean
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 A *|*|*|*|*|b|b|b|c|c A                A  | | | | | | | | |  A
@@ -1126,7 +1126,7 @@ T  | | | | | | | | |  T                T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 
 Player A's turn: input a coordinate to fire at
-You hit a Destroy!
+You hit a Destroyer!
      Your Ocean                           Player A's ocean
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 A *|*|*|*|*|b|b|b|c|c A                A  | | | | | | | | |  A
@@ -1179,7 +1179,7 @@ T  | | | | | | | | |  T                T  | | | | | | | | |  T
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 
 Player A's turn: input a coordinate to fire at
-You hit a Destroy!
+You hit a Destroyer!
      Your Ocean                           Player A's ocean
   0|1|2|3|4|5|6|7|8|9                    0|1|2|3|4|5|6|7|8|9  
 A *|*|*|*|*|b|b|b|c|c A                A  | | | | | | | | |  A

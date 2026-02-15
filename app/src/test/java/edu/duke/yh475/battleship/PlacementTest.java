@@ -31,7 +31,6 @@ public class PlacementTest {
   public void test_string_error_cases() {
     assertThrows(IllegalArgumentException.class, () -> new Placement("A0"));
     assertThrows(IllegalArgumentException.class, () -> new Placement("A0VV"));
-    assertThrows(IllegalArgumentException.class, () -> new Placement("A0l"));
     assertThrows(IllegalArgumentException.class, () -> new Placement("A01"));
     assertThrows(IllegalArgumentException.class, () -> new Placement(" "));
     assertThrows(IllegalArgumentException.class, () -> new Placement("!0V"));
@@ -57,6 +56,33 @@ public class PlacementTest {
     assertNotEquals(p1, "A1V");
     assertEquals(p1.hashCode(), p2.hashCode());
     assertNotEquals(p1.hashCode(), p3.hashCode());
+  }
+
+  @Test
+  public void test_all_orientation(){
+    Coordinate c1 = new Coordinate(0, 0);
+    Placement p1 = new Placement(c1, 'V');
+    assertEquals('V', p1.getOrientation());
+
+    Placement p2 = new Placement("A0h");
+    assertEquals('H', p2.getOrientation());
+
+    Placement p3 = new Placement("A0u");
+    assertEquals('U', p3.getOrientation());
+
+    Placement p4 = new Placement("A0d");
+    assertEquals('D', p4.getOrientation());
+    Placement p5 = new Placement("A0l");
+    assertEquals('L', p5.getOrientation());
+    Placement p6 = new Placement("A0r");
+    assertEquals('R', p6.getOrientation());
+  }
+
+  @Test 
+  public void test_invalid_orientation(){
+    assertThrows(IllegalArgumentException.class, () -> new Placement("A0x"));
+    assertThrows(IllegalArgumentException.class, () -> new Placement("A0 "));
+    assertThrows(IllegalArgumentException.class, () -> new Placement("A0-"));
   }
 
 }

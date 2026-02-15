@@ -40,10 +40,10 @@ public class V1ShipFactoryTest {
     V1ShipFactory factory = new V1ShipFactory();
     Placement v1 = new Placement(new Coordinate(1,2), 'v');
     Ship<Character> sub = factory.makeDestroyer(v1);
-    checkShip(sub, "Destroy", 'd', new Coordinate(1,2), new Coordinate(2, 2));
+    checkShip(sub, "Destroyer", 'd', new Coordinate(1,2), new Coordinate(2, 2));
 
     Ship<Character> sub2 = factory.makeDestroyer(new Placement(new Coordinate(1, 2), 'H'));
-    checkShip(sub2, "Destroy", 'd', new Coordinate(1,2), new Coordinate(1,3));
+    checkShip(sub2, "Destroyer", 'd', new Coordinate(1,2), new Coordinate(1,3));
   }
 
   @Test

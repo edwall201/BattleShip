@@ -39,7 +39,8 @@ public class Placement {
    * This constructor leverages the coordinate constructor
    * @param input is a 3 character string, first 2 are coordinate the third is the  orientation
    * @throws IllegalArgumentException if the input lenth is not 3
-   * @throws IllegalArgumentException if the orientation is not V or H
+   * @throws IllegalArgumentException if the orientation is not V or H or U or D or L or R
+   * @throws IllegalArgumentException if the coordinate part of the string is invalid
    */
   public Placement(String input) {
     if (input.length() != 3) {
@@ -47,10 +48,20 @@ public class Placement {
     }
     this.where = new Coordinate(input.substring(0, 2));
     char orient = Character.toUpperCase(input.charAt(2));
-    if (orient != 'H' && orient != 'V') {
-      throw new IllegalArgumentException("Orientation must be H or V but is " + orient);
+
+    if (!isValidOrientation(orient)) {
+      throw new IllegalArgumentException("Orientation must be H, V, U, D, L, or R but is " + orient);
     }
     this.orientation = orient;
+  }
+
+  /**
+   * Checks if the given character is a valid orientation
+   * @param o is the chara to check
+   * @return true if the orientation is valid or not
+   */
+  private boolean isValidOrientation(char o){
+    return o == 'H' || o == 'V' || o == 'U' || o == 'D' || o == 'L' || o == 'R';
   }
 
   /**
