@@ -189,7 +189,7 @@ public class TextPlayerTest {
     Board<Character> b2 = new BattleShipBoard<>(10, 20);
     V2ShipFactory f = new V2ShipFactory();
     StringBuilder sb = new StringBuilder();
-    sb.append("S\n").append("S\n").append("S\n"); 
+    sb.append("S\n").append("S\n").append("S\n");
     sb.append("S\n").append("F\n").append("A0\n");
     BufferedReader input = new BufferedReader(new StringReader(sb.toString()));
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -198,13 +198,57 @@ public class TextPlayerTest {
     BoardTextView enemyView = new BoardTextView(b2);
 
     for (int i = 0; i < 4; i++) {
-        player.playOneTurn(b2, enemyView, "My", "Enemy");
+      player.playOneTurn(b2, enemyView, "My", "Enemy");
     }
 
     String output = bytes.toString();
-    
+
     assertTrue(output.contains("That action is invalid: no sonar actions remaining."));
-    assertTrue(output.contains("You missed!")); 
+    assertTrue(output.contains("You missed!"));
   }
 
+  @Test
+  public void test_playOneTurn_auto_fire() throws IOException {
+    Board<Character> b1 = new BattleShipBoard<>(10, 20);
+    Board<Character> b2 = new BattleShipBoard<>(10, 20);
+    V2ShipFactory f = new V2ShipFactory();
+    String inputData = "M\nM\nM\nS\nS\nS\nA0\n";
+    BufferedReader input = new BufferedReader(new StringReader(inputData));
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    PrintStream out = new PrintStream(bytes);
+    TextPlayer player = new TextPlayer("A", b1, input, out, f);
+
+    BoardTextView enemyView = new BoardTextView(b2);
+    for (int i = 0; i < 7; i++) {
+      player.playOneTurn(b2, enemyView, "My Ocean", "Enemy Ocean");
+    }
+    String output = bytes.toString();
+    assertTrue(output.contains("input a coordinate to fire at"));
+    assertTrue(output.contains("You missed!"));
+  }
+
+  @Test
+  public void test_readCoordinate_all_paths() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    String inputData = "ZZ\nA0\n";
+    TextPlayer player = createTextPlayer(10, 20, inputData, bytes);
+    Coordinate coord = player.readCoordinate("Enter coord:");
+
+    assertEquals(new Coordinate(0, 0), coord);
+    String output = bytes.toString();
+    assertTrue(output.contains("Enter coord:"));
+    assertTrue(output.contains("Please try again."));
+  }
+
+  @Test
+  public void test_readCoordinate_EOF() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer player = createTextPlayer(10, 20, "", bytes);
+
+    EOFException thrown = assertThrows(EOFException.class, () -> {
+      player.readCoordinate("Prompt");
+    });
+
+    assertEquals("Input ended unexpectedly", thrown.getMessage());
+  }
 }
