@@ -2,8 +2,8 @@ package edu.duke.yh475.battleship;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -97,5 +97,21 @@ public class BattleShipBoardTest {
     b.fireAt(new Coordinate(0, 1));
     assertTrue(b.isLost());
     
-    }
+  }
+  
+  @Test
+public void test_V2Ships_outOfBounds_onBoard() {
+    Board<Character> board = new BattleShipBoard<>(10, 20);
+    V2ShipFactory f = new V2ShipFactory();
+
+    Ship<Character> b = f.makeBattleship(new Placement("T0U"));
+    assertEquals("That placement is invalid: the ship goes off the bottom of the board.", board.tryAddShip(b));
+
+    Ship<Character> cR = f.makeCarrier(new Placement("A6R"));
+    assertEquals("That placement is invalid: the ship goes off the right of the board.", board.tryAddShip(cR));
+
+    Ship<Character> cU = f.makeCarrier(new Placement("Q0U"));
+    assertEquals("That placement is invalid: the ship goes off the bottom of the board.", board.tryAddShip(cU));
+    
+}
 }

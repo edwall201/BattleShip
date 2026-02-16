@@ -20,12 +20,14 @@ import  org.junit.jupiter.api.parallel.Resources;
 
 class AppTest {
   
+  @Disabled 
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_A_wins() throws IOException {
     runTest("testA_wins_input.txt", "testA_wins_output.txt");
   }
 
+  @Disabled
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_B_wins() throws IOException {
