@@ -67,7 +67,6 @@ public class TextPlayer {
 
   /**
    * A single ship placement and display the board
-   * 
    * @param shipName is the name of the ship to place
    * @param createFn is the function to create the ship based on placement
    * @throws IOException if input reading fails
@@ -169,6 +168,12 @@ public class TextPlayer {
     }
   }
 
+  /**
+   * Implement the firing action, prompting the player for a  coordinate to fire 
+   * Display the result of the fire action
+   * @param enemyBoard is the board of the enemy player
+   * @throws IOException if there is an error during input
+   */
   protected void doFire(Board<Character> enemyBoard) throws IOException {
     Coordinate coord = readCoordinate("Player " + name + "'s turn: input a coordinate to fire at");
     Ship<Character> hitRecord = enemyBoard.fireAt(coord);
@@ -179,6 +184,12 @@ public class TextPlayer {
     }
   }
 
+  /**
+   * Prompts the player for an action to take and reads their response
+   * @param promt is the message to display
+   * @return the action parsed from the user input
+   * @throws IOException if there is an error 
+   */
   protected String readAction(String prompt) throws IOException {
     while (true) {
       out.println(prompt);
@@ -207,7 +218,7 @@ public class TextPlayer {
 
   /**
    * Manages a single turn of attacking the enemy board
-   * 
+   * Base on the player's choice, fire, move, or sonar.
    * @param enemyBoard  is the board of the enemy player
    * @param enemyView   is the view of the enemy board
    * @param myHeader    is the header to display above the player's own board
