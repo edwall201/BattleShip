@@ -1,14 +1,28 @@
 package edu.duke.yh475.battleship;
 
+/**
+ * A class to handle the moving action
+ */
 public class ShipMove<T> {
   private final Board<T> board;
   private final AbstractShipFactory<T> factory;
 
+  /**
+   * Constructs a ShipMove with the given board and factory
+   * @param board the board to move ships on
+   * @param factory the factory to create new ships for moving
+   */
   public ShipMove(Board<T> board, AbstractShipFactory<T> factory) {
     this.board = board;
     this.factory = factory;
   }
 
+  /**
+   * Moves a ship from one coordinate to a new placement
+   * @param from the coordinate of the ship to move
+   * @param to the new placement for the ship
+   * @return null if the move is successful, or an error message if the move is invalid
+   */
   public String doMove(Coordinate from, Placement to) {
     Ship<T> shipToMove = board.getShipAt(from);
     if (shipToMove == null) {
@@ -33,6 +47,9 @@ public class ShipMove<T> {
     
   }
 
+  /**
+   * Creates a new ship based on the name and placement
+   */
   private Ship<T> createNewShip(String name, Placement to) {
     if (name.equals("Submarine")) {
         return factory.makeSubmarine(to);
