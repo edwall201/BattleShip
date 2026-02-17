@@ -145,4 +145,14 @@ public class BattleShipBoard<T> implements Board<T> {
     return null;
   }
   
+  /**
+   * Remove a ship from the board
+   * @param ship is the ship to be removed
+   */
+  @Override
+  public void removeShip(Ship<T> ship) {
+    boolean removed = myShips.remove(ship);
+  }
+
+  
 }

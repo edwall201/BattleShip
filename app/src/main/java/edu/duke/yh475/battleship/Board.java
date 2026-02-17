@@ -9,5 +9,6 @@ public interface Board<T>{
   public T whatIsAtForEnemy(Coordinate where);
   public boolean isLost();
   public Ship<T> getShipAt(Coordinate where);
+  public void removeShip(Ship<T> ship);
 }
 

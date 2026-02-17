@@ -130,7 +130,7 @@ public class BasicShipTest {
     dest.recordHitAt(5);
     
     assertTrue(dest.wasHitAt(5));
-    assertTrue(dest.wasHitAt(new Coordinate(1, 2)));
+    assertTrue(dest.wasHitAt(new Coordinate(0,3)));
     assertFalse(dest.wasHitAt(0));               
     
     assertThrows(IllegalArgumentException.class, () -> dest.recordHitAt(-1));

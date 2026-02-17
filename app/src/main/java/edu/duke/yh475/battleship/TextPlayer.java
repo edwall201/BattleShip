@@ -191,30 +191,21 @@ public class TextPlayer {
    * @throws IOException if there is an error 
    */
   protected String readAction(String prompt) throws IOException {
-    while (true) {
-      out.println(prompt);
-      String input = inputReader.readLine();
-      if (input == null) {
-        throw new EOFException("Input ended unexpectedly");
-      }
-      String action = input.toUpperCase().trim();
+  while (true) {
+    out.println(prompt);
+    String input = inputReader.readLine();
+    if (input == null) {
+      throw new EOFException("Input ended unexpectedly");
+    }
+    String action = input.toUpperCase().trim();
 
-      if (!action.equals("F") && !action.equals("M") && !action.equals("S")) {
-        out.println("That action is invalid: please enter F, M, or S.");
-        continue;
-      }
-      if (action.equals("M") && moveCount <= 0) {
-        out.println("That action is invalid: no move actions remaining.");
-        continue;
-      }
-      if (action.equals("S") && sonarCount <= 0) {
-        out.println("That action is invalid: no sonar actions remaining.");
-        continue;
-      }
-
+    if (action.equals("F") || action.equals("M") || action.equals("S")) {
       return action;
     }
+    
+    out.println("That action is invalid: please enter F, M, or S.");
   }
+}
 
   /**
    * Manages a single turn of attacking the enemy board
@@ -232,34 +223,60 @@ public class TextPlayer {
       doFire(enemyBoard);
       return;
     }
+    while (true) {
+      StringBuilder prompt = new StringBuilder("Possible actions for Player " + name + ":\n");
+      prompt.append("\n F Fire at a square");
+      if (moveCount > 0) {
+        prompt.append("\n M Move a ship to another square (").append(moveCount).append(" remaining)");
+      }
+      if (sonarCount > 0) {
+        prompt.append("\n S Sonar scan (").append(sonarCount).append(" remaining)");
+      }
+      prompt.append("\n\nPlayer ").append(name).append(", what would you like to do?");
 
-    StringBuilder prompt = new StringBuilder("Possible actions for Player " + name + ":\n");
-    prompt.append("\n F Fire at a square");
-    if (moveCount > 0) {
-      prompt.append("\n M Move a ship to another square (").append(moveCount).append(" remaining)");
-    }
-    if (sonarCount > 0) {
-      prompt.append("\n S Sonar scan (").append(sonarCount).append(" remaining)");
-    }
-    prompt.append("\n\nPlayer ").append(name).append(", what would you like to do?");
+      String action = readAction(prompt.toString());
 
-    String action = readAction(prompt.toString());
-
-    if (action.equals("F")) {
-      doFire(enemyBoard);
+      if (action.equals("F")) {
+        doFire(enemyBoard);
+        break;
+      } else if (action.equals("M")) {
+        if (moveCount <= 0) {
+          out.println("That action is invalid: no move actions remaining.");
+          continue;
+        }
+        if (doMove()) break;
+      }
+      if (action.equals("S")) {
+        if (sonarCount <= 0) {
+          out.println("That action is invalid: no sonar actions remaining.");
+          continue;
+        }
+        // doSonar(); 
+        sonarCount--;
+        break;
+      }
     }
-    if (action.equals("M")) {
-      moveCount--;
-    }
-    if (action.equals("S")) {
-      sonarCount--;
-    }
-
   }
 
-  protected void doMove() throws IOException{
+  protected boolean doMove() throws IOException {
     Coordinate from = readCoordinate("Which ship do you want to move?");
     Ship<Character> s = theBoard.getShipAt(from);
+    if (s == null) {
+        out.println("Error: There is no ship at " + from + "! Please choose an action again.");
+        return false; 
+    }
+    Placement to = readPlacement("Where would you like to move the ship to?");
+    ShipMove<Character> mover = new ShipMove<>(theBoard, shipFactory);
+    String result = mover.doMove(from, to);
+
+    if (result != null) {
+        out.println("Move failed: " + result + ". Please choose an action again.");
+        return false; 
+    }
+
+    moveCount--;
+    out.println("Ship moved successfully!");
+    return true;
   }
 
 }

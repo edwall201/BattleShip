@@ -2,7 +2,6 @@ package edu.duke.yh475.battleship;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -100,7 +99,7 @@ public class BattleShipBoardTest {
   }
   
   @Test
-public void test_V2Ships_outOfBounds_onBoard() {
+  public void test_V2Ships_outOfBounds_onBoard() {
     Board<Character> board = new BattleShipBoard<>(10, 20);
     V2ShipFactory f = new V2ShipFactory();
 
@@ -113,5 +112,16 @@ public void test_V2Ships_outOfBounds_onBoard() {
     Ship<Character> cU = f.makeCarrier(new Placement("Q0U"));
     assertEquals("That placement is invalid: the ship goes off the bottom of the board.", board.tryAddShip(cU));
     
-}
+  }
+  
+  @Test
+  public void test_removeShip() {
+    BattleShipBoard<Character> board = new BattleShipBoard<>(10, 10);
+    V2ShipFactory factory = new V2ShipFactory();
+    Ship<Character> sub = factory.makeSubmarine(new Placement("A0V"));
+    board.tryAddShip(sub);
+    assertEquals(sub, board.getShipAt(new Coordinate(0, 0)));
+    board.removeShip(sub);
+    assertNull(board.getShipAt(new Coordinate(0, 0)));
+  }
 }

@@ -1,6 +1,10 @@
 package edu.duke.yh475.battleship;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -212,7 +216,18 @@ public class TextPlayerTest {
     Board<Character> b1 = new BattleShipBoard<>(10, 20);
     Board<Character> b2 = new BattleShipBoard<>(10, 20);
     V2ShipFactory f = new V2ShipFactory();
-    String inputData = "M\nM\nM\nS\nS\nS\nA0\n";
+
+    b1.tryAddShip(f.makeSubmarine(new Placement("A0V")));
+    b1.tryAddShip(f.makeSubmarine(new Placement("A1V")));
+    b1.tryAddShip(f.makeSubmarine(new Placement("A2V")));
+
+    String inputData = "M\nA0\nB0V\n" + 
+                       "M\nA1\nB1V\n" + 
+                       "M\nA2\nB2V\n" +  
+                       "S\n" +           
+                       "S\n" +           
+                       "S\n" +           
+                       "A0\n";
     BufferedReader input = new BufferedReader(new StringReader(inputData));
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     PrintStream out = new PrintStream(bytes);
@@ -223,6 +238,7 @@ public class TextPlayerTest {
       player.playOneTurn(b2, enemyView, "My Ocean", "Enemy Ocean");
     }
     String output = bytes.toString();
+    
     assertTrue(output.contains("input a coordinate to fire at"));
     assertTrue(output.contains("You missed!"));
   }
@@ -250,5 +266,85 @@ public class TextPlayerTest {
     });
 
     assertEquals("Input ended unexpectedly", thrown.getMessage());
+  }
+
+  @Test
+  public void test_doMove_noShip() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    PrintStream out = new PrintStream(bytes);
+    Board<Character> board = new BattleShipBoard<>(10, 10);
+    V2ShipFactory factory = new V2ShipFactory();
+
+    StringReader sr = new StringReader("A0\n");
+    BufferedReader br = new BufferedReader(sr);
+    TextPlayer player = new TextPlayer("A", board, br, out, factory);
+
+    boolean result = player.doMove();
+
+    assertFalse(result);
+    assertTrue(bytes.toString().contains("There is no ship at (0, 0)"));
+  }
+
+  @Test
+  public void test_doMove_invalidDest() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    Board<Character> board = new BattleShipBoard<>(10, 10);
+    V2ShipFactory factory = new V2ShipFactory();
+    Ship<Character> s1 = factory.makeSubmarine(new Placement("A0V"));
+    Ship<Character> obstacle = factory.makeSubmarine(new Placement("D0V"));
+    board.tryAddShip(s1);
+    board.tryAddShip(obstacle);
+
+    StringReader sr = new StringReader("A0\nD0V\n");
+    BufferedReader br = new BufferedReader(sr);
+    TextPlayer player = new TextPlayer("A", board, br, new PrintStream(bytes), factory);
+
+    boolean result = player.doMove();
+
+    assertFalse(result);
+    assertSame(s1, board.getShipAt(new Coordinate("A0")));
+    assertTrue(bytes.toString().contains("Move failed"));
+  }
+
+  @Test
+  public void test_doMove_success() throws IOException {
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    Board<Character> board = new BattleShipBoard<>(10, 10);
+    V2ShipFactory factory = new V2ShipFactory();
+
+    Ship<Character> s = factory.makeSubmarine(new Placement("A0V"));
+    board.tryAddShip(s);
+    s.recordHitAt(0);
+
+    StringReader sr = new StringReader("A0\nB5H\n");
+    BufferedReader br = new BufferedReader(sr);
+    TextPlayer player = new TextPlayer("A", board, br, new PrintStream(bytes), factory);
+
+    boolean result = player.doMove();
+
+    assertTrue(result);
+    Ship<Character> moved = board.getShipAt(new Coordinate("B5"));
+    assertNotNull(moved);
+    assertTrue(moved.wasHitAt(0));
+    assertNull(board.getShipAt(new Coordinate("A0")));
+  }
+
+  @Test
+  public void test_doMove_failure_coverage() throws IOException {
+    Board<Character> b1 = new BattleShipBoard<>(10, 20);
+    Board<Character> b2 = new BattleShipBoard<>(10, 20);
+    V2ShipFactory f = new V2ShipFactory();
+    String inputData = "M\nA0\nF\nD5\nS\n";
+    BufferedReader input = new BufferedReader(new StringReader(inputData));
+    
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    TextPlayer player = new TextPlayer("A", b1, input, new PrintStream(bytes), f);
+    BoardTextView enemyView = new BoardTextView(b2);
+
+    player.playOneTurn(b2, enemyView, "My", "Enemy");
+    player.playOneTurn(b2, enemyView, "My", "Enemy");
+    String output = bytes.toString();
+    assertTrue(output.contains("Error: There is no ship at (0, 0)! Please choose an action again."));
+    assertTrue(output.contains("You missed!"));
   }
 }
