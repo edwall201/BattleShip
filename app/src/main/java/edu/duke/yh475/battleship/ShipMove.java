@@ -49,6 +49,10 @@ public class ShipMove<T> {
 
   /**
    * Creates a new ship based on the name and placement
+   * @param name the name of the ship to create
+   * @param to the placement for the new ship
+   * @return the newly created ship
+   * @throws IllegalArgumentException if the ship name is unknown
    */
   private Ship<T> createNewShip(String name, Placement to) {
     if (name.equals("Submarine")) {

@@ -1,6 +1,9 @@
 package edu.duke.yh475.battleship;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -117,10 +120,9 @@ public class BoardTextViewTest {
     b2.fireAt(new Coordinate(0, 3));
     b2.fireAt(new Coordinate(0, 0));
 
-    String headerSpacer = "               "; 
+    String headerSpacer = "               ";
     String bodySpacer = "                ";
-    String expected = 
-        "     Your Ocean" + headerSpacer + "Enemy Ocean\n" +
+    String expected = "     Your Ocean" + headerSpacer + "Enemy Ocean\n" +
         "  0|1|2|3  " + bodySpacer + "  0|1|2|3  \n" +
         "A  | | |  A" + bodySpacer + "A X| | |s A\n" +
         "B s|s| |  B" + bodySpacer + "B  | | |  B\n" +
@@ -162,5 +164,28 @@ public class BoardTextViewTest {
     String actual = view1.displayMyBoardWithEnemyNextToIt(view2, "Your Ocean", "Enemy Ocean");
 
     assertEquals(expected.toString(), actual);
+  }
+
+  @Test
+  public void test_displayEnemyBoard_after_ship_moved() {
+
+    BattleShipBoard<Character> board = new BattleShipBoard<>(10, 10);
+    V2ShipFactory factory = new V2ShipFactory();
+    BoardTextView view = new BoardTextView(board);
+
+    Ship<Character> sub = factory.makeSubmarine(new Placement("A0V"));
+    board.tryAddShip(sub);
+    board.fireAt(new Coordinate(0, 0));
+
+    Character contentBefore = board.whatIsAtForEnemy(new Coordinate(0, 0));
+    assertEquals('s', contentBefore);
+
+    board.removeShip(sub);
+
+    assertNull(board.whatIsAtForSelf(new Coordinate(0, 0)));
+
+    String enemyDisplay = view.displayEnemyBoard();
+
+    assertTrue(enemyDisplay.contains("A s| | | | | | | | |  A"));
   }
 }

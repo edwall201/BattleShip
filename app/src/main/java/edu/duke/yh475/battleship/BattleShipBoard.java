@@ -1,6 +1,6 @@
 package edu.duke.yh475.battleship;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 
 /**
  * BattleShip represents the grid where ships are placed and tracked
@@ -12,7 +12,7 @@ public class BattleShipBoard<T> implements Board<T> {
   private final int height;
   final ArrayList<Ship<T>> myShips;
   private final PlacementRuleChecker<T> placementRuleChecker;
-  HashSet<Coordinate> enemyMisses;
+  private final HashMap<Coordinate, T> enemyRecords;
   final T missInfo;
   
   /**
@@ -32,7 +32,7 @@ public class BattleShipBoard<T> implements Board<T> {
     this.height = h;
     this.myShips = new ArrayList<Ship<T>>();
     this.placementRuleChecker = placementRuleChecker;
-    this.enemyMisses = new HashSet<>();
+    this.enemyRecords = new HashMap<>();
     this.missInfo = missInfo;
   }
 
@@ -77,21 +77,23 @@ public class BattleShipBoard<T> implements Board<T> {
 
   /**
    * Check the board at a specific coordinate to see what is present
+   * Record the information for enemy view 
    * @param where is the coordinate to check
    * @param isSelf is ture if the view is for self, false if the view is for enemy
    * @return the display info of typt T
    */
 
-  protected T whatIsAt(Coordinate where, boolean isSelf){
-    for (Ship<T> s: myShips) {
-      if (s.occupiesCoordinates(where)){
-        return s.getDisplayInfoAt(where, isSelf);
+  protected T whatIsAt(Coordinate where, boolean isSelf) {
+    if (isSelf) {
+      for (Ship<T> s : myShips) {
+        if (s.occupiesCoordinates(where)) {
+          return s.getDisplayInfoAt(where, true);
+        }
       }
+      return null;
+    } else {
+      return enemyRecords.get(where); 
     }
-    if (!isSelf && enemyMisses.contains(where)) {
-        return missInfo;
-    }
-    return null;
   }
 
   /**
@@ -114,10 +116,11 @@ public class BattleShipBoard<T> implements Board<T> {
     for(Ship<T> s: myShips){
       if(s.occupiesCoordinates(where)){
         s.recordHitAt(where);
+        enemyRecords.put(where, s.getDisplayInfoAt(where, false));
         return s;
       }
     }
-    enemyMisses.add(where);
+    enemyRecords.put(where, missInfo);
     return null;
   }
 
