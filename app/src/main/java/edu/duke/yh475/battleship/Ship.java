@@ -59,5 +59,24 @@ public interface Ship<T> {
    * @return An Iterable with the coordinates that this ship occupies
    */
   public Iterable<Coordinate> getCoordinates();
+
+  /**
+   * Get the number of pieces of this ship, which is the number of coordinates it occupies
+   * @return the number of pieces of this ship
+   */
+  public int getNumPieces();
+
+  /**
+   * Record a hit at the given index, which must be between 0 and getNumPieces() - 1
+   * @param index the index of the piece that was hit
+   */
+  public void recordHitAt(int index);
+
+  /**
+   * Check if this ship was hit at the given index, which must be between 0 and getNumPieces() - 1
+   * @param index the index of the piece to check
+   * @return true if this ship was hit at the given index, false otherwise
+   */
+  public boolean wasHitAt(int index);
 }
 

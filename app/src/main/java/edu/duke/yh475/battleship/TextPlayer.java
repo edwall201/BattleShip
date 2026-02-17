@@ -257,4 +257,9 @@ public class TextPlayer {
 
   }
 
+  protected void doMove() throws IOException{
+    Coordinate from = readCoordinate("Which ship do you want to move?");
+    Ship<Character> s = theBoard.getShipAt(from);
+  }
+
 }

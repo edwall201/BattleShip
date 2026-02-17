@@ -80,11 +80,11 @@ public class V2ShipFactory implements AbstractShipFactory<Character> {
     if (direction == 'U') {
       off = new int[][]{{0, 0}, {1, 0}, {2, 0}, {2, 1}, {3, 0}, {3, 1}, {4, 1}};
     } else if (direction == 'R') {
-      off = new int[][]{{0, 2}, {0, 3}, {0, 4}, {1, 0}, {1, 1}, {1, 2}, {1, 3}};
-    } else if (direction == 'D') {
-      off = new int[][]{{0, 0}, {1, 0}, {1, 1}, {2, 1}, {2, 2}, {3, 2}, {4, 2}};
-    } else if (direction == 'L') {
       off = new int[][]{{0, 1}, {0, 2}, {0, 3}, {0, 4}, {1, 0}, {1, 1}, {1, 2}};
+    } else if (direction == 'D') {
+      off = new int[][]{{0, 0}, {1, 0}, {1, 1}, {2, 0}, {2, 1}, {3, 1}, {4, 1}};
+    } else if (direction == 'L') {
+      off = new int[][]{{0, 2}, {0, 3}, {0, 4}, {1, 0}, {1, 1}, {1, 2}, {1, 3}};
     } else {
       throw new IllegalArgumentException("Carrier orientation must be U, R, D, or L");
     }

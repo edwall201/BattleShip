@@ -1,6 +1,6 @@
 package edu.duke.yh475.battleship;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 
 public class RectangleShip<T> extends BasicShip<T> {
 
@@ -44,8 +44,8 @@ public class RectangleShip<T> extends BasicShip<T> {
    * @param width The number of columns
    * @param height The number of rows
    */
-  static HashSet<Coordinate> makeCoords(Coordinate upperleft, int width, int height) {
-    HashSet<Coordinate> coords = new HashSet<>();
+  static LinkedHashSet<Coordinate> makeCoords(Coordinate upperleft, int width, int height) {
+    LinkedHashSet<Coordinate> coords = new LinkedHashSet<>();
     for (int row = 0; row < height; row++) {
       for (int col = 0; col < width; col++) {
         coords.add(new Coordinate(upperleft.getRow() + row, upperleft.getColumn() + col));

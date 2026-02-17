@@ -134,4 +134,15 @@ public class BattleShipBoard<T> implements Board<T> {
     }
     return true;
   }
+
+  @Override
+  public Ship<T> getShipAt(Coordinate where) {
+    for (Ship<T> s : myShips) {
+      if (s.occupiesCoordinates(where)) {
+        return s;
+      }
+    }
+    return null;
+  }
+  
 }

@@ -10,7 +10,7 @@ public class V2ShipFactoryTest {
     V2ShipFactory factory = new V2ShipFactory();
     Ship<Character> s = factory.makeCarrier(new Placement("A0R"));
     assertFalse(s.occupiesCoordinates(new Coordinate(0, 0)));
-    assertFalse(s.occupiesCoordinates(new Coordinate(0, 1)));
+    assertTrue(s.occupiesCoordinates(new Coordinate(0, 1)));
     assertTrue(s.occupiesCoordinates(new Coordinate(0, 2)));
     assertTrue(s.occupiesCoordinates(new Coordinate(1, 0)));
   }
@@ -31,7 +31,7 @@ public class V2ShipFactoryTest {
     assertTrue(s.occupiesCoordinates(new Coordinate(0, 0)));
     assertFalse(s.occupiesCoordinates(new Coordinate(0, 1)));
     assertTrue(s.occupiesCoordinates(new Coordinate(2, 1)));
-    assertTrue(s.occupiesCoordinates(new Coordinate(3, 2)));
+    assertTrue(s.occupiesCoordinates(new Coordinate(3, 1)));
   }
 
   @Test
@@ -39,10 +39,10 @@ public class V2ShipFactoryTest {
     V2ShipFactory f = new V2ShipFactory();
     Ship<Character> s = f.makeCarrier(new Placement("A0L"));
     assertFalse(s.occupiesCoordinates(new Coordinate(0, 0)));
-    assertTrue(s.occupiesCoordinates(new Coordinate(0, 1)));
+    assertTrue(s.occupiesCoordinates(new Coordinate(0, 2)));
     assertTrue(s.occupiesCoordinates(new Coordinate(1, 0)));
     assertTrue(s.occupiesCoordinates(new Coordinate(1, 2)));
-    assertFalse(s.occupiesCoordinates(new Coordinate(1, 3)));
+    assertTrue(s.occupiesCoordinates(new Coordinate(1, 3)));
   }
 
   @Test
