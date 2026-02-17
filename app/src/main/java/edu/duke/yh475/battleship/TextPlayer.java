@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 /**
@@ -67,6 +68,7 @@ public class TextPlayer {
 
   /**
    * A single ship placement and display the board
+   * 
    * @param shipName is the name of the ship to place
    * @param createFn is the function to create the ship based on placement
    * @throws IOException if input reading fails
@@ -169,8 +171,9 @@ public class TextPlayer {
   }
 
   /**
-   * Implement the firing action, prompting the player for a  coordinate to fire 
+   * Implement the firing action, prompting the player for a coordinate to fire
    * Display the result of the fire action
+   * 
    * @param enemyBoard is the board of the enemy player
    * @throws IOException if there is an error during input
    */
@@ -186,30 +189,32 @@ public class TextPlayer {
 
   /**
    * Prompts the player for an action to take and reads their response
+   * 
    * @param promt is the message to display
    * @return the action parsed from the user input
-   * @throws IOException if there is an error 
+   * @throws IOException if there is an error
    */
   protected String readAction(String prompt) throws IOException {
-  while (true) {
-    out.println(prompt);
-    String input = inputReader.readLine();
-    if (input == null) {
-      throw new EOFException("Input ended unexpectedly");
-    }
-    String action = input.toUpperCase().trim();
+    while (true) {
+      out.println(prompt);
+      String input = inputReader.readLine();
+      if (input == null) {
+        throw new EOFException("Input ended unexpectedly");
+      }
+      String action = input.toUpperCase().trim();
 
-    if (action.equals("F") || action.equals("M") || action.equals("S")) {
-      return action;
+      if (action.equals("F") || action.equals("M") || action.equals("S")) {
+        return action;
+      }
+
+      out.println("That action is invalid: please enter F, M, or S.");
     }
-    
-    out.println("That action is invalid: please enter F, M, or S.");
   }
-}
 
   /**
    * Manages a single turn of attacking the enemy board
    * Base on the player's choice, fire, move, or sonar.
+   * 
    * @param enemyBoard  is the board of the enemy player
    * @param enemyView   is the view of the enemy board
    * @param myHeader    is the header to display above the player's own board
@@ -244,14 +249,15 @@ public class TextPlayer {
           out.println("That action is invalid: no move actions remaining.");
           continue;
         }
-        if (doMove()) break;
+        if (doMove())
+          break;
       }
       if (action.equals("S")) {
         if (sonarCount <= 0) {
           out.println("That action is invalid: no sonar actions remaining.");
           continue;
         }
-        // doSonar(); 
+        doSonar(enemyBoard);
         sonarCount--;
         break;
       }
@@ -262,21 +268,34 @@ public class TextPlayer {
     Coordinate from = readCoordinate("Which ship do you want to move?");
     Ship<Character> s = theBoard.getShipAt(from);
     if (s == null) {
-        out.println("Error: There is no ship at " + from + "! Please choose an action again.");
-        return false; 
+      out.println("Error: There is no ship at " + from + "! Please choose an action again.");
+      return false;
     }
     Placement to = readPlacement("Where would you like to move the ship to?");
     ShipMove<Character> mover = new ShipMove<>(theBoard, shipFactory);
     String result = mover.doMove(from, to);
 
     if (result != null) {
-        out.println("Move failed: " + result + ". Please choose an action again.");
-        return false; 
+      out.println("Move failed: " + result + ". Please choose an action again.");
+      return false;
     }
 
     moveCount--;
     out.println("Ship moved successfully!");
     return true;
+  }
+
+  protected void doSonar(Board<Character> enemyBoard) throws IOException {
+    String prompt = "where do you want to center the sonar scan?";
+    Coordinate center = readCoordinate(prompt);
+    SonarScanner<Character> scanner = new SonarScanner<>(enemyBoard);
+    Map<String, Integer> res = scanner.scan(center);
+    out.println("---------------------------------------------------------------------------");
+    out.println("Submarines occupy " + res.get("Submarine") + " squares");
+    out.println("Destroyers occupy " + res.get("Destroyer") + " squares");
+    out.println("Battleships occupy " + res.get("Battleship") + " squares");
+    out.println("Carriers occupy " + res.get("Carrier") + " squares");
+    out.println("---------------------------------------------------------------------------");
   }
 
 }

@@ -193,8 +193,9 @@ public class TextPlayerTest {
     Board<Character> b2 = new BattleShipBoard<>(10, 20);
     V2ShipFactory f = new V2ShipFactory();
     StringBuilder sb = new StringBuilder();
-    sb.append("S\n").append("S\n").append("S\n");
-    sb.append("S\n").append("F\n").append("A0\n");
+    sb.append("S\nE5\n");
+    sb.append("S\nE5\n").append("S\nE5\n");
+    sb.append("S\nE5\n").append("F\n").append("A0\n");
     BufferedReader input = new BufferedReader(new StringReader(sb.toString()));
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     PrintStream out = new PrintStream(bytes);
@@ -224,10 +225,10 @@ public class TextPlayerTest {
     String inputData = "M\nA0\nB0V\n" + 
                        "M\nA1\nB1V\n" + 
                        "M\nA2\nB2V\n" +  
-                       "S\n" +           
-                       "S\n" +           
-                       "S\n" +           
-                       "A0\n";
+                       "S\nE5\n" +           
+                       "S\nE5\n" +           
+                       "S\nE5\n" +           
+                       "A0";
     BufferedReader input = new BufferedReader(new StringReader(inputData));
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     PrintStream out = new PrintStream(bytes);
@@ -334,7 +335,7 @@ public class TextPlayerTest {
     Board<Character> b1 = new BattleShipBoard<>(10, 20);
     Board<Character> b2 = new BattleShipBoard<>(10, 20);
     V2ShipFactory f = new V2ShipFactory();
-    String inputData = "M\nA0\nF\nD5\nS\n";
+    String inputData = "M\nA0\nF\nD5\nS\nE5\n";
     BufferedReader input = new BufferedReader(new StringReader(inputData));
     
     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -347,4 +348,33 @@ public class TextPlayerTest {
     assertTrue(output.contains("Error: There is no ship at (0, 0)! Please choose an action again."));
     assertTrue(output.contains("You missed!"));
   }
+
+  @Test
+public void test_doSonar_output_format() throws IOException {
+    BattleShipBoard<Character> enemyBoard = new BattleShipBoard<>(10, 20);
+    V2ShipFactory factory = new V2ShipFactory();
+    enemyBoard.tryAddShip(factory.makeSubmarine(new Placement("B2H")));
+
+    String inputData = "C2\n";
+    BufferedReader input = new BufferedReader(new StringReader(inputData));
+    
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    PrintStream out = new PrintStream(bytes);
+    
+    TextPlayer player = new TextPlayer("A", new BattleShipBoard<>(10,20), input, out, factory);
+    player.doSonar(enemyBoard);
+    
+    String output = bytes.toString();
+    String expectedHeader = "---------------------------------------------------------------------------";
+    
+    assertTrue(output.contains("where do you want to center the sonar scan?"));
+    assertTrue(output.contains(expectedHeader));
+    assertTrue(output.contains("Submarines occupy 2 squares"));
+    assertTrue(output.contains("Destroyers occupy 0 squares"));
+    assertTrue(output.contains("Battleships occupy 0 squares"));
+    assertTrue(output.contains("Carriers occupy 0 squares"));
+    
+    String[] lines = output.split("\n");
+    assertEquals(expectedHeader, lines[lines.length - 1].trim());
+}
 }
