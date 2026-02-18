@@ -75,6 +75,16 @@ public class App {
     }
   }
 
+  /**
+   * Create a player based on the user input
+   * @param input is the input source to read
+   * @param out is the output source to print
+   * @param name is the name of the player to create
+   * @param board is the board for the player to manage
+   * @param factory is the ship factory to create ships for the player
+   * @return a player created based on the user input
+   * @throws IOException if there is an error reading input
+   */
   public static Player createPlayer(BufferedReader input, PrintStream out, String name, Board<Character> board,
       AbstractShipFactory<Character> factory) throws IOException {
     while (true) {
