@@ -100,7 +100,7 @@ public abstract class BasicShip<T> implements Ship<T> {
    * If the index is out of bound, throw IllegalArgumentException
    * @param index the index of the coordinate to get
    * @return the coordinate of this ship at the index
-   * @throws IllegalArgumentException if the index is out of bound
+   * 
    */
   protected Coordinate getCoordinateByIndex(int index) {
     int i = 0;

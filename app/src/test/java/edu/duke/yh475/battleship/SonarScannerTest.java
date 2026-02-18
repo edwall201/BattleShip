@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class SonarScannerTest {
   @Test
   public void test_SonarScanner_success() {
-    BattleShipBoard<Character> board = new BattleShipBoard<>(10,20);
+    BattleShipBoard<Character> board = new BattleShipBoard<>(10, 20);
     V2ShipFactory factory = new V2ShipFactory();
     board.tryAddShip(factory.makeSubmarine(new Placement("K4H")));
     board.tryAddShip(factory.makeCarrier(new Placement("I4L")));
@@ -19,8 +19,8 @@ public class SonarScannerTest {
     assertEquals(6, result.get("Carrier"));
   }
 
-   public void test_SonarScanner_invalid() {
-    BattleShipBoard<Character> board = new BattleShipBoard<>(10,20);
+  public void test_SonarScanner_invalid() {
+    BattleShipBoard<Character> board = new BattleShipBoard<>(10, 20);
     V2ShipFactory factory = new V2ShipFactory();
     board.tryAddShip(factory.makeSubmarine(new Placement("K4H")));
     board.tryAddShip(factory.makeCarrier(new Placement("I4L")));
@@ -44,6 +44,17 @@ public class SonarScannerTest {
     assertEquals(0, result2.get("Destroyer"));
     assertEquals(0, result3.get("Battleship"));
     assertEquals(0, result4.get("Carrier"));
+  }
+
+  @Test
+  public void test_sonar_scanning_T_shape() {
+    BattleShipBoard<Character> board = new BattleShipBoard<>(10, 20);
+    V2ShipFactory factory = new V2ShipFactory();
+    board.tryAddShip(factory.makeBattleship(new Placement("B2U")));
+    SonarScanner<Character> scanner = new SonarScanner<>(board);
+    Map<String, Integer> res = scanner.scan(new Coordinate("B2"));
+
+    assertEquals(4, res.get("Battleship"));
   }
 
 }

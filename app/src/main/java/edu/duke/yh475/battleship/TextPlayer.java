@@ -178,13 +178,21 @@ public class TextPlayer {
    * @throws IOException if there is an error during input
    */
   protected void doFire(Board<Character> enemyBoard) throws IOException {
-    Coordinate coord = readCoordinate("Player " + name + "'s turn: input a coordinate to fire at");
-    Ship<Character> hitRecord = enemyBoard.fireAt(coord);
-    if (hitRecord != null) {
-      out.println("You hit a " + hitRecord.getName() + "!");
-    } else {
-      out.println("You missed!\n");
+    while(true){
+      try{
+        Coordinate coord = readCoordinate("Player " + name + "'s turn: input a coordinate to fire at");
+        Ship<Character> hitRecord = enemyBoard.fireAt(coord);
+        if (hitRecord != null) {
+          out.println("You hit a " + hitRecord.getName() + "!");
+        } else {
+          out.println("You missed!\n");
+        }
+        break;
+      } catch (IllegalArgumentException e) {
+        out.println(e.getMessage() + " Please try again.");
+      }
     }
+    
   }
 
   /**
@@ -223,6 +231,7 @@ public class TextPlayer {
    */
   public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String myHeader, String enemyHeader)
       throws IOException {
+    out.println("---------------------------------------------------------------------------");
     out.println(view.displayMyBoardWithEnemyNextToIt(enemyView, myHeader, enemyHeader));
     if (moveCount <= 0 && sonarCount <= 0) {
       doFire(enemyBoard);
@@ -264,6 +273,11 @@ public class TextPlayer {
     }
   }
 
+  /**
+   * Do the move action, prompting the player for a coordinate to from and to
+   * @return true if the move is successful, or false
+   * @throws IOException if there is an error during input
+   */
   protected boolean doMove() throws IOException {
     Coordinate from = readCoordinate("Which ship do you want to move?");
     Ship<Character> s = theBoard.getShipAt(from);
@@ -271,20 +285,34 @@ public class TextPlayer {
       out.println("Error: There is no ship at " + from + "! Please choose an action again.");
       return false;
     }
-    Placement to = readPlacement("Where would you like to move the ship to?");
-    ShipMove<Character> mover = new ShipMove<>(theBoard, shipFactory);
-    String result = mover.doMove(from, to);
+    while (true){
+      try{
+        Placement to = readPlacement("Where would you like to move the ship to?");
+        ShipMove<Character> mover = new ShipMove<>(theBoard, shipFactory);
+        String result = mover.doMove(from, to);
 
-    if (result != null) {
-      out.println("Move failed: " + result + ". Please choose an action again.");
-      return false;
+        if (result != null) {
+          out.println("Move failed: " + result + ". Please choose an action again.");
+          return false;
+        }
+
+        moveCount--;
+        out.println("Ship moved successfully!");
+        return true;
+      }
+      catch (IllegalArgumentException e) {
+        out.println("That placement is invalid: " + e.getMessage() + " Please try again.");
+      }
     }
-
-    moveCount--;
-    out.println("Ship moved successfully!");
-    return true;
+    
   }
 
+  /**
+   * Prompts the player for a coordinate to input the center of the sonar scan
+   * Eexecute the sonar scan and display the result
+   * @param enemyBoard is the board of the enemy player
+   * @throws IOException if there is an error during input
+   */
   protected void doSonar(Board<Character> enemyBoard) throws IOException {
     String prompt = "where do you want to center the sonar scan?";
     Coordinate center = readCoordinate(prompt);

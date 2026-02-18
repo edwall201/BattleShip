@@ -2,7 +2,6 @@ package edu.duke.yh475.battleship;
 
 import java.util.HashMap;
 import java.util.Map;
-
 public class SonarScanner<T> {
   private final Board<T> enemyBoard;
 

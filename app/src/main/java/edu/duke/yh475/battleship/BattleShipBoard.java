@@ -113,6 +113,9 @@ public class BattleShipBoard<T> implements Board<T> {
    */
   @Override
   public Ship<T> fireAt(Coordinate where){
+    if(where.getRow() < 0 || where.getRow() >= height || where.getColumn() < 0 || where.getColumn() >= width){
+      throw new IllegalArgumentException("Coordinate " + where + " is out of bounds");
+    }
     for(Ship<T> s: myShips){
       if(s.occupiesCoordinates(where)){
         s.recordHitAt(where);
