@@ -1,0 +1,370 @@
+Is player A a Human(H) or a Computer(C)? Please enter H or C
+Is player B a Human(H) or a Computer(C)? Please enter H or C
+Player A hit your Submarine at A0!
+Player B hit your Submarine at A0!
+Player A hit your Submarine at A1!
+Player B hit your Submarine at A1!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Submarine at B0!
+Player B hit your Submarine at B0!
+Player A hit your Submarine at B1!
+Player B hit your Submarine at B1!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Destroyer at C0!
+Player B hit your Destroyer at C0!
+Player A hit your Destroyer at C1!
+Player B hit your Destroyer at C1!
+Player A hit your Destroyer at C2!
+Player B hit your Destroyer at C2!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Destroyer at D0!
+Player B hit your Destroyer at D0!
+Player A hit your Destroyer at D1!
+Player B hit your Destroyer at D1!
+Player A hit your Destroyer at D2!
+Player B hit your Destroyer at D2!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Destroyer at E0!
+Player B hit your Destroyer at E0!
+Player A hit your Destroyer at E1!
+Player B hit your Destroyer at E1!
+Player A hit your Destroyer at E2!
+Player B hit your Destroyer at E2!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Battleship at F1!
+Player B hit your Battleship at F1!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Battleship at G0!
+Player B hit your Battleship at G0!
+Player A hit your Battleship at G1!
+Player B hit your Battleship at G1!
+Player A hit your Battleship at G2!
+Player B hit your Battleship at G2!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Battleship at I1!
+Player B hit your Battleship at I1!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Battleship at J0!
+Player B hit your Battleship at J0!
+Player A hit your Battleship at J1!
+Player B hit your Battleship at J1!
+Player A hit your Battleship at J2!
+Player B hit your Battleship at J2!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Battleship at L1!
+Player B hit your Battleship at L1!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Battleship at M0!
+Player B hit your Battleship at M0!
+Player A hit your Battleship at M1!
+Player B hit your Battleship at M1!
+Player A hit your Battleship at M2!
+Player B hit your Battleship at M2!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Carrier at O0!
+Player B hit your Carrier at O0!
+Player A missed!
+Player B missed!
+Player A hit your Carrier at O2!
+Player B hit your Carrier at O2!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Carrier at P0!
+Player B hit your Carrier at P0!
+Player A missed!
+Player B missed!
+Player A hit your Carrier at P2!
+Player B hit your Carrier at P2!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Carrier at Q0!
+Player B hit your Carrier at Q0!
+Player A hit your Carrier at Q1!
+Player B hit your Carrier at Q1!
+Player A hit your Carrier at Q2!
+Player B hit your Carrier at Q2!
+Player A hit your Carrier at Q3!
+Player B hit your Carrier at Q3!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Carrier at R0!
+Player B hit your Carrier at R0!
+Player A hit your Carrier at R1!
+Player B hit your Carrier at R1!
+Player A hit your Carrier at R2!
+Player B hit your Carrier at R2!
+Player A hit your Carrier at R3!
+Player B hit your Carrier at R3!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Carrier at S1!
+Player B hit your Carrier at S1!
+Player A missed!
+Player B missed!
+Player A hit your Carrier at S3!
+Player A win!

@@ -7,6 +7,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.function.Function;
 
+/**
+ * Computer player implements the player interface
+ * Handles the ship placement and firing logic for a computer player
+ * It will fire every coordinate on the board, starting from A0 to the end
+ */
 public class ComputerPlayer implements Player {
   protected final Board<Character> theBoard;
   protected final BoardTextView view;
@@ -19,6 +24,13 @@ public class ComputerPlayer implements Player {
   private int FireRow = 0;
   private int FireCol = 0;
 
+  /**
+   * Constructor for the computer player
+   * @param name the name of the player
+   * @param theBoard the board for the player to place ships on and fire from
+   * @param out the PrintStream to output messages to
+   * @param shipFactory the factory to create ships for placement
+   */
   public ComputerPlayer(String name, Board<Character> theBoard, PrintStream out,
       AbstractShipFactory<Character> shipFactory) {
     this.name = name;
@@ -54,10 +66,13 @@ public class ComputerPlayer implements Player {
     shipsToPlace.addAll(Collections.nCopies(2, "Carrier"));
   }
 
+  /**
+   * Handles the ship placement for the computer player
+   */
   @Override
   public void doPlacementPhase() throws IOException {
     String[] placements = {
-        "A0H", "B0H", "C0H", "D0H", "E0H", "F0U", "I0U", "L0U", "O0U", "R0U"
+        "A0H", "B0H", "C0H", "D0H", "E0H", "F0U", "I0U", "L0U", "O0U", "O2U"
     };
     int i = 0;
     for (String shipName : shipsToPlace) {
@@ -67,6 +82,13 @@ public class ComputerPlayer implements Player {
     }
   }
 
+  /**
+   * Handles the firing logic for the computer player
+   * @param enemyBoard the board of the enemy player to fire at
+   * @param enemyView the view of the enemy board (not used by computer player)
+   * @param myHeader the header to display for the computer player's board
+   * @param enemyHeader the header to display for the enemy player's board
+   */
   @Override
   public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String myHeader, String enemyHeader)
       throws IOException {
@@ -77,8 +99,10 @@ public class ComputerPlayer implements Player {
       FireRow++;
     }
     Ship<Character> hit = enemyBoard.fireAt(coord);
+    char rowChar = (char) ('A' + coord.getRow());
+    String coordStr = "" + rowChar + coord.getColumn();
     if (hit != null) {
-      out.println("Player " + name + " hit your " + hit.getName() + " at " + coord + "!");
+      out.println("Player " + name + " hit your " + hit.getName() + " at " + coordStr + "!");
     } else {
       out.println("Player " + name + " missed!");
     }

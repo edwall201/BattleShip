@@ -62,7 +62,7 @@ public class ComputerPlayerTest {
     cp.playOneTurn(enemyBoard, null, null, null);
     String output = bytes.toString();
 
-    assertTrue(output.contains("Player Computer hit your Submarine at (0, 0)!"));
+    assertTrue(output.contains("Player Computer hit your Submarine at A0!"));
     assertTrue(output.contains("Player Computer missed!"));
     assertEquals("Computer", cp.getName());
     assertNotNull(cp.getBoard());

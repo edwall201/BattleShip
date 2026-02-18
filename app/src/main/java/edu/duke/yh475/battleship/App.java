@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 
 /**
  * The main application class for the battle ship game
@@ -36,8 +37,8 @@ public class App {
       Board<Character> b2 = new BattleShipBoard<Character>(10, 20);
       BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
       V2ShipFactory factory = new V2ShipFactory();
-      Player p1 = new TextPlayer("A", b1, input, System.out, factory);
-      Player p2 = new TextPlayer("B", b2, input, System.out, factory);
+      Player p1 = createPlayer(input, System.out, "A", b1, factory);
+      Player p2 = createPlayer(input, System.out, "B", b2, factory);
       App app = new App(p1, p2);
       app.doPlacementPhase();
       app.doAttackingPhase();
@@ -59,17 +60,37 @@ public class App {
 
   public void doAttackingPhase() throws IOException {
     while (true) {
-      player1.playOneTurn(player2.getBoard(), player2.getView(), "Your Ocean", "Player " + player2.getName() + "'s ocean");
+      player1.playOneTurn(player2.getBoard(), player2.getView(), "Your Ocean",
+          "Player " + player2.getName() + "'s ocean");
       if (player2.getBoard().isLost()) {
         System.out.println("Player " + player1.getName() + " win!");
         return;
       }
-      player2.playOneTurn(player1.getBoard(), player1.getView(), "Your Ocean", "Player " + player1.getName() + "'s ocean");
+      player2.playOneTurn(player1.getBoard(), player1.getView(), "Your Ocean",
+          "Player " + player1.getName() + "'s ocean");
       if (player1.getBoard().isLost()) {
         System.out.println("Player " + player2.getName() + " win!");
         return;
       }
     }
+  }
 
+  public static Player createPlayer(BufferedReader input, PrintStream out, String name, Board<Character> board,
+      AbstractShipFactory<Character> factory) throws IOException {
+    while (true) {
+      out.println("Is player " + name + " a Human(H) or a Computer(C)? Please enter H or C");
+      String line = input.readLine();
+      if (line == null) {
+        throw new EOFException("No more input");
+      }
+      String s = line.trim().toUpperCase();
+      if (s.equals("H")) {
+        return new TextPlayer(name, board, input, out, factory);
+      } else if (s.equals("C")) {
+        return new ComputerPlayer(name, board, out, factory);
+      }
+      out.println("Invalid input, please enter H for human or C for computer");
+
+    }
   }
 }
