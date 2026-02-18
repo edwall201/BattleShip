@@ -14,7 +14,7 @@ import java.util.function.Function;
  * TextPlayer handles the textual interaction with a player
  * manage input display board and executing placement phase
  */
-public class TextPlayer {
+public class TextPlayer implements Player {
   final Board<Character> theBoard;
   final BoardTextView view;
   final BufferedReader inputReader;
@@ -48,6 +48,26 @@ public class TextPlayer {
 
     setupShipCreationMap();
     setupShipCreatoinList();
+  }
+
+  @Override
+  public String getName() {
+      return this.name;
+  }
+
+  @Override
+  public boolean isLost() {
+      return theBoard.isLost();
+  }
+
+  @Override
+  public Board<Character> getBoard() {
+    return this.theBoard;
+  }
+
+  @Override
+  public BoardTextView getView() {
+    return this.view;
   }
 
   /**

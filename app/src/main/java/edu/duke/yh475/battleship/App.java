@@ -12,8 +12,8 @@ import java.io.InputStreamReader;
  * The main application class for the battle ship game
  */
 public class App {
-  final TextPlayer player1;
-  final TextPlayer player2;
+  final Player player1;
+  final Player player2;
 
   /**
    * Construct and App instance
@@ -22,7 +22,7 @@ public class App {
    * @param inputSource is where player commands are read from
    * @param out         is where message and the board view ara printed
    */
-  public App(TextPlayer p1, TextPlayer p2) {
+  public App(Player p1, Player p2) {
     this.player1 = p1;
     this.player2 = p2;
   }
@@ -36,8 +36,8 @@ public class App {
       Board<Character> b2 = new BattleShipBoard<Character>(10, 20);
       BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
       V2ShipFactory factory = new V2ShipFactory();
-      TextPlayer p1 = new TextPlayer("A", b1, input, System.out, factory);
-      TextPlayer p2 = new TextPlayer("B", b2, input, System.out, factory);
+      Player p1 = new TextPlayer("A", b1, input, System.out, factory);
+      Player p2 = new TextPlayer("B", b2, input, System.out, factory);
       App app = new App(p1, p2);
       app.doPlacementPhase();
       app.doAttackingPhase();
@@ -59,14 +59,14 @@ public class App {
 
   public void doAttackingPhase() throws IOException {
     while (true) {
-      player1.playOneTurn(player2.theBoard, player2.view, "Your Ocean", "Player " + player2.name + "'s ocean");
-      if (player2.theBoard.isLost()) {
-        System.out.println("Player " + player1.name + " win!");
+      player1.playOneTurn(player2.getBoard(), player2.getView(), "Your Ocean", "Player " + player2.getName() + "'s ocean");
+      if (player2.getBoard().isLost()) {
+        System.out.println("Player " + player1.getName() + " win!");
         return;
       }
-      player2.playOneTurn(player1.theBoard, player1.view, "Your Ocean", "Player " + player1.name + "'s ocean");
-      if (player1.theBoard.isLost()) {
-        System.out.println("Player " + player2.name + " win!");
+      player2.playOneTurn(player1.getBoard(), player1.getView(), "Your Ocean", "Player " + player1.getName() + "'s ocean");
+      if (player1.getBoard().isLost()) {
+        System.out.println("Player " + player2.getName() + " win!");
         return;
       }
     }

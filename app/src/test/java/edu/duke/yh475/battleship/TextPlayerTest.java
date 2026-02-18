@@ -422,4 +422,22 @@ public class TextPlayerTest {
     assertTrue(output.contains("is out of bounds"));
     assertTrue(output.contains("You missed!"));
   }
+
+  @Test
+  public void test_text_player_getters() throws IOException {
+    Board<Character> b = new BattleShipBoard<>(10, 20);
+    V2ShipFactory f = new V2ShipFactory();
+    BufferedReader input = new BufferedReader(new StringReader("")); 
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    PrintStream out = new PrintStream(bytes);
+
+    TextPlayer p = new TextPlayer("A", b, input, out, f);
+    assertEquals("A", p.getName());
+    assertNotNull(p.getBoard());
+    assertEquals(10, p.getBoard().getWidth());
+    assertNotNull(p.getView());
+    assertTrue(p.isLost());
+    b.tryAddShip(f.makeSubmarine(new Placement("A0H")));
+    assertFalse(p.isLost());
+  }
 }
