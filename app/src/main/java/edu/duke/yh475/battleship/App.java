@@ -58,6 +58,13 @@ public class App {
     player2.doPlacementPhase();
   }
 
+  /**
+   * Executes the attacking of the game
+   * During each game, the current player attack another player's board
+   * After each attack, the method check whether any player wins
+   * If so, the game ends and announce the winner
+   * @throws IOException if an error occurs while reading player input
+   */
   public void doAttackingPhase() throws IOException {
     while (true) {
       player1.playOneTurn(player2.getBoard(), player2.getView(), "Your Ocean",

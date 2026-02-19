@@ -19,6 +19,9 @@ public class CustomShip<T> extends BasicShip<T> {
     this.name = name;
   }
 
+  /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public String getName() {
     return name;

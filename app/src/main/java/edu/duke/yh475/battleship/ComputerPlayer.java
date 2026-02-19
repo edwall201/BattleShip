@@ -108,21 +108,33 @@ public class ComputerPlayer implements Player {
     }
   }
 
+  /**
+   * Desrcibe in Player interface
+   */
   @Override
   public boolean isLost() {
     return theBoard.isLost();
   }
 
+  /**
+   * Desrcibe in Player interface
+   */
   @Override
   public String getName() {
     return name;
   }
 
+  /**
+   * Desrcibe in Player interface
+   */
   @Override
   public Board<Character> getBoard() {
     return theBoard;
   }
 
+  /**
+   * Desrcibe in Player interface
+   */
   @Override
   public BoardTextView getView() {
     return view;

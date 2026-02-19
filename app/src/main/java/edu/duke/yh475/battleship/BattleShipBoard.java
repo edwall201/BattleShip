@@ -36,15 +36,26 @@ public class BattleShipBoard<T> implements Board<T> {
     this.missInfo = missInfo;
   }
 
+  /**
+   * Construct a BattleshipBoard with the speficied width and height
+   * @param w is the width of the newly constructed board
+   * @param h is the heigh of the newly constructed board
+   */
   public BattleShipBoard(int w, int h){
     this(w, h, new InBoundsRuleChecker<T>(new NoCollisionRuleChecker<>(null)), (T)(Character)'X');
   }
   
+   /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public int getHeight() {
     return height;
   }
 
+   /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public int getWidth() {
     return width;
@@ -82,7 +93,6 @@ public class BattleShipBoard<T> implements Board<T> {
    * @param isSelf is ture if the view is for self, false if the view is for enemy
    * @return the display info of typt T
    */
-
   protected T whatIsAt(Coordinate where, boolean isSelf) {
     if (isSelf) {
       for (Ship<T> s : myShips) {
@@ -141,6 +151,9 @@ public class BattleShipBoard<T> implements Board<T> {
     return true;
   }
 
+   /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public Ship<T> getShipAt(Coordinate where) {
     for (Ship<T> s : myShips) {

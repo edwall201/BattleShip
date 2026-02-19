@@ -36,12 +36,18 @@ public class Coordinate {
     }
     this.row = rowLetter - 'A';
     this.column = cloumnnum - '0'; 
- }
+  }
 
+  /**
+   * @return the row of the coordinate
+   */
   public int getRow() {
     return row;
   }
 
+  /**
+   * @return the column of the coordinate
+   */
   public int getColumn() {
     return column;
   }
@@ -60,11 +66,17 @@ public class Coordinate {
     return false;
   }
 
+  /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public String toString() {
     return "(" + row + ", " + column + ")";
   }
 
+  /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public int hashCode() {
     return toString().hashCode();

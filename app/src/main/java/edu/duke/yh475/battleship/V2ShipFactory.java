@@ -3,6 +3,9 @@ package edu.duke.yh475.battleship;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Create version 2 ship as the display type
+ */
 public class V2ShipFactory implements AbstractShipFactory<Character> {
   /**
    * To create a Rectangleship base on the provide placement
@@ -36,6 +39,9 @@ public class V2ShipFactory implements AbstractShipFactory<Character> {
         new SimpleShipDisplayInfo<>(null, letter));
   }
 
+  /**
+   * Descirbe in AbstractShipFactory interface
+   */
   @Override
   public Ship<Character> makeBattleship(Placement where) {
     int[][] upOffsets = { { 0, 1 }, { 1, 0 }, { 1, 1 }, { 1, 2 } };
@@ -43,16 +49,25 @@ public class V2ShipFactory implements AbstractShipFactory<Character> {
     return createCustomShip("Battleship", 'b', coords);
   }
 
+  /**
+   * Descirbe in AbstractShipFactory interface
+   */
   @Override
   public Ship<Character> makeDestroyer(Placement where) {
     return createShip(where, 1, 3, 'd', "Destroyer");
   }
 
+  /**
+   * Descirbe in AbstractShipFactory interface
+   */
   @Override
   public Ship<Character> makeSubmarine(Placement where) {
     return createShip(where, 1, 2, 's', "Submarine");
   }
 
+  /**
+   * Descirbe in AbstractShipFactory interface
+   */
   @Override
   public Ship<Character> makeCarrier(Placement where) {
     int[][] upOffsets = { { 0, 0 }, { 1, 0 }, { 2, 0 }, { 3, 0 }, { 2, 1 }, { 3, 1 }, { 4, 1 } };

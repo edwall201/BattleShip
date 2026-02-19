@@ -40,11 +40,17 @@ public abstract class BasicShip<T> implements Ship<T> {
     }
  }
 
+  /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public boolean occupiesCoordinates(Coordinate c) {
     return myPieces.containsKey(c);
   }
 
+   /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public boolean isSunk() {
     for(Boolean b : myPieces.values()){
@@ -53,18 +59,27 @@ public abstract class BasicShip<T> implements Ship<T> {
     return true;
    }
 
+   /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public void recordHitAt(Coordinate where) {
     checkCoordinateInThisShip(where);
     myPieces.put(where, true);
-   }
+  }
 
+   /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public boolean wasHitAt(Coordinate where) {
     checkCoordinateInThisShip(where);
     return myPieces.get(where);
   }
 
+   /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public T getDisplayInfoAt(Coordinate where, boolean myShip) {
     if(myShip){
@@ -73,22 +88,34 @@ public abstract class BasicShip<T> implements Ship<T> {
     return enemyDisplayInfo.getInfo(where, wasHitAt(where));
   }
 
+   /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public Iterable<Coordinate> getCoordinates(){
     return myPieces.keySet();
   }
 
+   /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public void recordHitAt(int index) {
     Coordinate c = getCoordinateByIndex(index);
     myPieces.put(c, true); 
   }
 
+   /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public int getNumPieces() {
       return myPieces.size(); 
   }
 
+   /**
+   * Desrcibe in Ship interface
+   */
   @Override
   public boolean wasHitAt(int index) {
     Coordinate c = getCoordinateByIndex(index);

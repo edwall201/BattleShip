@@ -54,6 +54,9 @@ public class RectangleShip<T> extends BasicShip<T> {
     return coords;
   }
 
+  /**
+   * Describe in Ship interface
+   */
   @Override
   public String getName(){
     return name;

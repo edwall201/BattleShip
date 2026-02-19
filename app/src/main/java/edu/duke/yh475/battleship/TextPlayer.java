@@ -50,21 +50,33 @@ public class TextPlayer implements Player {
     setupShipCreatoinList();
   }
 
+  /**
+   * Descirbe in player interface
+   */
   @Override
   public String getName() {
       return this.name;
   }
 
+  /**
+   * Descirbe in player interface
+   */
   @Override
   public boolean isLost() {
       return theBoard.isLost();
   }
 
+  /**
+   * Descirbe in player interface
+   */
   @Override
   public Board<Character> getBoard() {
     return this.theBoard;
   }
 
+  /**
+   * Descirbe in player interface
+   */
   @Override
   public BoardTextView getView() {
     return this.view;
