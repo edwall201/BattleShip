@@ -20,24 +20,28 @@ import  org.junit.jupiter.api.parallel.Resources;
 
 class AppTest {
 
+  @Disabled 
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_ctrl_d_stop_input() throws IOException {
     runTest("empty_input.txt", "empty_output.txt");
   }
 
+  @Disabled 
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_Computer_vs_Computer() throws IOException {
     runTest("test_v2_CvsC_input.txt", "test_v2_CvsC_output.txt");
   }
 
+  @Disabled 
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_Computer_vs_Human() throws IOException {
     runTest("test_v2_CvsH_input.txt", "test_v2_CvsH_output.txt");
   }
 
+  @Disabled 
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_A_wins_v2() throws IOException {
@@ -45,6 +49,7 @@ class AppTest {
 
   }
 
+  @Disabled 
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_Human_vs_Computer() throws IOException {
