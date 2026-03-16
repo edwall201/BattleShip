@@ -118,17 +118,31 @@ public class ComputerPlayerTest {
         new Coordinate(5, 4), new Coordinate(5, 6)
     );
 
-    assertEquals(4, player.targetStack.size(), "Should add 4 neighbors for a center coordinate");
+    assertEquals(4, player.targetStack.size());
     for (Coordinate neighbor : expectedNeighbors) {
-        assertTrue(player.targetStack.contains(neighbor), "Stack should contain neighbor: " + neighbor);
+        assertTrue(player.targetStack.contains(neighbor));
     }
 
     player.targetStack.clear(); 
     Coordinate corner = new Coordinate(0, 0);
     player.addNeighborsToStack(corner, board);
 
-    assertEquals(2, player.targetStack.size(), "Should only add 2 neighbors for a corner coordinate");
+    assertEquals(2, player.targetStack.size());
     assertTrue(player.targetStack.contains(new Coordinate(1, 0)));
     assertTrue(player.targetStack.contains(new Coordinate(0, 1)));
+  }
+
+  @Test
+  void test_generateRandomCoordinate_hits() {
+    Board<Character> board = new BattleShipBoard<Character>(2, 1);
+    ComputerPlayer player = new ComputerPlayer("Computer", board, System.out, null);
+
+    Coordinate c0 = new Coordinate(0, 0);
+    player.firedCoordinates.add(c0);
+
+    for (int i = 0; i < 10; i++) {
+        Coordinate coord = player.generateRandomCoordinate(board);
+        assertEquals(new Coordinate(0, 1), coord);
+    }
   }
 }
