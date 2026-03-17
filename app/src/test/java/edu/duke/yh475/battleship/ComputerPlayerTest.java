@@ -95,7 +95,7 @@ public class ComputerPlayerTest {
   }
 
   @Test
-  void test_generateRandomCoordinate_retry_logic() {
+  void test_generateRandomCoordinate_retry() {
     Board<Character> board = new BattleShipBoard<>(2, 2);
     ComputerPlayer player = new ComputerPlayer("AI", board, null, null);
 
@@ -107,7 +107,7 @@ public class ComputerPlayerTest {
     assertEquals(new Coordinate(1, 1), coord);
   }
   @Test
-  void test_addNeighborsToStack_logic() {
+  void test_addNeighborsToStack() {
     Board<Character> board = new BattleShipBoard<Character>(10, 20);
     V2ShipFactory factory = new V2ShipFactory();
     ComputerPlayer player = new ComputerPlayer("Computer", board, System.out, factory);
@@ -145,4 +145,33 @@ public class ComputerPlayerTest {
         assertEquals(new Coordinate(0, 1), coord);
     }
   }
+  @Test
+  void test_addNeighborsToStack_skips_fired() {
+    Board<Character> board = new BattleShipBoard<>(10, 20);
+    ComputerPlayer player = new ComputerPlayer("Computer", board, System.out, null);
+    Coordinate center = new Coordinate(5, 5);
+    Coordinate neighbor = new Coordinate(4, 5); 
+
+    player.firedCoordinates.add(neighbor);
+    
+    player.addNeighborsToStack(center, board);
+    assertEquals(3, player.targetStack.size());
+    assertFalse(player.targetStack.contains(neighbor));
+  }
+  @Test
+  void test_playOneTurn_hits_target() throws IOException {
+    Board<Character> enemyBoard = new BattleShipBoard<>(10, 20);
+    V2ShipFactory f = new V2ShipFactory();
+    Ship<Character> s = f.makeSubmarine(new Placement("A0H"));
+    enemyBoard.tryAddShip(s);
+
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    ComputerPlayer cp = new ComputerPlayer("Computer", new BattleShipBoard<>(10, 20), new PrintStream(bytes), f);
+    cp.targetStack.push(new Coordinate(0, 0));
+
+    cp.playOneTurn(enemyBoard, null, null, null);
+
+    String output = bytes.toString();
+    assertTrue(output.contains("hit your Submarine at A0!"));
+}
 }

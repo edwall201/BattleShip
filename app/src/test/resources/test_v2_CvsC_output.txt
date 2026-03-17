@@ -1,135 +1,18 @@
+> Task :app:compileJava UP-TO-DATE
+> Task :app:processResources NO-SOURCE
+> Task :app:classes UP-TO-DATE
+
+> Task :app:run
 Is player A a Human(H) or a Computer(C)? Please enter H or C
 Is player B a Human(H) or a Computer(C)? Please enter H or C
-Player A hit your Submarine at A0!
-Player B hit your Submarine at A0!
-Player A hit your Submarine at A1!
-Player B hit your Submarine at A1!
 Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Submarine at B0!
-Player B hit your Submarine at B0!
-Player A hit your Submarine at B1!
-Player B hit your Submarine at B1!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Destroyer at C0!
-Player B hit your Destroyer at C0!
-Player A hit your Destroyer at C1!
-Player B hit your Destroyer at C1!
-Player A hit your Destroyer at C2!
-Player B hit your Destroyer at C2!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Destroyer at D0!
-Player B hit your Destroyer at D0!
-Player A hit your Destroyer at D1!
-Player B hit your Destroyer at D1!
-Player A hit your Destroyer at D2!
-Player B hit your Destroyer at D2!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Destroyer at E0!
-Player B hit your Destroyer at E0!
-Player A hit your Destroyer at E1!
-Player B hit your Destroyer at E1!
-Player A hit your Destroyer at E2!
-Player B hit your Destroyer at E2!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Battleship at F1!
-Player B hit your Battleship at F1!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Battleship at G0!
-Player B hit your Battleship at G0!
-Player A hit your Battleship at G1!
-Player B hit your Battleship at G1!
-Player A hit your Battleship at G2!
 Player B hit your Battleship at G2!
 Player A missed!
 Player B missed!
 Player A missed!
-Player B missed!
+Player B hit your Battleship at G1!
+Player A missed!
+Player B hit your Battleship at G0!
 Player A missed!
 Player B missed!
 Player A missed!
@@ -137,22 +20,144 @@ Player B missed!
 Player A missed!
 Player B missed!
 Player A missed!
+Player B hit your Battleship at F1!
+Player A hit your Destroyer at C0!
 Player B missed!
+Player A hit your Destroyer at C1!
+Player B hit your Destroyer at E1!
+Player A hit your Destroyer at C2!
+Player B hit your Destroyer at E2!
+Player A missed!
+Player B missed!
+Player A hit your Destroyer at D2!
+Player B hit your Destroyer at D2!
+Player A missed!
+Player B missed!
+Player A hit your Destroyer at D1!
+Player B hit your Destroyer at D1!
+Player A hit your Destroyer at D0!
+Player B hit your Destroyer at D0!
+Player A hit your Destroyer at E0!
+Player B hit your Destroyer at E0!
+Player A hit your Destroyer at E1!
+Player B hit your Destroyer at C0!
+Player A hit your Destroyer at E2!
+Player B hit your Destroyer at C1!
+Player A missed!
+Player B hit your Destroyer at C2!
+Player A missed!
+Player B missed!
+Player A hit your Battleship at F1!
+Player B missed!
+Player A missed!
+Player B hit your Submarine at B1!
+Player A hit your Battleship at G1!
+Player B hit your Submarine at B0!
+Player A hit your Battleship at G2!
+Player B hit your Submarine at A0!
+Player A missed!
+Player B hit your Submarine at A1!
+Player A missed!
+Player B missed!
+Player A hit your Battleship at G0!
+Player B missed!
+Player A missed!
+Player B hit your Carrier at P0!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B hit your Carrier at Q0!
+Player A hit your Submarine at B1!
+Player B hit your Carrier at Q1!
+Player A hit your Submarine at B0!
+Player B hit your Carrier at Q2!
+Player A hit your Submarine at A0!
+Player B hit your Carrier at Q3!
+Player A hit your Submarine at A1!
+Player B missed!
+Player A missed!
+Player B hit your Carrier at R3!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B hit your Carrier at R2!
+Player A missed!
+Player B hit your Carrier at R1!
+Player A missed!
+Player B hit your Carrier at R0!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B hit your Carrier at S1!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B hit your Carrier at S3!
+Player A hit your Carrier at Q3!
+Player B missed!
+Player A hit your Carrier at Q2!
+Player B missed!
+Player A hit your Carrier at Q1!
+Player B missed!
+Player A hit your Carrier at Q0!
+Player B hit your Carrier at P2!
+Player A hit your Carrier at R0!
+Player B hit your Carrier at O2!
+Player A hit your Carrier at R1!
+Player B missed!
+Player A hit your Carrier at R2!
+Player B missed!
+Player A hit your Carrier at R3!
+Player B missed!
+Player A missed!
+Player B hit your Carrier at O0!
+Player A hit your Carrier at S3!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Carrier at S1!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Carrier at P0!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Carrier at O0!
+Player B missed!
+Player A missed!
+Player B hit your Battleship at M1!
+Player A missed!
+Player B hit your Battleship at M2!
+Player A hit your Carrier at P2!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A hit your Carrier at O2!
+Player B hit your Battleship at M0!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B hit your Battleship at L1!
 Player A missed!
 Player B missed!
 Player A missed!
 Player B missed!
 Player A missed!
 Player B missed!
-Player A missed!
+Player A hit your Battleship at J0!
 Player B missed!
-Player A missed!
+Player A hit your Battleship at J1!
 Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
+Player A hit your Battleship at J2!
 Player B missed!
 Player A missed!
 Player B missed!
@@ -163,208 +168,36 @@ Player B missed!
 Player A missed!
 Player B missed!
 Player A hit your Battleship at I1!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
+Player B missed!
+Player A missed!
 Player B hit your Battleship at I1!
 Player A missed!
 Player B missed!
 Player A missed!
 Player B missed!
 Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Battleship at J0!
-Player B hit your Battleship at J0!
-Player A hit your Battleship at J1!
 Player B hit your Battleship at J1!
-Player A hit your Battleship at J2!
+Player A missed!
 Player B hit your Battleship at J2!
 Player A missed!
 Player B missed!
 Player A missed!
 Player B missed!
 Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Battleship at L1!
-Player B hit your Battleship at L1!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Battleship at M0!
-Player B hit your Battleship at M0!
-Player A hit your Battleship at M1!
-Player B hit your Battleship at M1!
-Player A hit your Battleship at M2!
-Player B hit your Battleship at M2!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Carrier at O0!
-Player B hit your Carrier at O0!
-Player A missed!
-Player B missed!
-Player A hit your Carrier at O2!
-Player B hit your Carrier at O2!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Carrier at P0!
-Player B hit your Carrier at P0!
-Player A missed!
-Player B missed!
-Player A hit your Carrier at P2!
-Player B hit your Carrier at P2!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Carrier at Q0!
-Player B hit your Carrier at Q0!
-Player A hit your Carrier at Q1!
-Player B hit your Carrier at Q1!
-Player A hit your Carrier at Q2!
-Player B hit your Carrier at Q2!
-Player A hit your Carrier at Q3!
-Player B hit your Carrier at Q3!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Carrier at R0!
-Player B hit your Carrier at R0!
-Player A hit your Carrier at R1!
-Player B hit your Carrier at R1!
-Player A hit your Carrier at R2!
-Player B hit your Carrier at R2!
-Player A hit your Carrier at R3!
-Player B hit your Carrier at R3!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A missed!
-Player B missed!
-Player A hit your Carrier at S1!
-Player B hit your Carrier at S1!
-Player A missed!
-Player B missed!
-Player A hit your Carrier at S3!
-Player A win!
+Player B hit your Battleship at J0!
+Player B win!
+
+[Incubating] Problems report is available at: file:///Users/huangyukai/ece651-sp25-yh475-battleship/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 1s
+2 actionable tasks: 1 executed, 1 up-to-date

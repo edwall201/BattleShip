@@ -19,6 +19,7 @@ public class SonarScannerTest {
     assertEquals(6, result.get("Carrier"));
   }
 
+  @Test
   public void test_SonarScanner_invalid() {
     BattleShipBoard<Character> board = new BattleShipBoard<>(10, 20);
     V2ShipFactory factory = new V2ShipFactory();

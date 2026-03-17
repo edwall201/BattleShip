@@ -3,31 +3,31 @@
  */
 package edu.duke.yh475.battleship;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.io.StringReader;
+import static org.junit.jupiter.api.Assertions.*;
+import java.io.*;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.ResourceAccessMode;
 import org.junit.jupiter.api.parallel.ResourceLock;
-import  org.junit.jupiter.api.parallel.Resources;
+import org.junit.jupiter.api.parallel.Resources;
 
 class AppTest {
+  
+  @Test
+  @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
+  void test_B_wins_v2() throws IOException {
+    runTest("test_v2_HvsH2_input.txt", "test_v2_HvsH2_output.txt");
 
-  @Disabled 
+  }
+
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_ctrl_d_stop_input() throws IOException {
     runTest("empty_input.txt", "empty_output.txt");
   }
 
-  @Disabled 
+  @Disabled
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_Computer_vs_Computer() throws IOException {
@@ -41,7 +41,6 @@ class AppTest {
     runTest("test_v2_CvsH_input.txt", "test_v2_CvsH_output.txt");
   }
 
-  @Disabled 
   @Test
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_A_wins_v2() throws IOException {
@@ -69,6 +68,28 @@ class AppTest {
   @ResourceLock(value = Resources.SYSTEM_OUT, mode = ResourceAccessMode.READ_WRITE)
   void test_B_wins() throws IOException {
     runTest("testB_wins_input.txt", "testB_wins_output.txt");
+  }
+
+  @Test
+  void test_createPlayer() throws IOException {
+    String inputData = "X\nC\nH\n";
+    BufferedReader reader = new BufferedReader(new StringReader(inputData));
+    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    PrintStream out = new PrintStream(bytes);
+
+    Board<Character> board = new BattleShipBoard<>(10, 20);
+    V2ShipFactory factory = new V2ShipFactory();
+
+    Player p1 = App.createPlayer(reader, out, "A", board, factory);
+    
+    assertTrue(p1 instanceof ComputerPlayer);
+    String output = bytes.toString();
+    assertTrue(output.contains("Invalid input, please enter H for human or C for computer"));
+    Player p2 = App.createPlayer(reader, out, "B", board, factory);
+  
+    assertTrue(p2 instanceof TextPlayer);
+
+    assertThrows(EOFException.class, () -> {App.createPlayer(reader, out, "C", board, factory);});
   }
 
   private void runTest(String inputName, String outputName) throws IOException{
