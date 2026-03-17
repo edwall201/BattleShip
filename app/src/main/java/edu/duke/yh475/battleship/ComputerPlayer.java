@@ -25,14 +25,15 @@ public class ComputerPlayer implements Player {
   protected final ArrayList<String> shipsToPlace;
   protected final HashMap<String, Function<Placement, Ship<Character>>> shipCreationFns;
 
-  private int FireRow = 0;
-  private int FireCol = 0;
-
   protected final Random random = new Random();
   //A set to keep track of coordinates that have already fired at
   protected final HashSet<Coordinate> firedCoordinates = new HashSet<>();
   //A stack to keep track of target coordinates for the computer player
   protected final Stack<Coordinate> targetStack = new Stack<>();
+
+  protected Coordinate firstHit = null;
+  protected boolean isVertical = false;
+  protected boolean isHorizontal = false;
 
   /**
    * Constructor for the computer player
@@ -116,9 +117,13 @@ public class ComputerPlayer implements Player {
     String coordStr = "" + (char)('A' + coord.getRow()) + coord.getColumn();
     Ship<Character> hit = enemyBoard.fireAt(coord);
     firedCoordinates.add(coord);
+
     if (hit != null) {
       addNeighborsToStack(coord, enemyBoard);
       out.println("Player " + name + " hit your " + hit.getName() + " at " + coordStr + "!");
+      if (enemyBoard.getShipAt(coord).isSunk()) {
+        firstHit = null; 
+      }
     } else {
       out.println("Player " + name + " missed!");
     }
@@ -146,17 +151,43 @@ public class ComputerPlayer implements Player {
    * @param enemyBoard the board of the enemy player to check for valid neighbors
    */
   protected void addNeighborsToStack(Coordinate coord, Board<Character> enemyBoard) {
-    int row = coord.getRow();
-    int col = coord.getColumn();
-    int [][] directions = {{row - 1, col}, {row + 1, col}, {row, col - 1}, {row, col + 1}};
-    for (int[] dir : directions) {
-      int r = dir[0];
-      int c = dir[1];
-      if(r >= 0 && r < enemyBoard.getHeight() && c >= 0 && c < enemyBoard.getWidth()) {
-        Coordinate neighbor = new Coordinate(r, c);
-        if (!firedCoordinates.contains(neighbor)) {
-          targetStack.push(neighbor);
-        }
+    int r = coord.getRow();
+    int c = coord.getColumn();
+    if (firstHit == null) {
+      // if this is the first hit
+      // add all four neighbors to the stack and set firstHit
+      firstHit = coord;
+      addfireCandiate(new Coordinate(r - 1, c), enemyBoard); // up
+      addfireCandiate(new Coordinate(r + 1, c), enemyBoard); // down
+      addfireCandiate(new Coordinate(r, c - 1), enemyBoard); // left
+      addfireCandiate(new Coordinate(r, c + 1), enemyBoard); // right
+    } else {
+      // if this is not the first hit, we can determine the orientation of the ship
+      if (r == firstHit.getRow()) {
+        // if it is the same row
+        targetStack.removeIf(p -> p.getRow() != r);
+        int nextCol = (c > firstHit.getColumn()) ? c + 1 : c - 1;
+        addfireCandiate(new Coordinate(r, nextCol), enemyBoard);
+      } else if (c == firstHit.getColumn()) {
+        // if it is the same column
+        // remove all horizontal predictions from the stack
+        targetStack.removeIf(p -> p.getColumn() != c);
+        
+        int nextRow = (r > firstHit.getRow()) ? r + 1 : r - 1;
+        addfireCandiate(new Coordinate(nextRow, c), enemyBoard);
+      }
+    }
+  }
+
+  /**
+   * helper method to add a coordinate to the target stack if is is a valid coordinate
+   */
+  private void addfireCandiate(Coordinate neighbor, Board<Character> enemyBoard) {
+    int r = neighbor.getRow();
+    int c = neighbor.getColumn();
+    if (r >= 0 && r < enemyBoard.getHeight() && c >= 0 && c < enemyBoard.getWidth()) {
+      if (!firedCoordinates.contains(neighbor)) {
+        targetStack.push(neighbor);
       }
     }
   }
