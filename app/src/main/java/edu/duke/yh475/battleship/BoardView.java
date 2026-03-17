@@ -10,13 +10,16 @@ public class BoardView {
     private final GridPane grid;
     private final Board<Character> board;
     private final Button[][] cells;
+    private boolean isEnemyView;
 
     /**
      * Constructor for the boardview
      * @param board the board to create the view
+     * @param isEnemyView whether this is the enemy's view
      */
-    public BoardView(Board<Character> board) {
+    public BoardView(Board<Character> board, boolean isEnemyView) {
         this.board = board;
+        this.isEnemyView = isEnemyView; 
         this.grid = new GridPane();
         this.cells = new Button[board.getHeight()][board.getWidth()];
         setupGrid();
@@ -37,9 +40,13 @@ public class BoardView {
                 
                 final int r = row;
                 final int c = col;
-                
-                cell.setOnAction(e -> handleCellClick(r, c));
-                
+                if(isEnemyView){
+                    cell.setOnAction(e -> handleCellClick(r, c));
+                }
+                else{
+                    cell.setOnAction(null); 
+                }
+                                
                 grid.add(cell, col, row);
                 cells[row][col] = cell;
             }
