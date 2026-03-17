@@ -2,6 +2,8 @@ package edu.duke.yh475.battleship;
 
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.scene.control.Label;
+import javafx.geometry.Pos;
 
 /**
  * A javafx view for the battleship board.
@@ -10,16 +12,16 @@ public class BoardView {
     private final GridPane grid;
     private final Board<Character> board;
     private final Button[][] cells;
-    private boolean isEnemyView;
+    private boolean isEnemy;
 
     /**
      * Constructor for the boardview
      * @param board the board to create the view
-     * @param isEnemyView whether this is the enemy's view
+     * @param isEnemy whether this is the enemy's view
      */
-    public BoardView(Board<Character> board, boolean isEnemyView) {
+    public BoardView(Board<Character> board, boolean isEnemy) {
         this.board = board;
-        this.isEnemyView = isEnemyView; 
+        this.isEnemy = isEnemy; 
         this.grid = new GridPane();
         this.cells = new Button[board.getHeight()][board.getWidth()];
         setupGrid();
@@ -31,23 +33,39 @@ public class BoardView {
      * also sets up the event handler for each button to handle firing at coordinates when clicked
      */
     private void setupGrid() {
+        for (int col = 0; col < board.getWidth(); col++) {
+            Label colLabel = new Label(String.valueOf(col));
+            colLabel.setPrefSize(35, 35);
+            colLabel.setAlignment(Pos.CENTER); // Center the text
+            colLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #34495e; -fx-font-size: 14px;");
+            grid.add(colLabel, col + 1, 0); // Shift right by 1
+        }
+
+        for (int row = 0; row < board.getHeight(); row++) {
+            char rowChar = (char) ('A' + row);
+            Label rowLabel = new Label(String.valueOf(rowChar));
+            rowLabel.setPrefSize(35, 35);
+            rowLabel.setAlignment(Pos.CENTER); // Center the text
+            rowLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #34495e; -fx-font-size: 14px;");
+            grid.add(rowLabel, 0, row + 1); // Shift down by 1
+        }
+
         for (int row = 0; row < board.getHeight(); row++) {
             for (int col = 0; col < board.getWidth(); col++) {
                 Button cell = new Button();
                 cell.setPrefSize(35, 35);
-                
                 cell.setStyle("-fx-background-color: #2c3e50; -fx-border-color: #34495e;");
                 
                 final int r = row;
                 final int c = col;
-                if(isEnemyView){
+                
+                if (isEnemy) {
                     cell.setOnAction(e -> handleCellClick(r, c));
-                }
-                else{
+                } else {
                     cell.setOnAction(null); 
                 }
-                                
-                grid.add(cell, col, row);
+                
+                grid.add(cell, col + 1, row + 1);
                 cells[row][col] = cell;
             }
         }
