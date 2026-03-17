@@ -15,6 +15,7 @@ repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
+def javafx_platform = "mac" 
 
 dependencies {
     // Use JUnit Jupiter for testing.
@@ -24,6 +25,10 @@ dependencies {
     clover 'org.openclover:clover:4.5.2'
     // This dependency is used by the application.
     implementation libs.guava
+    implementation "org.openjfx:javafx-controls:21:${javafx_platform}"
+    implementation "org.openjfx:javafx-graphics:21:${javafx_platform}"
+    implementation "org.openjfx:javafx-base:21:${javafx_platform}"
+    implementation "org.openjfx:javafx-fxml:21:${javafx_platform}"
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -35,7 +40,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'edu.duke.yh475.battleship.App'
+    mainClass = 'edu.duke.yh475.battleship.Launcher'
 }
 
 tasks.named('test') {

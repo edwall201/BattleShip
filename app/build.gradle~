@@ -8,7 +8,13 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
-     id 'com.bmuschko.clover' version '3.0.7'
+    id 'com.bmuschko.clover' version '3.0.7'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
+}
+
+javafx {
+    version = "17"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 repositories {
@@ -24,6 +30,11 @@ dependencies {
     clover 'org.openclover:clover:4.5.'
     // This dependency is used by the application.
     implementation libs.guava
+    def javafx_platform = "mac"
+    implementation "org.openjfx:javafx-controls:17"
+    implementation "org.openjfx:javafx-fxml:17"
+    implementation "org.openjfx:javafx-graphics:17"
+    implementation "org.openjfx:javafx-base:17"
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -35,7 +46,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = 'edu.duke.yh475.battleship.App'
+    mainClass = 'edu.duke.yh475.battleship.GuiApp'
 }
 
 tasks.named('test') {
