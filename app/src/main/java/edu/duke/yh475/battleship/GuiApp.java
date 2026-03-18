@@ -25,12 +25,28 @@ public class GuiApp extends Application {
     private ComboBox<String> orientationSelector;
     private Button startGameBtn;
     private Label instructionLabel;
+    private Label shipRemainingLabel;
 
     //layout
     private HBox boardsLayout;
     private VBox leftSide;
     private VBox rightSide;
-    private VBox controlPanel;
+    private VBox placementSidebar;
+
+    //ships tracking
+    private Label subLabel;
+    private Label destLabel;
+    private Label battleLabel;
+    private Label carrierLabel;
+    private Label messageLabel;
+    private int subCount = 0;
+    private int destCount = 0;
+    private int battleCount = 0;
+    private int carrierCount = 0;
+    private final int MAX_SUB = 2;
+    private final int MAX_DEST = 3;
+    private final int MAX_BATTLE = 3;
+    private final int MAX_CARRIER = 2;
 
     /**
      * starts the javafx app
@@ -38,12 +54,11 @@ public class GuiApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         initializeGameData();
-
+        buildPlacementSidebar();
         buildBoardsLayout();
-        buildControlPanel();
         buildInstructionLabel();
 
-        VBox root = new VBox(30, instructionLabel, boardsLayout, controlPanel);
+        VBox root = new VBox(30, instructionLabel, boardsLayout);
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(30));
 
@@ -78,72 +93,84 @@ public class GuiApp extends Application {
         rightSide = new VBox(10, enemyLabel, enemyView.getGrid());
         rightSide.setAlignment(Pos.CENTER);
         
-        boardsLayout = new HBox(50, leftSide); 
-        boardsLayout.setAlignment(Pos.CENTER);
+        boardsLayout = new HBox(50, leftSide, placementSidebar); // Start with just the left side and sidebar
+        boardsLayout.setAlignment(Pos.TOP_CENTER);
     }
 
     private void buildInstructionLabel() {
-        instructionLabel = new Label("Select a ship and orientation, then click your board to place it.");
-        instructionLabel.setStyle("-fx-font-size: 24px; " + 
-        "-fx-font-weight: bold; " +
-        "-fx-text-fill: white; " +
-        "-fx-background-color: #959ba3ff;  " +
-        "-fx-padding: 12px 24px; "+
-        "-fx-background-radius: 30px; "+
+        instructionLabel = new Label("Select a ship and orientation, then click your board to place it");
+        instructionLabel.setStyle("-fx-font-size: 24px; " + "-fx-font-weight: bold; " +"-fx-text-fill: white; " +
+        "-fx-background-color: #959ba3ff;  " + "-fx-padding: 12px 24px; "+"-fx-background-radius: 30px; "+
         "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);");
     }
 
-    private void buildControlPanel() {
+   private void buildPlacementSidebar() {
+        Label shapesInfo = new Label( "Ship Shapes:\n" + "• Submarine (1x2) - V, H\n" + "• Destroyer (1x3) - V, H\n" +"• Battleship (T-Shape) - U, D, L, R\n" +
+            "• Carrier (Z-Shape) - U, D, L, R");
+
+        shapesInfo.setStyle("-fx-font-size: 18px; -fx-text-fill: #34495e; -fx-padding: 10px 0;");
+
+        Label trackerTitle = new Label("Remaining ships to Place:");
+        trackerTitle.setStyle("-fx-font-size: 18px; -fx-text-fill: #2c3e50;");
+
+        String trackerStyle = "-fx-font-size: 18px; -fx-text-fill: #e67e22;";
+        subLabel = new Label("Submarines: " + subCount + " / " + MAX_SUB);
+        destLabel = new Label("Destroyers: " + destCount + " / " + MAX_DEST);
+        battleLabel = new Label("Battleships: " + battleCount + " / " + MAX_BATTLE);
+        carrierLabel = new Label("Carriers: " + carrierCount + " / " + MAX_CARRIER);
+        
+        subLabel.setStyle(trackerStyle);
+        destLabel.setStyle(trackerStyle);
+        battleLabel.setStyle(trackerStyle);
+        carrierLabel.setStyle(trackerStyle);
+
+        VBox trackerBox = new VBox(5, trackerTitle, subLabel, destLabel, battleLabel, carrierLabel);
+        trackerBox.setStyle("-fx-background-color: #ecf0f1; -fx-padding: 10px; -fx-background-radius: 5px;");
+
         shipSelector = new ComboBox<>();
         shipSelector.getItems().addAll("Submarine", "Destroyer", "Battleship", "Carrier");
         shipSelector.setValue("Submarine");
-        shipSelector.setStyle("-fx-font-size: 18px; -fx-pref-width: 190px;");
+        shipSelector.setStyle("-fx-font-size: 18px; -fx-pref-width: 180px;");
 
         orientationSelector = new ComboBox<>();
         orientationSelector.getItems().addAll("V", "H"); 
         orientationSelector.setValue("V");
-        orientationSelector.setStyle("-fx-font-size: 18px; -fx-pref-width: 190px;");
+        orientationSelector.setStyle("-fx-font-size: 18px; -fx-pref-width: 100px;");
 
         shipSelector.valueProperty().addListener((observable, oldValue, newValue) -> {
-            orientationSelector.getItems().clear();
+            orientationSelector.getItems().clear(); 
             if (newValue.equals("Submarine") || newValue.equals("Destroyer")) {
                 orientationSelector.getItems().addAll("V", "H");
-                orientationSelector.setValue("V");
+                orientationSelector.setValue("V"); 
             } else {
                 orientationSelector.getItems().addAll("U", "D", "L", "R");
-                orientationSelector.setValue("U");
+                orientationSelector.setValue("U"); 
             }
         });
 
-        startGameBtn = new Button("Start Game");
-        startGameBtn.setDisable(false); 
-        startGameBtn.setStyle("-fx-background-color: #1b683bff; -fx-text-fill: white; -fx-font-weight: bold;" + "-fx-font-size: 20px;");
+        HBox dropdowns = new HBox(10, shipSelector, orientationSelector);
+        dropdowns.setAlignment(Pos.CENTER_LEFT);
 
+        messageLabel = new Label("Awaiting placement...");
+        messageLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #7f8c8d;");
+        messageLabel.setWrapText(true);
+        messageLabel.setPrefHeight(30);
+
+        startGameBtn = new Button("Start Game");
+        startGameBtn.setDisable(true);
+        startGameBtn.setStyle("-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 20px; -fx-padding: 10px 25px;");
         startGameBtn.setOnAction(e -> transitionToCombatPhase());
 
-        Label shipLabel = new Label("Ship:");
-        shipLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;");
-        
-        Label orientationLabel = new Label("Orientation:");
-        orientationLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;");
-
-        HBox selectionRow = new HBox(20, shipLabel, shipSelector, orientationLabel, orientationSelector);
-        selectionRow.setAlignment(Pos.CENTER);
-
-        controlPanel = new VBox(20, selectionRow, startGameBtn);
-        controlPanel.setAlignment(Pos.CENTER);
-        
-
-        controlPanel.setPadding(new Insets(30, 0, 0, 0));
+        placementSidebar = new VBox(20, shapesInfo, trackerBox, new Label("Select Ship & Orientation:"), dropdowns, messageLabel, startGameBtn);
+        placementSidebar.setAlignment(Pos.TOP_LEFT);
+        placementSidebar.setPadding(new Insets(40, 20, 20, 40));
+        placementSidebar.setPrefWidth(350);
     }
 
     private void transitionToCombatPhase() {
+        boardsLayout.getChildren().remove(placementSidebar);
         boardsLayout.getChildren().add(rightSide);
-        
-        controlPanel.setVisible(false);
-        controlPanel.setManaged(false);
-
-        // 3. Update the Instruction Banner
+    
         instructionLabel.setText("Phase 2: Combat! Click the Enemy Board to fire.");
         instructionLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white; " +
             "-fx-background-color: #e74c3c; " +

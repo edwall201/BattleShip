@@ -13,6 +13,7 @@ public class BoardView {
     private final Board<Character> board;
     private final Button[][] cells;
     private boolean isEnemy;
+    private ClickHandler placementHandler;
 
     /**
      * Constructor for the boardview
@@ -60,9 +61,9 @@ public class BoardView {
                 final int c = col;
                 
                 if (isEnemy) {
-                    cell.setOnAction(e -> handleCellClick(r, c));
+                    cell.setOnAction(e -> handleClick(r, c));
                 } else {
-                    cell.setOnAction(null); 
+                    cell.setOnAction(e -> {if (placementHandler != null) {placementHandler.handle(r, c);}});
                 }
                 
                 grid.add(cell, col + 1, row + 1);
@@ -77,7 +78,7 @@ public class BoardView {
      * @param row the row of the coord to fire at
      * @param col the column of the coord to fire at
      */
-    private void handleCellClick(int row, int col) {
+    private void handleClick(int row, int col) {
         Coordinate coord = new Coordinate(row, col);
         Ship<Character> hit = board.fireAt(coord);
         
@@ -89,6 +90,18 @@ public class BoardView {
             System.out.println("Miss at " + coord);
         }
         cells[row][col].setDisable(true);
+    }
+
+    public interface ClickHandler {
+        void handle(int row, int col);
+    }
+
+    public void setPlacement(ClickHandler handler) {
+        this.placementHandler = handler;
+    }
+
+    public void colorCell(int row, int col, String hexColor) {
+        cells[row][col].setStyle("-fx-background-color: " + hexColor + "; -fx-border-color: #34495e; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
     }
 
     /** 
