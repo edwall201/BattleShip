@@ -26,9 +26,9 @@ public class ComputerPlayer implements Player {
   protected final HashMap<String, Function<Placement, Ship<Character>>> shipCreationFns;
 
   protected final Random random = new Random();
-  //A set to keep track of coordinates that have already fired at
+  // A set to keep track of coordinates that have already fired at
   protected final HashSet<Coordinate> firedCoordinates = new HashSet<>();
-  //A stack to keep track of target coordinates for the computer player
+  // A stack to keep track of target coordinates for the computer player
   protected final Stack<Coordinate> targetStack = new Stack<>();
 
   protected Coordinate firstHit = null;
@@ -37,9 +37,10 @@ public class ComputerPlayer implements Player {
 
   /**
    * Constructor for the computer player
-   * @param name the name of the player
-   * @param theBoard the board for the player to place ships on and fire from
-   * @param out the PrintStream to output messages to
+   * 
+   * @param name        the name of the player
+   * @param theBoard    the board for the player to place ships on and fire from
+   * @param out         the PrintStream to output messages to
    * @param shipFactory the factory to create ships for placement
    */
   public ComputerPlayer(String name, Board<Character> theBoard, PrintStream out,
@@ -95,13 +96,15 @@ public class ComputerPlayer implements Player {
 
   /**
    * Handles the firing logic for the computer player
-   * @param enemyBoard the board of the enemy player to fire at
-   * @param enemyView the view of the enemy board (not used by computer player)
-   * @param myHeader the header to display for the computer player's board
+   * 
+   * @param enemyBoard  the board of the enemy player to fire at
+   * @param enemyView   the view of the enemy board (not used by computer player)
+   * @param myHeader    the header to display for the computer player's board
    * @param enemyHeader the header to display for the enemy player's board
    */
   @Override
-  public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String myHeader, String enemyHeader) throws IOException {
+  public void playOneTurn(Board<Character> enemyBoard, BoardTextView enemyView, String myHeader, String enemyHeader)
+      throws IOException {
     Coordinate coord = null;
     while (coord == null) {
       if (!targetStack.isEmpty()) {
@@ -114,7 +117,7 @@ public class ComputerPlayer implements Player {
         coord = generateRandomCoordinate(enemyBoard);
       }
     }
-    String coordStr = "" + (char)('A' + coord.getRow()) + coord.getColumn();
+    String coordStr = "" + (char) ('A' + coord.getRow()) + coord.getColumn();
     Ship<Character> hit = enemyBoard.fireAt(coord);
     firedCoordinates.add(coord);
 
@@ -122,7 +125,7 @@ public class ComputerPlayer implements Player {
       addNeighborsToStack(coord, enemyBoard);
       out.println("Player " + name + " hit your " + hit.getName() + " at " + coordStr + "!");
       if (enemyBoard.getShipAt(coord).isSunk()) {
-        firstHit = null; 
+        firstHit = null;
       }
     } else {
       out.println("Player " + name + " missed!");
@@ -131,6 +134,7 @@ public class ComputerPlayer implements Player {
 
   /**
    * Generates a random coordinate for the computer player to fire at
+   * 
    * @param enemyBoard the board of the enemy player
    * @return a random coordinate that has not been fired before
    */
@@ -146,8 +150,10 @@ public class ComputerPlayer implements Player {
   }
 
   /**
-   * Adds the neighboring coordinates of a hit coordinate to the target stack for the computer player
-   * @param coord the coordinate that was hit
+   * Adds the neighboring coordinates of a hit coordinate to the target stack for
+   * the computer player
+   * 
+   * @param coord      the coordinate that was hit
    * @param enemyBoard the board of the enemy player to check for valid neighbors
    */
   protected void addNeighborsToStack(Coordinate coord, Board<Character> enemyBoard) {
@@ -172,7 +178,7 @@ public class ComputerPlayer implements Player {
         // if it is the same column
         // remove all horizontal predictions from the stack
         targetStack.removeIf(p -> p.getColumn() != c);
-        
+
         int nextRow = (r > firstHit.getRow()) ? r + 1 : r - 1;
         addfireCandiate(new Coordinate(nextRow, c), enemyBoard);
       }
@@ -180,7 +186,8 @@ public class ComputerPlayer implements Player {
   }
 
   /**
-   * helper method to add a coordinate to the target stack if is is a valid coordinate
+   * helper method to add a coordinate to the target stack if is is a valid
+   * coordinate
    */
   private void addfireCandiate(Coordinate neighbor, Board<Character> enemyBoard) {
     int r = neighbor.getRow();
@@ -191,7 +198,6 @@ public class ComputerPlayer implements Player {
       }
     }
   }
-
 
   /**
    * Desrcibe in Player interface
