@@ -24,7 +24,10 @@ public class GuiApp extends Application {
   private VBox rightSide;
   private VBox placementSidebar;
 
+  // controllers
   private PlacementController placementController;
+  private CombatController combatController;
+  private VBox combatSidebar;
 
   /**
    * starts the javafx app
@@ -33,6 +36,7 @@ public class GuiApp extends Application {
   public void start(Stage primaryStage) {
     // Initialize the controller first
     placementController = new PlacementController(this);
+    combatController = new CombatController(this);
 
     initializeGameData();
     buildBoardsLayout();
@@ -68,7 +72,7 @@ public class GuiApp extends Application {
     playerLabel.setStyle("-fx-font-size: 23px; -fx-font-weight: bold;");
 
     Label enemyLabel = new Label("Enemy Board");
-    enemyLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+    enemyLabel.setStyle("-fx-font-size: 23px; -fx-font-weight: bold;");
 
     leftSide = new VBox(10, playerLabel, playerView.getGrid());
     leftSide.setAlignment(Pos.CENTER);
@@ -94,10 +98,15 @@ public class GuiApp extends Application {
     boardsLayout.getChildren().remove(placementSidebar);
     boardsLayout.getChildren().add(rightSide);
 
-    instructionLabel.setText("Combat! Click the Enemy Board to fire.");
+    combatSidebar = combatController.buildSidebar();
+    boardsLayout.getChildren().add(combatSidebar);
+
+    instructionLabel.setText("Game Started!");
     instructionLabel.setStyle("-fx-font-size: 24px; " + "-fx-font-weight: bold; " + "-fx-text-fill: white; " +
         "-fx-background-color: #959ba3ff;  " + "-fx-padding: 12px 24px; " + "-fx-background-radius: 30px; " +
         "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);");
+
+    boardsLayout.getScene().getWindow().setWidth(1350);
   }
 
   //Getters and Setters 
