@@ -62,8 +62,8 @@ public class CombatController {
         
         updateActionMenu(); 
 
-        messageLabel = new Label("Awaiting orders, Captain.");
-        messageLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-weight: bold;");
+        messageLabel = new Label("Awaiting choice...");
+        messageLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: #34495e; -fx-font-weight: bold;");
         messageLabel.setWrapText(true);
         messageLabel.setPrefHeight(100); 
 
@@ -81,8 +81,8 @@ public class CombatController {
             hideOrientationSelector(); 
             
             if ("Move a ship".equals(newVal)) {
-                messageLabel.setText("Move selected! Click a ship on YOUR board to select it.");
-                messageLabel.setStyle("-fx-text-fill: #34495e; -fx-font-size: 16px;");
+                messageLabel.setText("Move selected!\n" + "Click a ship on your board to select it.");
+                messageLabel.setStyle("-fx-text-fill: #34495e; -fx-font-size: 18px;");
             }
         });
 
@@ -127,7 +127,7 @@ public class CombatController {
      */
     public void handlePlayerBoardClick(int row, int col) {
         if (!"Move a ship".equals(actionSelector.getValue())) {
-            messageLabel.setText("You can only click your own board to Move a ship!");
+            messageLabel.setText("You can only click your own board to move a ship!");
             return;
         }
 
@@ -137,8 +137,8 @@ public class CombatController {
         if (moveSourceCoord == null) {
             Ship<Character> shipToMove = app.getPlayerBoard().getShipAt(clickedCoord);
             if (shipToMove == null) {
-                messageLabel.setText("No ship at " + clickedCoord + ". Click a valid ship.");
-                messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 16px; -fx-font-weight: bold;");
+                messageLabel.setText("No ship at " + clickedCoord + "\n" + ". Click a valid ship.");
+                messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 16px; -fx-font-weight");
             } else {
                 moveSourceCoord = clickedCoord;
                 String shipName = shipToMove.getName();
@@ -155,9 +155,9 @@ public class CombatController {
                     orientationSelector.getItems().addAll("U", "D", "L", "R");
                     orientationSelector.setValue("U");
                 }
-
-                messageLabel.setText(shipName + " selected at " + clickedCoord + "! Now select an orientation and click its NEW location on your board.");
-                messageLabel.setStyle("-fx-text-fill: #2980b9; -fx-font-size: 16px; -fx-font-weight: bold;");
+                showOrientationSelector();
+                messageLabel.setText(shipName + " selected at " + clickedCoord + "! \n" + "Now select an orientation and click its new location on your board.");
+                messageLabel.setStyle("-fx-text-fill: #2980b9; -fx-font-size: 18px;");
             }
         } 
         //2. Choose the destination
@@ -168,16 +168,17 @@ public class CombatController {
             String errorMsg = shipMoveLogic.doMove(moveSourceCoord, destination);
             
             if (errorMsg != null) {
-                messageLabel.setText("Move Failed: " + errorMsg + " Try another spot.");
-                messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 16px;");
+                messageLabel.setText("Move Failed: \n" + errorMsg +"\n"+ "Try another spot.");
+                messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 18px;");
             } else {
                 moveCount--;
                 updateActionMenu();
                 moveSourceCoord = null;
                 
                 messageLabel.setText("Ship moved successfully!");
-                messageLabel.setStyle("-fx-text-fill: #2ecc71; -fx-font-size: 16px;");
-                
+                messageLabel.setStyle("-fx-text-fill: #2ecc71; -fx-font-size: 18px;");
+                hideOrientationSelector();
+
                 // Redraw the player board to reflect the move
                 app.getPlayerView().refresh();
             }
