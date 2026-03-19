@@ -289,7 +289,7 @@ public class GuiApp extends Application {
     if (subCount == MAX_SUB && destCount == MAX_DEST && battleCount == MAX_BATTLE && carrierCount == MAX_CARRIER) {
       // let the bottom green
       startGameBtn.setDisable(false);
-      startGameBtn.setStyle("-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 20px; -fx-padding: 10px 20px;");
+      startGameBtn.setStyle("-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18px; -fx-padding: 10px 20px;");
       messageLabel.setText("All ships placed! Ready to start.");
     }
   }
@@ -320,7 +320,7 @@ public class GuiApp extends Application {
     carrierLabel.setStyle(defaultStyle);
 
     startGameBtn.setDisable(true);
-    startGameBtn.setStyle("-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 20px; -fx-padding: 10px 20px;");
+    startGameBtn.setStyle("-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18px; -fx-padding: 10px 20px;");
 
     messageLabel.setText("Board reset! Awaiting placement...");
     messageLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #7f8c8d;");
