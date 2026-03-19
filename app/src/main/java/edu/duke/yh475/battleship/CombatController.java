@@ -54,23 +54,38 @@ public class CombatController {
         
         updateActionMenu(); 
 
+        orientationLabel = new Label("Move Orientation:");
+        orientationLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #2c3e50;");
+        orientationSelector = new ComboBox<>();
+        orientationSelector.setStyle("-fx-font-size: 18px; -fx-pref-width: 100px;");
+        hideOrientationSelector(); // Start hidden!
+        
+        updateActionMenu(); 
+
         messageLabel = new Label("Awaiting orders, Captain.");
         messageLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #34495e; -fx-font-weight: bold;");
         messageLabel.setWrapText(true);
         messageLabel.setPrefHeight(100); 
 
-        VBox sidebar = new VBox(15, title, trackerBox, prompt, actionSelector, new Label("Move Orientation:"), orientationSelector, messageLabel);
+        VBox sidebar = new VBox(15, title, trackerBox, prompt, actionSelector, orientationLabel, orientationSelector, messageLabel);
         sidebar.setAlignment(Pos.TOP_LEFT);
         sidebar.setPadding(new Insets(40, 20, 20, 40));
         sidebar.setPrefWidth(350);
         
         actionSelector.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (moveSourceCoord != null) {
+                app.getPlayerView().refresh(); 
+            }
             moveSourceCoord = null; 
+            // hide if player changes to fire or sonar 
+            hideOrientationSelector(); 
+            
             if ("Move a ship".equals(newVal)) {
                 messageLabel.setText("Move selected! Click a ship on YOUR board to select it.");
+                messageLabel.setStyle("-fx-text-fill: #34495e; -fx-font-size: 16px;");
             }
         });
-        
+
         return sidebar;
     }
 
@@ -154,19 +169,33 @@ public class CombatController {
             
             if (errorMsg != null) {
                 messageLabel.setText("Move Failed: " + errorMsg + " Try another spot.");
-                messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 16px; -fx-font-weight: bold;");
+                messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 16px;");
             } else {
                 moveCount--;
                 updateActionMenu();
                 moveSourceCoord = null;
                 
                 messageLabel.setText("Ship moved successfully!");
-                messageLabel.setStyle("-fx-text-fill: #2ecc71; -fx-font-size: 16px; -fx-font-weight: bold;");
+                messageLabel.setStyle("-fx-text-fill: #2ecc71; -fx-font-size: 16px;");
                 
                 // Redraw the player board to reflect the move
                 app.getPlayerView().refresh();
             }
         }
+    }
+
+    private void showOrientationSelector() {
+        orientationLabel.setVisible(true);
+        orientationLabel.setManaged(true);
+        orientationSelector.setVisible(true);
+        orientationSelector.setManaged(true);
+    }
+
+    private void hideOrientationSelector() {
+        orientationLabel.setVisible(false);
+        orientationLabel.setManaged(false);
+        orientationSelector.setVisible(false);
+        orientationSelector.setManaged(false);
     }
 
 }
