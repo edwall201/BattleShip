@@ -118,4 +118,19 @@ public class BoardView {
   public GridPane getGrid() {
     return grid;
   }
+
+  public void refresh() {
+      for (int row = 0; row < board.getHeight(); row++) {
+          for (int col = 0; col < board.getWidth(); col++) {
+              Coordinate coord = new Coordinate(row, col);
+              Ship<Character> ship = board.getShipAt(coord);
+              
+              if (ship != null) {
+                  cells[row][col].setStyle("-fx-background-color: #2ecc71; -fx-border-color: #34495e; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
+              } else {
+                  cells[row][col].setStyle("-fx-background-color: #2c3e50; -fx-border-color: #34495e; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
+              }
+          }
+      }
+  }
 }

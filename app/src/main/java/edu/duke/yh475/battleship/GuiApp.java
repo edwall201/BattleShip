@@ -100,7 +100,7 @@ public class GuiApp extends Application {
 
     combatSidebar = combatController.buildSidebar();
     boardsLayout.getChildren().add(combatSidebar);
-
+    playerView.setPlacement((row, col) -> combatController.handlePlayerBoardClick(row, col));
     instructionLabel.setText("Game Started!");
     instructionLabel.setStyle("-fx-font-size: 24px; " + "-fx-font-weight: bold; " + "-fx-text-fill: white; " +
         "-fx-background-color: #959ba3ff;  " + "-fx-padding: 12px 24px; " + "-fx-background-radius: 30px; " +
