@@ -235,7 +235,7 @@ public class CombatController {
         if(hitShip != null){
             String shipName = hitShip.getName(); 
             app.getEnemyView().colorCell(row, col, "#e74c3c"); 
-            messageLabel.setText("Direct hit! You struck a " + shipName + " at " + clickedCoord + "!");
+            messageLabel.setText("You hit a " + shipName + " at " + clickedCoord + "!");
             messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 18px;");
         } else {
             app.getEnemyView().colorCell(row, col, "#3498db"); // Light Blue for Miss
@@ -247,7 +247,7 @@ public class CombatController {
                 javafx.scene.layout.GridPane.getColumnIndex(node) == col + 1) {
                 javafx.scene.control.Button btn = (javafx.scene.control.Button) node;                
                 btn.setText(buttonText); 
-                btn.setStyle(btn.getStyle() + "-fx-text-fill: white; -fx-font-size: 18px; -fx-opacity: 1.0;");
+                btn.setStyle(btn.getStyle() + "-fx-text-fill: white;-fx-font-weight: bold; -fx-font-size: 18px; -fx-opacity: 1.0;");
                 btn.setDisable(true);
             }
         });
