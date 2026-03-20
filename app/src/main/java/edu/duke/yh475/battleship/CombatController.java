@@ -16,6 +16,7 @@ public class CombatController {
     private ComboBox<String> actionSelector;
     private ComboBox<String> orientationSelector;
     private Label messageLabel;
+    private Label computerMessage;
     private Label orientationLabel;
 
     // Tracking actions
@@ -74,9 +75,14 @@ public class CombatController {
         messageLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: #34495e; -fx-font-weight: bold;");
         messageLabel.setWrapText(true);
         messageLabel.setPrefHeight(100); 
-        computerController = new ComputerController(app, messageLabel);
 
-        VBox sidebar = new VBox(15, title, trackerBox, prompt, actionSelector, orientationLabel, orientationSelector, messageLabel);
+        computerMessage = new Label("");
+        computerMessage.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+        computerMessage.setWrapText(true);
+        computerMessage.setMinHeight(30);
+
+        computerController = new ComputerController(app, computerMessage);
+        VBox sidebar = new VBox(20, title, trackerBox, prompt, actionSelector, orientationLabel, orientationSelector, messageLabel, computerMessage);
         sidebar.setAlignment(Pos.TOP_LEFT);
         sidebar.setPadding(new Insets(40, 20, 20, 40));
         sidebar.setPrefWidth(350);

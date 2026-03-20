@@ -26,10 +26,12 @@ public class ComputerController{
 
         if (hitShip != null) {
             app.getPlayerView().colorCell(row, col, "#e74c3c");
-            messageLabel.setText(messageLabel.getText() + "\nComputer hit your " + hitShip.getName() + " at " + coordStr + "!");
+            messageLabel.setText("Computer hit your " + hitShip.getName() + " at " + coordStr + "!");
+            messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 18px;");
         } else {
             app.getPlayerView().colorCell(row, col, "#3498db");
-            messageLabel.setText(messageLabel.getText() + "\nComputer missed at " + coordStr + ".");
+            messageLabel.setText("Computer missed at " + coordStr + ".");
+            messageLabel.setStyle("-fx-text-fill: #3498db; -fx-font-size: 18px;");
         }
         
         app.getPlayerView().getGrid().getChildren().forEach(node -> {

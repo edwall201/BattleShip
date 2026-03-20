@@ -126,6 +126,7 @@ public class ComputerPlayer implements Player {
       out.println("Player " + name + " hit your " + hit.getName() + " at " + coordStr + "!");
       if (enemyBoard.getShipAt(coord).isSunk()) {
         firstHit = null;
+        targetStack.clear();
       }
     } else {
       out.println("Player " + name + " missed!");
