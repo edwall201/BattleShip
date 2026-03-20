@@ -80,7 +80,6 @@ public class GuiApp extends Application {
     rightSide = new VBox(10, enemyLabel, enemyView.getGrid());
     rightSide.setAlignment(Pos.CENTER);
 
-    // Ask the controller to build the sidebar UI
     placementSidebar = placementController.buildSidebar();
 
     boardsLayout = new HBox(50, leftSide, placementSidebar);
@@ -100,8 +99,11 @@ public class GuiApp extends Application {
 
     combatSidebar = combatController.buildSidebar();
     boardsLayout.getChildren().add(combatSidebar);
-    playerView.setPlacement((row, col) -> combatController.handlePlayerBoardClick(row, col));
-    instructionLabel.setText("Game Started!");
+    
+    playerView.setPlacement((row, col) -> combatController.handleMoveClick(row, col));
+    enemyView.setPlacement((row, col) -> combatController.handleEnemyBoardClick(row, col));
+    
+    instructionLabel.setText("Start!");
     instructionLabel.setStyle("-fx-font-size: 24px; " + "-fx-font-weight: bold; " + "-fx-text-fill: white; " +
         "-fx-background-color: #959ba3ff;  " + "-fx-padding: 12px 24px; " + "-fx-background-radius: 30px; " +
         "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);");
@@ -111,11 +113,11 @@ public class GuiApp extends Application {
 
   //Getters and Setters 
   public Board<Character> getPlayerBoard() { return playerBoard; }
+  public Board<Character> getEnemyBoard() { return enemyBoard; }
   public void setPlayerBoard(Board<Character> board) { this.playerBoard = board; }
-  
   public BoardView getPlayerView() { return playerView; }
+  public BoardView getEnemyView() { return enemyView; }
   public void setPlayerView(BoardView view) { this.playerView = view; }
-  
   public VBox getLeftSide() { return leftSide; }
 
   public static void main(String[] args) {

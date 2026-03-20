@@ -5,6 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import java.util.Map;
+import java.util.HashMap;
 
 public class CombatController {
     private final GuiApp app;
@@ -23,6 +25,7 @@ public class CombatController {
 
     private Coordinate moveSourceCoord = null; 
     private ShipMove<Character> shipMoveLogic;
+    private SonarScanner<Character> sonarScanner;
 
     public CombatController(GuiApp app) {
         this.app = app;
@@ -30,7 +33,7 @@ public class CombatController {
 
     public VBox buildSidebar() {
         shipMoveLogic = new ShipMove<>(app.getPlayerBoard(), new V2ShipFactory());
-
+        sonarScanner = new SonarScanner<>(app.getEnemyBoard());
         Label title = new Label("Action Options");
         title.setStyle("-fx-font-size: 24px; -fx-text-fill: #e74c3c;");
 
@@ -123,9 +126,9 @@ public class CombatController {
     }
 
     /**
-     * Handles clicks on my board
+     * Handles movement on my board
      */
-    public void handlePlayerBoardClick(int row, int col) {
+    public void handleMoveClick(int row, int col) {
         if (!"Move a ship".equals(actionSelector.getValue())) {
             messageLabel.setText("You can only click your own board to move a ship!");
             return;
@@ -197,6 +200,78 @@ public class CombatController {
         orientationLabel.setManaged(false);
         orientationSelector.setVisible(false);
         orientationSelector.setManaged(false);
+    }
+
+    public void handleEnemyBoardClick(int row, int col) {
+        String action = actionSelector.getValue();
+        Coordinate clickedCoord = new Coordinate(row, col);
+
+        if ("Fire at a square".equals(action)) {
+            executeFireAction(row, col, clickedCoord);
+        } 
+        else if ("Sonar scan".equals(action)) {
+            executeSonarAction(clickedCoord);
+        } 
+    }
+
+    private void executeFireAction(int row, int col, Coordinate clickedCoord){
+        Ship<Character> hitShip = app.getEnemyBoard().fireAt(clickedCoord);
+        Character displayChar = app.getEnemyBoard().whatIsAtForEnemy(clickedCoord);
+        String buttonText = (displayChar != null) ? displayChar.toString() : "";
+        if(hitShip != null){
+            String shipName = hitShip.getName(); 
+            app.getEnemyView().colorCell(row, col, "#e74c3c"); 
+            messageLabel.setText("Direct hit! You struck a " + shipName + " at " + clickedCoord + "!");
+            messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 18px;");
+        } else {
+            app.getEnemyView().colorCell(row, col, "#3498db"); // Light Blue for Miss
+            messageLabel.setText("You missed!");
+            messageLabel.setStyle("-fx-text-fill: #2980b9; -fx-font-size: 18px;");
+        }
+        app.getEnemyView().getGrid().getChildren().forEach(node -> {
+            if (javafx.scene.layout.GridPane.getRowIndex(node) == row + 1 && 
+                javafx.scene.layout.GridPane.getColumnIndex(node) == col + 1) {
+                javafx.scene.control.Button btn = (javafx.scene.control.Button) node;                
+                btn.setText(buttonText); 
+                btn.setStyle(btn.getStyle() + "-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18px; -fx-opacity: 1.0;");
+                
+                btn.setDisable(true);
+            }
+        });
+    }
+    private void executeSonarAction(Coordinate clickedCoord) {
+        if (sonarCount <= 0) return; 
+
+        Map<String, Integer> results = sonarScanner.scan(clickedCoord);
+        
+        sonarCount--;
+        updateActionMenu();
+        
+        int centerRow = clickedCoord.getRow();
+        int centerCol = clickedCoord.getColumn();
+
+        for (int r = -3; r <= 3; r++) {
+            for (int c = -3; c <= 3; c++) {
+                if (Math.abs(r) + Math.abs(c) <= 3) { 
+                    int currR = centerRow + r;
+                    int currC = centerCol + c;
+                    
+                    if (currR >= 0 && currR < app.getEnemyBoard().getHeight() &&
+                        currC >= 0 && currC < app.getEnemyBoard().getWidth()) {
+                        
+                        app.getEnemyView().colorCell(currR, currC, "#e67e22"); 
+                    }
+                }
+            }
+        }
+
+        String report = String.format("Submarines: %d, Destroyers: %d\nBattleships: %d, Carriers: %d",
+            results.get("Submarine"), results.get("Destroyer"),
+            results.get("Battleship"), results.get("Carrier"));
+
+        messageLabel.setText("Sonar scanned at " + clickedCoord + "!\n" + report);
+        messageLabel.setStyle("-fx-text-fill: #e67e22; -fx-font-size: 18px;");
+
     }
 
 }

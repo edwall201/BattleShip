@@ -48,9 +48,9 @@ public class BoardView {
       char rowChar = (char) ('A' + row);
       Label rowLabel = new Label(String.valueOf(rowChar));
       rowLabel.setPrefSize(35, 35);
-      rowLabel.setAlignment(Pos.CENTER); // Center the text
+      rowLabel.setAlignment(Pos.CENTER);
       rowLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #34495e; -fx-font-size: 14px;");
-      grid.add(rowLabel, 0, row + 1); // Shift down by 1
+      grid.add(rowLabel, 0, row + 1); 
     }
 
     for (int row = 0; row < board.getHeight(); row++) {
@@ -62,40 +62,16 @@ public class BoardView {
         final int r = row;
         final int c = col;
 
-        if (isEnemy) {
-          cell.setOnAction(e -> handleClick(r, c));
-        } else {
-          cell.setOnAction(e -> {
+        cell.setOnAction(e -> {
             if (placementHandler != null) {
-              placementHandler.handle(r, c);
+                placementHandler.handle(r, c);
             }
-          });
-        }
+        });
 
         grid.add(cell, col + 1, row + 1);
         cells[row][col] = cell;
       }
     }
-  }
-
-  /**
-   * Fires at given coords and updates the button color
-   * if hit, change to red, otherwise change to blue
-   * @param row the row of the coord to fire at
-   * @param col the column of the coord to fire at
-   */
-  private void handleClick(int row, int col) {
-    Coordinate coord = new Coordinate(row, col);
-    Ship<Character> hit = board.fireAt(coord);
-
-    if (hit != null) {
-      cells[row][col].setStyle("-fx-background-color: #e74c3c;");
-      System.out.println("Hit at " + coord);
-    } else {
-      cells[row][col].setStyle("-fx-background-color: #3498db;");
-      System.out.println("Miss at " + coord);
-    }
-    cells[row][col].setDisable(true);
   }
 
   public interface ClickHandler {
@@ -107,8 +83,7 @@ public class BoardView {
   }
 
   public void colorCell(int row, int col, String hexColor) {
-    cells[row][col].setStyle("-fx-background-color: " + hexColor
-        + "; -fx-border-color: #34495e; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
+    cells[row][col].setStyle("-fx-background-color: " + hexColor + "; -fx-border-color: #34495e; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
   }
 
   /**
@@ -124,7 +99,7 @@ public class BoardView {
           for (int col = 0; col < board.getWidth(); col++) {
               Coordinate coord = new Coordinate(row, col);
               Ship<Character> ship = board.getShipAt(coord);
-              
+
               if (ship != null) {
                   cells[row][col].setStyle("-fx-background-color: #2ecc71; -fx-border-color: #34495e; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
               } else {
