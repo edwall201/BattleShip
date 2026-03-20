@@ -19,16 +19,17 @@ public class ComputerController{
         int row = target.getRow();
         int col = target.getColumn();
 
+        String coordStr = "" + (char)('A' + row) + col;
         Ship<Character> hitShip = app.getPlayerBoard().getShipAt(target);
         Character displayChar = app.getPlayerBoard().whatIsAtForSelf(target);
         String buttonText = (displayChar != null) ? displayChar.toString() : "";
 
         if (hitShip != null) {
             app.getPlayerView().colorCell(row, col, "#e74c3c");
-            messageLabel.setText(messageLabel.getText() + "\nComputer hit your " + hitShip.getName() + " at " + target + "!");
+            messageLabel.setText(messageLabel.getText() + "\nComputer hit your " + hitShip.getName() + " at " + coordStr + "!");
         } else {
             app.getPlayerView().colorCell(row, col, "#3498db");
-            messageLabel.setText(messageLabel.getText() + "\nComputer missed at " + target + ".");
+            messageLabel.setText(messageLabel.getText() + "\nComputer missed at " + coordStr + ".");
         }
         
         app.getPlayerView().getGrid().getChildren().forEach(node -> {

@@ -239,14 +239,15 @@ public class CombatController {
         Ship<Character> hitShip = app.getEnemyBoard().fireAt(clickedCoord);
         Character displayChar = app.getEnemyBoard().whatIsAtForEnemy(clickedCoord);
         String buttonText = (displayChar != null) ? displayChar.toString() : "";
+        String coordStr = "" + (char)('A' + row) + col;
         if(hitShip != null){
             String shipName = hitShip.getName(); 
             app.getEnemyView().colorCell(row, col, "#e74c3c"); 
-            messageLabel.setText("You hit a " + shipName + " at " + clickedCoord + "!");
+            messageLabel.setText("You hit a " + shipName + " at " + coordStr + "!");
             messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 18px;");
         } else {
             app.getEnemyView().colorCell(row, col, "#3498db"); // Light Blue for Miss
-            messageLabel.setText("You missed!");
+            messageLabel.setText("You missed at " + coordStr + "!");
             messageLabel.setStyle("-fx-text-fill: #2980b9; -fx-font-size: 18px;");
         }
         app.getEnemyView().getGrid().getChildren().forEach(node -> {
