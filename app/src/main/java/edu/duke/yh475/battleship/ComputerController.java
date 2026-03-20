@@ -11,6 +11,11 @@ public class ComputerController{
         this.app = app;
         this.messageLabel = messageLabel;
         this.computerPlayer = new ComputerPlayer("Computer", app.getEnemyBoard(), System.out, new V2ShipFactory());
+        try {
+            this.computerPlayer.doPlacementPhase();
+        } catch (Exception e) {
+            System.out.println("Error placing computer ships: " + e.getMessage());
+        }
     }
 
     public void doComputerTurn() {

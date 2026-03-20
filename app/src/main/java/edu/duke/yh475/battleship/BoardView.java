@@ -120,8 +120,7 @@ public class BoardView {
               Coordinate coord = new Coordinate(row, col);
               Ship<Character> ship = board.getShipAt(coord);
               Character enemyViewChar = board.whatIsAtForEnemy(coord);
-              cells[row][col].setText("");
-
+              Character myViewChar = board.whatIsAtForSelf(coord);
               if (ship != null) {
                   if (ship.wasHitAt(coord)) {
                     cells[row][col].setStyle("-fx-background-color: #e74c3c; -fx-border-color: #34495e; -fx-padding: 0;");

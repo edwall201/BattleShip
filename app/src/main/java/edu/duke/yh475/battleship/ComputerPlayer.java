@@ -44,17 +44,17 @@ public class ComputerPlayer implements Player {
    * @param shipFactory the factory to create ships for placement
    */
   public ComputerPlayer(String name, Board<Character> theBoard, PrintStream out,
-      AbstractShipFactory<Character> shipFactory) {
-    this.name = name;
-    this.theBoard = theBoard;
-    this.view = new BoardTextView(theBoard);
-    this.out = out;
-    this.shipFactory = shipFactory;
-    this.shipsToPlace = new ArrayList<>();
-    this.shipCreationFns = new HashMap<>();
-    setupShipCreationMap();
-    setupShipCreationList();
-  }
+    AbstractShipFactory<Character> shipFactory) {
+      this.name = name;
+      this.theBoard = theBoard;
+      this.view = new BoardTextView(theBoard);
+      this.out = out;
+      this.shipFactory = shipFactory;
+      this.shipsToPlace = new ArrayList<>();
+      this.shipCreationFns = new HashMap<>();
+      setupShipCreationMap();
+      setupShipCreationList();
+    }
 
   /**
    * Handles the ship placement phase for the player, prompting then to place each
@@ -273,5 +273,5 @@ public class ComputerPlayer implements Player {
     addfireCandiate(new Coordinate(r + 1, c), enemyBoard); // down
     addfireCandiate(new Coordinate(r, c - 1), enemyBoard); // left
     addfireCandiate(new Coordinate(r, c + 1), enemyBoard); // right
-}
+  }
 }

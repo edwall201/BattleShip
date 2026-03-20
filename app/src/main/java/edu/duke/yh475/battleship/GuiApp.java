@@ -60,9 +60,6 @@ public class GuiApp extends Application {
     playerBoard = new BattleShipBoard<>(10, 20);
     enemyBoard = new BattleShipBoard<>(10, 20);
 
-    V2ShipFactory factory = new V2ShipFactory();
-    enemyBoard.tryAddShip(factory.makeSubmarine(new Placement("A0H")));
-
     playerView = new BoardView(playerBoard, false);
     enemyView = new BoardView(enemyBoard, true);
     

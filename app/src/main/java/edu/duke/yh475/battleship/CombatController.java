@@ -254,35 +254,60 @@ public class CombatController {
         } 
     }
 
-    /**
+     /**
      * handles the logic for firing at the enemy board
      * updating the view 
      * showing messages based on hit or miss
      */
     private void executeFireAction(int row, int col, Coordinate clickedCoord){
         Ship<Character> hitShip = app.getEnemyBoard().fireAt(clickedCoord);
-        Character displayChar = app.getEnemyBoard().whatIsAtForEnemy(clickedCoord);
-        String buttonText = (displayChar != null) ? displayChar.toString() : "";
         String coordStr = "" + (char)('A' + row) + col;
-        if(hitShip != null){
+
+        if (hitShip != null) {
             String shipName = hitShip.getName(); 
             app.getEnemyView().colorCell(row, col, "#e74c3c"); 
             messageLabel.setText("You hit a " + shipName + " at " + coordStr + "!");
             messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 18px;");
+
+            if (hitShip.isSunk()) {
+                String letter = shipName.substring(0, 1).toUpperCase();
+                for (Coordinate c : hitShip.getCoordinates()) {
+                    app.getEnemyView().getGrid().getChildren().forEach(node -> {
+                        if (javafx.scene.layout.GridPane.getRowIndex(node) == c.getRow() + 1 && 
+                            javafx.scene.layout.GridPane.getColumnIndex(node) == c.getColumn() + 1) {
+                            javafx.scene.control.Button btn = (javafx.scene.control.Button) node;                
+                            btn.setText(letter); 
+                            btn.setStyle(btn.getStyle() + "-fx-text-fill: white; -fx-font-size: 18px; -fx-opacity: 1.0;");
+                            btn.setDisable(true);
+                        }
+                    });
+                }
+            } else {
+                app.getEnemyView().getGrid().getChildren().forEach(node -> {
+                    if (javafx.scene.layout.GridPane.getRowIndex(node) == row + 1 && 
+                        javafx.scene.layout.GridPane.getColumnIndex(node) == col + 1) {
+                        javafx.scene.control.Button btn = (javafx.scene.control.Button) node;                
+                        btn.setText("");
+                        btn.setStyle(btn.getStyle() + "-fx-text-fill: white; -fx-font-size: 18px; -fx-opacity: 1.0;");
+                        btn.setDisable(true);
+                    }
+                });
+            }
         } else {
-            app.getEnemyView().colorCell(row, col, "#3498db"); // Light Blue for Miss
+            app.getEnemyView().colorCell(row, col, "#3498db"); 
             messageLabel.setText("You missed at " + coordStr + "!");
             messageLabel.setStyle("-fx-text-fill: #2980b9; -fx-font-size: 18px;");
+            
+            app.getEnemyView().getGrid().getChildren().forEach(node -> {
+                if (javafx.scene.layout.GridPane.getRowIndex(node) == row + 1 && 
+                    javafx.scene.layout.GridPane.getColumnIndex(node) == col + 1) {
+                    javafx.scene.control.Button btn = (javafx.scene.control.Button) node;                
+                    btn.setStyle(btn.getStyle() + "-fx-text-fill: white;  -fx-font-size: 18px; -fx-opacity: 1.0;");
+                    btn.setDisable(true);
+                }
+            });
         }
-        app.getEnemyView().getGrid().getChildren().forEach(node -> {
-            if (javafx.scene.layout.GridPane.getRowIndex(node) == row + 1 && 
-                javafx.scene.layout.GridPane.getColumnIndex(node) == col + 1) {
-                javafx.scene.control.Button btn = (javafx.scene.control.Button) node;                
-                btn.setText(buttonText); 
-                btn.setStyle(btn.getStyle() + "-fx-text-fill: white;-fx-font-weight: bold; -fx-font-size: 18px; -fx-opacity: 1.0;");
-                btn.setDisable(true);
-            }
-        });
+        
         ComputerAttackwithDelay();
     }
 
@@ -293,9 +318,7 @@ public class CombatController {
      */
     private void executeSonarAction(Coordinate clickedCoord) {
         if (sonarCount <= 0) return; 
-
         Map<String, Integer> results = sonarScanner.scan(clickedCoord);
-        
         sonarCount--;
         updateActionMenu();
         
@@ -310,7 +333,6 @@ public class CombatController {
                     
                     if (currR >= 0 && currR < app.getEnemyBoard().getHeight() &&
                         currC >= 0 && currC < app.getEnemyBoard().getWidth()) {
-                        
                         app.getEnemyView().colorCell(currR, currC, "#e67e22"); 
                     }
                 }
