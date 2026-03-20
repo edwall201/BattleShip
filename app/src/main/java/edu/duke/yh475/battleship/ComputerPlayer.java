@@ -160,29 +160,30 @@ public class ComputerPlayer implements Player {
   protected void addNeighborsToStack(Coordinate coord, Board<Character> enemyBoard) {
     int r = coord.getRow();
     int c = coord.getColumn();
-    if (firstHit == null) {
-      // if this is the first hit
-      // add all four neighbors to the stack and set firstHit
-      firstHit = coord;
-      addfireCandiate(new Coordinate(r - 1, c), enemyBoard); // up
-      addfireCandiate(new Coordinate(r + 1, c), enemyBoard); // down
-      addfireCandiate(new Coordinate(r, c - 1), enemyBoard); // left
-      addfireCandiate(new Coordinate(r, c + 1), enemyBoard); // right
-    } else {
-      // if this is not the first hit, we can determine the orientation of the ship
-      if (r == firstHit.getRow()) {
-        // if it is the same row
-        targetStack.removeIf(p -> p.getRow() != r);
-        int nextCol = (c > firstHit.getColumn()) ? c + 1 : c - 1;
-        addfireCandiate(new Coordinate(r, nextCol), enemyBoard);
-      } else if (c == firstHit.getColumn()) {
-        // if it is the same column
-        // remove all horizontal predictions from the stack
-        targetStack.removeIf(p -> p.getColumn() != c);
 
-        int nextRow = (r > firstHit.getRow()) ? r + 1 : r - 1;
-        addfireCandiate(new Coordinate(nextRow, c), enemyBoard);
-      }
+    // Add neighbors in all four directions
+    if (firstHit == null) {
+        setFirstHitAndAddNeighbors(coord, enemyBoard);
+        return;
+    } 
+
+    // if we have a first hit we want to prioritize firing along the same row or column to try to sink the ship
+    boolean sameRow = (r == firstHit.getRow());
+    boolean sameCol = (c == firstHit.getColumn());
+
+    if (sameRow) {
+        // determine if the ship is horizontal
+        targetStack.removeIf(p -> p.getRow() != r);
+        addfireCandiate(new Coordinate(r, c + 1), enemyBoard);
+        addfireCandiate(new Coordinate(r, c - 1), enemyBoard);
+    } else if (sameCol) {
+        // determine if the ship is vertical
+        targetStack.removeIf(p -> p.getColumn() != c);
+        addfireCandiate(new Coordinate(r + 1, c), enemyBoard);
+        addfireCandiate(new Coordinate(r - 1, c), enemyBoard);
+    } else {
+        // if we have hit a new ship, reset the first hit and add all neighbors
+        setFirstHitAndAddNeighbors(coord, enemyBoard);
     }
   }
 
@@ -258,8 +259,19 @@ public class ComputerPlayer implements Player {
       addNeighborsToStack(coord, enemyBoard);
       if (hit.isSunk()) {
         firstHit = null;
+        targetStack.clear();
       }
     }
     return coord;
   }
+
+  private void setFirstHitAndAddNeighbors(Coordinate coord, Board<Character> enemyBoard) {
+    int r = coord.getRow();
+    int c = coord.getColumn();
+    firstHit = coord;
+    addfireCandiate(new Coordinate(r - 1, c), enemyBoard); // up
+    addfireCandiate(new Coordinate(r + 1, c), enemyBoard); // down
+    addfireCandiate(new Coordinate(r, c - 1), enemyBoard); // left
+    addfireCandiate(new Coordinate(r, c + 1), enemyBoard); // right
+}
 }
