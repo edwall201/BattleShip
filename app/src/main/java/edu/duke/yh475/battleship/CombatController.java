@@ -99,6 +99,13 @@ public class CombatController {
                 messageLabel.setText("Move selected!\n" + "Click a ship on your board to select it.");
                 messageLabel.setStyle("-fx-text-fill: #34495e; -fx-font-size: 18px;");
             }
+            else if ("Sonar scan".equals(newVal)) {
+                messageLabel.setText("Sonar Scan selected!\n" + "Click a square on the enemy board to scan.");
+                messageLabel.setStyle("-fx-text-fill: #34495e; -fx-font-size: 18px;");
+            } else {
+                messageLabel.setText("Fire selected!\n" + "Click a square on the enemy board to fire.");
+                messageLabel.setStyle("-fx-text-fill: #34495e; -fx-font-size: 18px;");
+            }
         });
 
         return sidebar;
@@ -143,6 +150,16 @@ public class CombatController {
     public void handleMoveClick(int row, int col) {
         if (!"Move a ship".equals(actionSelector.getValue())) {
             messageLabel.setText("You can only click your own board to move a ship!");
+            messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 18px;");
+            return;
+        }
+        if ("Fire at a square".equals(actionSelector.getValue())){
+            messageLabel.setText("You cannot fire at your own board!\nClick the Enemy Board.");
+            messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 18px; ");
+            return;
+        } else if ("Sonar scan".equals(actionSelector.getValue())) {
+            messageLabel.setText("You cannot scan your own board!\nClick the Enemy Board.");
+            messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 16px;");
             return;
         }
 
@@ -153,7 +170,7 @@ public class CombatController {
             Ship<Character> shipToMove = app.getPlayerBoard().getShipAt(clickedCoord);
             if (shipToMove == null) {
                 messageLabel.setText("No ship at " + clickedCoord + "\n" + ". Click a valid ship.");
-                messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 16px; -fx-font-weight");
+                messageLabel.setStyle("-fx-text-fill: #e74c3c; -fx-font-size: 18px; -fx-font-weight");
             } else {
                 moveSourceCoord = clickedCoord;
                 String shipName = shipToMove.getName();
