@@ -119,13 +119,28 @@ public class BoardView {
           for (int col = 0; col < board.getWidth(); col++) {
               Coordinate coord = new Coordinate(row, col);
               Ship<Character> ship = board.getShipAt(coord);
+              Character enemyViewChar = board.whatIsAtForEnemy(coord);
+              cells[row][col].setText("");
 
               if (ship != null) {
-                  cells[row][col].setStyle("-fx-background-color: #2ecc71; -fx-border-color: #34495e; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
+                  if (ship.wasHitAt(coord)) {
+                    cells[row][col].setStyle("-fx-background-color: #e74c3c; -fx-border-color: #34495e; -fx-padding: 0;");
+                    cells[row][col].setStyle(cells[row][col].getStyle() + "-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px;");
+                  } else {
+                    cells[row][col].setStyle("-fx-background-color: #2ecc71; -fx-border-color: #34495e; -fx-padding: 0;");
+                  }
               } else {
-                  cells[row][col].setStyle("-fx-background-color: #2c3e50; -fx-border-color: #34495e; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
+                  if (enemyViewChar != null && enemyViewChar == 'X') {
+                  cells[row][col].setStyle("-fx-background-color: #3498db; -fx-border-color: #34495e; -fx-padding: 0;");
+                  cells[row][col].setStyle(cells[row][col].getStyle() + "-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px;");
+                } else {
+                    cells[row][col].setStyle("-fx-background-color: #2c3e50; -fx-border-color: #34495e; -fx-padding: 0;");
+                  }
               }
           }
       }
+  }
+  public void setCellText(int row, int col, String text) {
+      cells[row][col].setText(text);
   }
 }

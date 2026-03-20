@@ -160,6 +160,7 @@ public class CombatController {
 
                 for (Coordinate c : shipToMove.getCoordinates()) {
                     app.getPlayerView().colorCell(c.getRow(), c.getColumn(), "#e67e22"); 
+                    app.getPlayerView().setCellText(c.getRow(), c.getColumn(), "");
                 }
 
                 orientationSelector.getItems().clear();
@@ -196,7 +197,7 @@ public class CombatController {
 
                 // Redraw the player board to reflect the move
                 app.getPlayerView().refresh();
-                computerController.doComputerTurn();
+                ComputerAttackwithDelay();
             }
         }
     }
@@ -265,7 +266,7 @@ public class CombatController {
                 btn.setDisable(true);
             }
         });
-        withDelay();
+        ComputerAttackwithDelay();
     }
 
     /**
@@ -303,10 +304,10 @@ public class CombatController {
             results.get("Submarine"), results.get("Destroyer"), results.get("Battleship"), results.get("Carrier"));
         messageLabel.setText("Sonar scanned at " + clickedCoord + "!\n" + report);
         messageLabel.setStyle("-fx-text-fill: #e67e22; -fx-font-size: 18px;");
-        withDelay();
+        ComputerAttackwithDelay();
     }
    
-    private void withDelay(){
+    private void ComputerAttackwithDelay(){
         PauseTransition pause = new PauseTransition(Duration.seconds(1));
         pause.setOnFinished(e ->{computerController.doComputerTurn();});
         pause.play();
