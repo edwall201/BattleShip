@@ -230,4 +230,35 @@ public class ComputerPlayer implements Player {
   public BoardTextView getView() {
     return view;
   }
+
+  /**
+   * A GUI version of the turn logic
+   * It fires at the board, updates its computer stack, and returns the coordinate it fired at
+   * @param enemyBoard the board of the enemy player to fire at
+   * @return the coordinate that the computer player fired at
+   */
+  public Coordinate doGuiTurn(Board<Character> enemyBoard) {
+    Coordinate coord = null;
+    while (coord == null) {
+      if (!targetStack.isEmpty()) {
+        Coordinate potential = targetStack.pop();
+        if (!firedCoordinates.contains(potential)) {
+          coord = potential;
+        }
+      } else {
+        coord = generateRandomCoordinate(enemyBoard);
+      }
+    }
+
+    Ship<Character> hit = enemyBoard.fireAt(coord);
+    firedCoordinates.add(coord);
+
+    if (hit != null) {
+      addNeighborsToStack(coord, enemyBoard);
+      if (hit.isSunk()) {
+        firstHit = null;
+      }
+    }
+    return coord;
+  }
 }

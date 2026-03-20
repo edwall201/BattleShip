@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import java.util.Map;
 import java.util.HashMap;
 
+
 public class CombatController {
     private final GuiApp app;
     private ComboBox<String> actionSelector;
@@ -26,6 +27,7 @@ public class CombatController {
     private Coordinate moveSourceCoord = null; 
     private ShipMove<Character> shipMoveLogic;
     private SonarScanner<Character> sonarScanner;
+    private ComputerController computerController;
 
     public CombatController(GuiApp app) {
         this.app = app;
@@ -61,14 +63,16 @@ public class CombatController {
         orientationLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: #2c3e50;");
         orientationSelector = new ComboBox<>();
         orientationSelector.setStyle("-fx-font-size: 18px; -fx-pref-width: 100px;");
-        hideOrientationSelector(); // Start hidden!
-        
+
+        // Start hidden!
+        hideOrientationSelector();
         updateActionMenu(); 
 
         messageLabel = new Label("Awaiting choice...");
         messageLabel.setStyle("-fx-font-size: 18px; -fx-text-fill: #34495e; -fx-font-weight: bold;");
         messageLabel.setWrapText(true);
         messageLabel.setPrefHeight(100); 
+        computerController = new ComputerController(app, messageLabel);
 
         VBox sidebar = new VBox(15, title, trackerBox, prompt, actionSelector, orientationLabel, orientationSelector, messageLabel);
         sidebar.setAlignment(Pos.TOP_LEFT);
@@ -184,6 +188,7 @@ public class CombatController {
 
                 // Redraw the player board to reflect the move
                 app.getPlayerView().refresh();
+                computerController.doComputerTurn();
             }
         }
     }
@@ -251,6 +256,7 @@ public class CombatController {
                 btn.setDisable(true);
             }
         });
+        computerController.doComputerTurn();
     }
 
     /**
@@ -288,7 +294,8 @@ public class CombatController {
             results.get("Submarine"), results.get("Destroyer"), results.get("Battleship"), results.get("Carrier"));
         messageLabel.setText("Sonar scanned at " + clickedCoord + "!\n" + report);
         messageLabel.setStyle("-fx-text-fill: #e67e22; -fx-font-size: 18px;");
-
+        computerController.doComputerTurn();
     }
+   
 
 }
