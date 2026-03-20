@@ -188,6 +188,9 @@ public class CombatController {
         }
     }
 
+    /**
+     * Helper methods to show the orientation selector
+     */
     private void showOrientationSelector() {
         orientationLabel.setVisible(true);
         orientationLabel.setManaged(true);
@@ -195,6 +198,9 @@ public class CombatController {
         orientationSelector.setManaged(true);
     }
 
+    /**
+     * Helper method to hide the orientation selector
+     */
     private void hideOrientationSelector() {
         orientationLabel.setVisible(false);
         orientationLabel.setManaged(false);
@@ -202,6 +208,9 @@ public class CombatController {
         orientationSelector.setManaged(false);
     }
 
+    /**
+     * handles clicks on the enemy board during combat phase for both firing and sonar actions
+     */
     public void handleEnemyBoardClick(int row, int col) {
         String action = actionSelector.getValue();
         Coordinate clickedCoord = new Coordinate(row, col);
@@ -214,6 +223,11 @@ public class CombatController {
         } 
     }
 
+    /**
+     * handles the logic for firing at the enemy board
+     * updating the view 
+     * showing messages based on hit or miss
+     */
     private void executeFireAction(int row, int col, Coordinate clickedCoord){
         Ship<Character> hitShip = app.getEnemyBoard().fireAt(clickedCoord);
         Character displayChar = app.getEnemyBoard().whatIsAtForEnemy(clickedCoord);
@@ -233,12 +247,17 @@ public class CombatController {
                 javafx.scene.layout.GridPane.getColumnIndex(node) == col + 1) {
                 javafx.scene.control.Button btn = (javafx.scene.control.Button) node;                
                 btn.setText(buttonText); 
-                btn.setStyle(btn.getStyle() + "-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18px; -fx-opacity: 1.0;");
-                
+                btn.setStyle(btn.getStyle() + "-fx-text-fill: white; -fx-font-size: 18px; -fx-opacity: 1.0;");
                 btn.setDisable(true);
             }
         });
     }
+
+    /**
+     * handles the logic for performing a sonar scan on the enemy board
+     * updates the view to show the scanned area and results
+     * decreases sonar count and updates the menu
+     */
     private void executeSonarAction(Coordinate clickedCoord) {
         if (sonarCount <= 0) return; 
 
@@ -266,9 +285,7 @@ public class CombatController {
         }
 
         String report = String.format("Submarines: %d, Destroyers: %d\nBattleships: %d, Carriers: %d",
-            results.get("Submarine"), results.get("Destroyer"),
-            results.get("Battleship"), results.get("Carrier"));
-
+            results.get("Submarine"), results.get("Destroyer"), results.get("Battleship"), results.get("Carrier"));
         messageLabel.setText("Sonar scanned at " + clickedCoord + "!\n" + report);
         messageLabel.setStyle("-fx-text-fill: #e67e22; -fx-font-size: 18px;");
 

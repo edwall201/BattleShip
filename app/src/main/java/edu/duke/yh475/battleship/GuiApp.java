@@ -53,6 +53,9 @@ public class GuiApp extends Application {
     primaryStage.show();
   }
 
+  /**
+   * initializes the game data
+   */
   private void initializeGameData() {
     playerBoard = new BattleShipBoard<>(10, 20);
     enemyBoard = new BattleShipBoard<>(10, 20);
@@ -63,10 +66,13 @@ public class GuiApp extends Application {
     playerView = new BoardView(playerBoard, false);
     enemyView = new BoardView(enemyBoard, true);
     
-    // Pass the clicks to the controller, not the local file
+    // Pass the clicks to the controller
     playerView.setPlacement((row, col) -> placementController.handlePlacementClick(row, col));
   }
 
+  /**
+   * Builds the layout for the boards and sidebars
+   */
   private void buildBoardsLayout() {
     Label playerLabel = new Label("Your Board");
     playerLabel.setStyle("-fx-font-size: 23px; -fx-font-weight: bold;");
@@ -86,6 +92,9 @@ public class GuiApp extends Application {
     boardsLayout.setAlignment(Pos.TOP_CENTER);
   }
 
+  /**
+   * put the instruction label at the top of the screen
+   */
   private void buildInstructionLabel() {
     instructionLabel = new Label("Select a ship and orientation, then click your board to place it");
     instructionLabel.setStyle("-fx-font-size: 24px; " + "-fx-font-weight: bold; " + "-fx-text-fill: white; " +
@@ -93,6 +102,9 @@ public class GuiApp extends Application {
         "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);");
   }
 
+  /**
+   * when the placementis complete, transition to the combat mode
+   */
   public void transitionToCombatPhase() {
     boardsLayout.getChildren().remove(placementSidebar);
     boardsLayout.getChildren().add(rightSide);
@@ -108,6 +120,7 @@ public class GuiApp extends Application {
         "-fx-background-color: #959ba3ff;  " + "-fx-padding: 12px 24px; " + "-fx-background-radius: 30px; " +
         "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);");
 
+    //resize the window to fit the new layouy
     boardsLayout.getScene().getWindow().setWidth(1350);
   }
 

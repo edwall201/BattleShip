@@ -1,6 +1,5 @@
 package edu.duke.yh475.battleship;
 
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -30,10 +29,16 @@ public class PlacementController{
     private final int MAX_BATTLE = 3;
     private final int MAX_CARRIER = 2;
 
+    /**
+     * constructo for the placement controller
+     */
     public PlacementController(GuiApp app) {
         this.app = app;
     }
 
+    /**
+     * Builds the sidebar for the placement
+     */
     public VBox buildSidebar() {
         Label shapesInfo = new Label("Ship Shapes:\n" + "• Submarine (1x2) - V, H\n" + "• Destroyer (1x3) - V, H\n"
             + "• Battleship (T-Shape) - U, D, L, R\n" + "• Carrier (Z-Shape) - U, D, L, R");
@@ -41,8 +46,9 @@ public class PlacementController{
 
         Label trackerTitle = new Label("Remaining ships to Place:");
         trackerTitle.setStyle("-fx-font-size: 18px; -fx-text-fill: #2c3e50;");
-
         String trackerStyle = "-fx-font-size: 18px; -fx-text-fill: #e67e22;";
+
+        //inisital the number of ships to place
         subLabel = new Label("Submarines: " + subCount + " / " + MAX_SUB);
         destLabel = new Label("Destroyers: " + destCount + " / " + MAX_DEST);
         battleLabel = new Label("Battleships: " + battleCount + " / " + MAX_BATTLE);
@@ -53,6 +59,7 @@ public class PlacementController{
         battleLabel.setStyle(trackerStyle);
         carrierLabel.setStyle(trackerStyle);
 
+        // group the tracker labels together
         VBox trackerBox = new VBox(5, trackerTitle, subLabel, destLabel, battleLabel, carrierLabel);
         trackerBox.setStyle("-fx-background-color: #ecf0f1; -fx-padding: 10px; -fx-background-radius: 5px;");
 
@@ -66,6 +73,7 @@ public class PlacementController{
         orientationSelector.setValue("V");
         orientationSelector.setStyle("-fx-font-size: 18px; -fx-pref-width: 100px;");
 
+        //update the orientation options base on the selected ship
         shipSelector.valueProperty().addListener((observable, oldValue, newValue) -> {
             orientationSelector.getItems().clear();
             if (newValue.equals("Submarine") || newValue.equals("Destroyer")) {
@@ -77,6 +85,7 @@ public class PlacementController{
             }
         });
 
+        //group the dropdowns together
         HBox dropdowns = new HBox(10, shipSelector, orientationSelector);
         dropdowns.setAlignment(Pos.CENTER_LEFT);
 
@@ -85,19 +94,19 @@ public class PlacementController{
         messageLabel.setWrapText(true);
         messageLabel.setPrefHeight(80);
 
+        //set up the reset btm
         Button resetBtn = new Button("Reset");
         resetBtn.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18px; -fx-padding: 10px 20px;");
         resetBtn.setOnAction(e -> resetPlacement());
 
+        // set up the start btn
         startGameBtn = new Button("Start");
         startGameBtn.setDisable(true);
         startGameBtn.setStyle("-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 18px; -fx-padding: 10px 20px;");
         
-        // Tells the main app to transition when clicked!
+        // When clicked, tells the main app to transition to combat phase
         startGameBtn.setOnAction(e -> app.transitionToCombatPhase());
-
         HBox actionButtons = new HBox(15, resetBtn, startGameBtn);
-
         VBox sidebar = new VBox(20, shapesInfo, trackerBox, new Label("Select Ship & Orientation:"), dropdowns, messageLabel, actionButtons);
         sidebar.setAlignment(Pos.TOP_LEFT);
         sidebar.setPadding(new Insets(40, 20, 20, 40));
@@ -105,6 +114,9 @@ public class PlacementController{
         return sidebar;
     }
 
+    /**
+     * handles clicks on the board during placement phase
+     */
     public void handlePlacementClick(int row, int col) {
         String shipType = shipSelector.getValue();
         String orientationStr = orientationSelector.getValue();
@@ -122,7 +134,6 @@ public class PlacementController{
             V2ShipFactory factory = new V2ShipFactory();
             Ship<Character> newShip = createShip(factory, shipType, placement);
 
-            // Using app.getPlayerBoard() instead of direct variable access
             String errorMsg = app.getPlayerBoard().tryAddShip(newShip);
 
             if (errorMsg != null) {
@@ -144,6 +155,9 @@ public class PlacementController{
         }
     }
 
+    /**
+     *  helper methods for ship creation and tracking  
+     */
     private Ship<Character> createShip(V2ShipFactory factory, String type, Placement p) {
         return switch (type) {
             case "Submarine" -> factory.makeSubmarine(p);
@@ -154,6 +168,9 @@ public class PlacementController{
         };
     }
 
+    /**
+     * helper methods for ship tracking and placement validation
+     */
     private boolean canPlaceShip(String type) {
         return switch (type) {
             case "Submarine" -> subCount < MAX_SUB;
@@ -164,6 +181,9 @@ public class PlacementController{
         };
     }
 
+    /**
+     * helper method to update the ship count and check if all ships of a type have been placed to update the UI
+     */
     private void updateShipCount(String type) {
         String finishedStyle = "-fx-font-size: 18px; -fx-text-fill: #27ae60;";
         switch (type) {
@@ -174,6 +194,9 @@ public class PlacementController{
         }
     }
 
+    /**
+     * helper method to check if all ships have been placed and enable the start button
+     */
     private void checkIfAllPlaced() {
         if (subCount == MAX_SUB && destCount == MAX_DEST && battleCount == MAX_BATTLE && carrierCount == MAX_CARRIER) {
             startGameBtn.setDisable(false);
@@ -182,8 +205,10 @@ public class PlacementController{
         }
     }
 
+    /**
+     * resets the placement state to allow the player to start over
+     */
     private void resetPlacement() {
-        // Tells the main app to create fresh boards
         app.setPlayerBoard(new BattleShipBoard<>(10, 20));
         app.setPlayerView(new BoardView(app.getPlayerBoard(), false));
         

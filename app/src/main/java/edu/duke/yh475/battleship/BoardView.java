@@ -36,6 +36,8 @@ public class BoardView {
    * coordinates when clicked
    */
   private void setupGrid() {
+
+    // add column labels
     for (int col = 0; col < board.getWidth(); col++) {
       Label colLabel = new Label(String.valueOf(col));
       colLabel.setPrefSize(35, 35);
@@ -53,11 +55,16 @@ public class BoardView {
       grid.add(rowLabel, 0, row + 1); 
     }
 
+    // add buttons for each cell
     for (int row = 0; row < board.getHeight(); row++) {
       for (int col = 0; col < board.getWidth(); col++) {
         Button cell = new Button();
         cell.setPrefSize(35, 35);
         cell.setStyle("-fx-background-color: #2c3e50; -fx-border-color: #34495e;");
+
+        cell.setPrefSize(35, 35);
+        cell.setMinSize(35, 35); 
+        cell.setMaxSize(35, 35);
 
         final int r = row;
         final int c = col;
@@ -74,14 +81,24 @@ public class BoardView {
     }
   }
 
+  /**
+   * Functional interface for handling clicks on the board
+   */
   public interface ClickHandler {
     void handle(int row, int col);
   }
 
+  /**
+   * sets the click handler for the board view
+   * it will be called when a cell is clicked
+   */
   public void setPlacement(ClickHandler handler) {
     this.placementHandler = handler;
   }
 
+  /**
+   * colors a specific cell on the board
+   */
   public void colorCell(int row, int col, String hexColor) {
     cells[row][col].setStyle("-fx-background-color: " + hexColor + "; -fx-border-color: #34495e; -fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
   }
@@ -94,6 +111,9 @@ public class BoardView {
     return grid;
   }
 
+  /**
+   * refreshes the board view to reflect the current state of the board
+   */
   public void refresh() {
       for (int row = 0; row < board.getHeight(); row++) {
           for (int col = 0; col < board.getWidth(); col++) {
