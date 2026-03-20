@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import java.util.Map;
 import java.util.HashMap;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 
 public class CombatController {
@@ -256,7 +258,7 @@ public class CombatController {
                 btn.setDisable(true);
             }
         });
-        computerController.doComputerTurn();
+        withDelay();
     }
 
     /**
@@ -294,8 +296,13 @@ public class CombatController {
             results.get("Submarine"), results.get("Destroyer"), results.get("Battleship"), results.get("Carrier"));
         messageLabel.setText("Sonar scanned at " + clickedCoord + "!\n" + report);
         messageLabel.setStyle("-fx-text-fill: #e67e22; -fx-font-size: 18px;");
-        computerController.doComputerTurn();
+        withDelay();
     }
    
+    private void withDelay(){
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
+        pause.setOnFinished(e ->{computerController.doComputerTurn();});
+        pause.play();
+    }
 
 }
