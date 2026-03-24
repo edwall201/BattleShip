@@ -159,26 +159,36 @@ public class PlacementController{
      *  helper methods for ship creation and tracking  
      */
     private Ship<Character> createShip(V2ShipFactory factory, String type, Placement p) {
-        return switch (type) {
-            case "Submarine" -> factory.makeSubmarine(p);
-            case "Destroyer" -> factory.makeDestroyer(p);
-            case "Battleship" -> factory.makeBattleship(p);
-            case "Carrier" -> factory.makeCarrier(p);
-            default -> throw new IllegalArgumentException("Unknown ship type");
-        };
+        switch (type) {
+            case "Submarine":
+                return factory.makeSubmarine(p);
+            case "Destroyer":
+                return factory.makeDestroyer(p);
+            case "Battleship":
+                return factory.makeBattleship(p);
+            case "Carrier":
+                return factory.makeCarrier(p);
+            default:
+                throw new IllegalArgumentException("Unknown ship: " + type);
+        }
     }
 
     /**
      * helper methods for ship tracking and placement validation
      */
     private boolean canPlaceShip(String type) {
-        return switch (type) {
-            case "Submarine" -> subCount < MAX_SUB;
-            case "Destroyer" -> destCount < MAX_DEST;
-            case "Battleship" -> battleCount < MAX_BATTLE;
-            case "Carrier" -> carrierCount < MAX_CARRIER;
-            default -> false;
-        };
+        switch (type) {
+            case "Submarine":
+                return subCount < MAX_SUB;
+            case "Destroyer":
+                return destCount < MAX_DEST;
+            case "Battleship":
+                return battleCount < MAX_BATTLE;
+            case "Carrier":
+                return carrierCount < MAX_CARRIER;
+            default:
+                return false;
+        }
     }
 
     /**

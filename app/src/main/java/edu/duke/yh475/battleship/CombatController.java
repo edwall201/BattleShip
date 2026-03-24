@@ -308,7 +308,11 @@ public class CombatController {
             });
         }
         
-        ComputerAttackwithDelay();
+        if (app.getEnemyBoard().isLost()) {
+            endGame("YOU WIN! All enemy ships are destroyed!", "#2ecc71");
+        } else {
+            ComputerAttackwithDelay();
+        }
     }
 
     /**
@@ -348,8 +352,26 @@ public class CombatController {
    
     private void ComputerAttackwithDelay(){
         PauseTransition pause = new PauseTransition(Duration.seconds(1));
-        pause.setOnFinished(e ->{computerController.doComputerTurn();});
+        pause.setOnFinished(e ->{computerController.doComputerTurn();
+            if (app.getPlayerBoard().isLost()) {
+                endGame("YOU LOSE! All your ships have been destroyed!", "#e74c3c");
+            }   
+        });
         pause.play();
     }
+
+    private void endGame(String message, String color) {
+    messageLabel.setText(message);
+    messageLabel.setStyle("-fx-text-fill: " + color + "; -fx-font-size: 26px; -fx-font-weight: bold;");
+    computerMessage.setText(""); 
+
+    actionSelector.setDisable(true);
+    if (orientationSelector != null) {
+        orientationSelector.setDisable(true);
+    }
+
+    app.getPlayerView().setPlacement(null);
+    app.getEnemyView().setPlacement(null);
+  }
 
 }

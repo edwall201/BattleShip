@@ -274,4 +274,6 @@ public class ComputerPlayer implements Player {
     addfireCandiate(new Coordinate(r, c - 1), enemyBoard); // left
     addfireCandiate(new Coordinate(r, c + 1), enemyBoard); // right
   }
+
+
 }

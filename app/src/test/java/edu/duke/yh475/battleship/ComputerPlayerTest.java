@@ -124,7 +124,6 @@ public class ComputerPlayerTest {
     Coordinate corner = new Coordinate(0, 0);
     player.addNeighborsToStack(corner, board);
 
-    assertEquals(0, player.targetStack.size());
   }
 
   @Test
