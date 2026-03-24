@@ -26,9 +26,7 @@ public class ComputerController{
 
         String coordStr = "" + (char)('A' + row) + col;
         Ship<Character> hitShip = app.getPlayerBoard().getShipAt(target);
-        Character displayChar = app.getPlayerBoard().whatIsAtForSelf(target);
-        String buttonText = (displayChar != null) ? displayChar.toString() : "";
-
+             
         if (hitShip != null) {
             app.getPlayerView().colorCell(row, col, "#e74c3c");
             messageLabel.setText("Computer hit your " + hitShip.getName() + " at " + coordStr + "!");
@@ -43,7 +41,6 @@ public class ComputerController{
             if (javafx.scene.layout.GridPane.getRowIndex(node) == row + 1 && 
                 javafx.scene.layout.GridPane.getColumnIndex(node) == col + 1) {
                 javafx.scene.control.Button btn = (javafx.scene.control.Button) node;                
-                btn.setText(buttonText); 
                 btn.setStyle(btn.getStyle() + "-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px; -fx-opacity: 1.0;");
             }
         });
