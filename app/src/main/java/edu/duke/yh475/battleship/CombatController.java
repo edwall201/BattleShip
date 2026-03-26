@@ -360,18 +360,25 @@ public class CombatController {
         pause.play();
     }
 
-    private void endGame(String message, String color) {
-    messageLabel.setText(message);
-    messageLabel.setStyle("-fx-text-fill: " + color + "; -fx-font-size: 26px; -fx-font-weight: bold;");
-    computerMessage.setText(""); 
+      private void endGame(String message, String color) {
+        messageLabel.setText(message);
+        messageLabel.setStyle("-fx-text-fill: " + color + "; -fx-font-size: 26px; -fx-font-weight: bold;");
+        computerMessage.setText("");
+        actionSelector.setDisable(true);
+        if (orientationSelector != null) {
+            orientationSelector.setDisable(true);
+        }
 
-    actionSelector.setDisable(true);
-    if (orientationSelector != null) {
-        orientationSelector.setDisable(true);
+        app.getPlayerView().setPlacement(null);
+        app.getEnemyView().setPlacement(null);
+
+        javafx.scene.control.Button restartBtn = new javafx.scene.control.Button("Play Again!");
+        restartBtn.setStyle("-fx-font-size: 22px; -fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10px 20px; -fx-background-radius: 8px; -fx-cursor: hand;");
+        
+        restartBtn.setOnAction(e -> app.restartGame());
+
+        javafx.scene.layout.VBox sidebar = (javafx.scene.layout.VBox) actionSelector.getParent();
+        sidebar.getChildren().add(restartBtn);
     }
-
-    app.getPlayerView().setPlacement(null);
-    app.getEnemyView().setPlacement(null);
-  }
 
 }
