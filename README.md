@@ -8,14 +8,14 @@ This application upgrades the text version of Battleship with a fully interactiv
 
 ### 1. Interactive Graphical Interface
 * **Board View:** Players have a clear view of their own fleet on the left (Green) and the enemy's waters on the right (Dark Blue).
-* **Color Feedback:** * **Green:** Safe ship.
+* **Color Feedback:** 
+  * **Green:** Safe ship.
   * **Red:** Hit ship.
   * **Light Blue:** Missed shots.
   * **Orange:** Active selections (Moving ships or Sonar scan areas).
 * **Dynamic Status Board:** A sidebar tracks available special actions, text output for both player and computer turns.
 
 ### 2. Ship Shapes
-Ship types:
 * **Submarine (2):** Standard 1x2 rectangle (Orientations: Vertical, Horizontal).
 * **Destroyer (3):** Standard 1x3 rectangle (Orientations: Vertical, Horizontal).
 * **Battleship (3):** Custom T-shaped vessel (Orientations: Up, Down, Left, Right).
@@ -55,8 +55,8 @@ Once combat begins, players can choose from three distinct actions using the dro
 
 
 ### 6. Game Over and replay
-* A massive **"YOU WIN!"** or **"GAME OVER!"** message is displayed.
-* A **"Play Again!"** button dynamically appears, allowing players to instantly reset the boards.
+* A **"YOU WIN!"** or **"GAME OVER!"** message is displayed.
+* A **"Play Again!"** button appears, allowing players to play again.
 
 
 ### Player Win
