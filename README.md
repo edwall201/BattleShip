@@ -49,7 +49,7 @@ Once combat begins, players can choose from three distinct actions using the dro
 
 ### 5. Computer
 * **Suspense Delay:** The computer pauses for 1 second before returning fire, allowing the player to process their own turn and creating a natural game flow.
-* **Intelligent Target Tracking:** The AI utilizes a memory-based tracking system to actively hunt down your ships. 
+* **Intelligent Target Tracking:** The computer utilizes a memory-based tracking system to actively hunt down your ships. 
   * **Coordinate Memory:** It perfectly remembers all previous hits and misses, ensuring it never wastes a turn firing at the same square twice.
   * **Hunt & Target Logic:**  Once the computer scores a successful hit, it dynamically switches from a random Hunt mode into a focused Target mode, prioritizing adjacent squares (Up, Down, Left, Right) to ruthlessly finish off the damaged ship before it sinks.
 
