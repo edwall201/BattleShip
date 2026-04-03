@@ -57,9 +57,13 @@ public class BoardView {
 
     // add buttons for each cell
     for (int row = 0; row < board.getHeight(); row++) {
+      char rowChar = (char) ('A' + row);
       for (int col = 0; col < board.getWidth(); col++) {
+        
         Button cell = new Button();
         cell.setPrefSize(35, 35);
+        String prefix = isEnemy ? "enemy" : "player";
+        cell.setId(prefix + "-cell-" + rowChar + "-" + col);
         cell.setStyle("-fx-background-color: #2c3e50; -fx-border-color: #34495e;");
 
         cell.setPrefSize(35, 35);
