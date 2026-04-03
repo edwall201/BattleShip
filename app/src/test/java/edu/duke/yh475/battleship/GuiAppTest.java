@@ -60,7 +60,7 @@ import org.testfx.util.WaitForAsyncUtils;
     }
 
     @Test
-    public void test_place_all_ships_and_start(FxRobot robot) {
+    public void test_start_and_action(FxRobot robot) {
         placeShip(robot, "Submarine", "V", "#player-cell-A-0");
         placeShip(robot, "Submarine", "V", "#player-cell-A-2");
         placeShip(robot, "Submarine", "Destroyer", "#player-cell-C-0"); 
@@ -75,6 +75,21 @@ import org.testfx.util.WaitForAsyncUtils;
         WaitForAsyncUtils.waitForFxEvents();
         robot.clickOn("Start");
         FxAssert.verifyThat("Start!", NodeMatchers.isVisible());
+        robot.clickOn("#enemy-cell-A-0");
+        robot.sleep(2000);
+
+        robot.clickOn("Fire at a square");
+        robot.clickOn("Sonar scan");
+        robot.clickOn("#enemy-cell-B-5");
+        FxAssert.verifyThat("Sonar Scan: 2 / 3", NodeMatchers.isVisible());
+        robot.sleep(2000);
+
+        robot.clickOn("Sonar scan");
+        robot.clickOn("Move a ship");
+        robot.clickOn("#player-cell-A-0");
+        robot.clickOn("V");
+        robot.clickOn("#player-cell-D-9");
+        FxAssert.verifyThat("Move Ship: 2 / 3", NodeMatchers.isVisible());
 
         
     }
