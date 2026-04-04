@@ -1,0 +1,21 @@
+image: eclipse-temurin:21-jdk-jammy
+
+variables:
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+before_script:
+  - chmod +x gradlew
+
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - ./gradlew assemble
+
+test_job:
+  stage: test
+  script:
+    - ./gradlew test
