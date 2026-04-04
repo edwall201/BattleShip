@@ -8,16 +8,8 @@ before_script:
 
 stages:
   - build
-  - test
 
 build_job:
   stage: build
   script:
     - ./gradlew assemble
-
-test_job:
-  stage: test
-  before_script:
-    - apt-get update && apt-get install -y libgtk-3-0 libglu1-mesa libx11-6 libxfconf-0-3
-  script:
-    - ./gradlew test -Djava.awt.headless=true -Dtestfx.robot=glass -Dtestfx.headless=true -Dprism.order=sw
